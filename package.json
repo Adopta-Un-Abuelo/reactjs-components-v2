@@ -1,7 +1,13 @@
 {
-  "name": "my-app",
+  "name": "reactjs-components-v2",
   "version": "0.1.0",
   "private": true,
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "files": [
+    "dist"
+  ],
+  "types": "dist/index.d.ts",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
@@ -10,15 +16,17 @@
     "@types/node": "^12.0.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "@types/styled-components": "^5.1.17",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
+    "styled-components": "^5.3.3",
     "typescript": "^4.1.2",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "rollup -c",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
@@ -53,11 +61,16 @@
     ]
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^21.0.1",
+    "@rollup/plugin-node-resolve": "^13.0.6",
+    "@rollup/plugin-typescript": "^8.3.0",
     "@storybook/addon-actions": "^6.4.9",
     "@storybook/addon-essentials": "^6.4.9",
     "@storybook/addon-links": "^6.4.9",
     "@storybook/node-logger": "^6.4.9",
     "@storybook/preset-create-react-app": "^3.2.0",
-    "@storybook/react": "^6.4.9"
+    "@storybook/react": "^6.4.9",
+    "rollup": "^2.61.1",
+    "rollup-plugin-dts": "^4.0.1"
   }
 }
