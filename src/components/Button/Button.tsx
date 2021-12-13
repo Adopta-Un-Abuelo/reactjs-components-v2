@@ -54,6 +54,7 @@ const Button = (props: Props) => {
   	return (
 		props.design === 'secondary' ?
 			<ButtonSecondary
+				data-testid="button"
 				type="button"
 				{...props}
 			>
@@ -67,6 +68,7 @@ const Button = (props: Props) => {
 			</ButtonSecondary>
 		: props.design === 'text' ?
 			<ButtonText
+				data-testid="button"
 				type="button"
 				{...props}
 			>
@@ -80,6 +82,7 @@ const Button = (props: Props) => {
 			</ButtonText>
 		:
 			<ButtonPrimary
+				data-testid="button"
 				type="button"
 				{...props}
 			>
