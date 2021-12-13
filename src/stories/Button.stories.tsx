@@ -1,41 +1,44 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { Star } from 'react-feather'
 
 import { Button } from '../components';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'Example/Button',
-  component: Button,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
-  argTypes: {
-    backgroundColor: { control: 'color' },
-  },
+	title: 'Basic/Button',
+	component: Button,
+	args: {
+		label: 'Button',
+		disabled: false
+	},
+	argTypes: {
+		onClick: { action: 'clicked' },
+		design: { 
+			options: ['primary', 'secondary', 'text'],
+			control: { type: 'select' }
+		}
+	}
 } as ComponentMeta<typeof Button>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
 
 export const Primary = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
-  primary: true,
-  label: 'Button',
+	design: 'primary'
 };
 
 export const Secondary = Template.bind({});
 Secondary.args = {
-  label: 'Button',
+	design: 'secondary'
 };
 
-export const Large = Template.bind({});
-Large.args = {
-  size: 'large',
-  label: 'Button',
+export const Text = Template.bind({});
+Text.args = {
+	design: 'text'
 };
 
-export const Small = Template.bind({});
-Small.args = {
-  size: 'small',
-  label: 'Button',
+export const WithIcon = Template.bind({});
+WithIcon.args = {
+	design: 'primary',
+	icon: <Star/>
 };

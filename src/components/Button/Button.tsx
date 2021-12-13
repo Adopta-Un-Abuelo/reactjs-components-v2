@@ -4,28 +4,98 @@ import styled from 'styled-components';
 import P from '../Text/P';
 import Color from '../../constants/Color';
 
-const ButtonStyled = styled.button`
+const ButtonPrimary = styled.button`
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 	height: 40px;
 	padding: 0px 16px;
 	border-radius: 20px;
 	border: none;
 	color: white;
-	background-color: ${Color.blue3};
+	background-color: ${props => props.disabled ? Color.gray4 : Color.blue3};
+	cursor: ${props => props.disabled ? 'default' : 'pointer'};
+	:hover{
+		background-color: ${props => props.disabled ? Color.gray4 : '#3B43BD'};
+	}
+`
+const ButtonSecondary = styled.button`
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	height: 40px;
+	padding: 0px 16px;
+	border-radius: 20px;
+	border: ${props => props.disabled ? '1px solid '+ Color.gray3 : '1px solid '+ Color.blue3};
+	color: ${props => props.disabled ? Color.gray3 : Color.blue3};
+	background-color: transparent;
+	cursor: ${props => props.disabled ? 'default' : 'pointer'};
+	:hover{
+		background-color: ${props => props.disabled ? 'transparent' : Color.blue3+'30'};
+	}
+`
+const ButtonText = styled.button`
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	height: 40px;
+	padding: 0px 16px;
+	border-radius: 20px;
+	border: none;
+	color: ${props => props.disabled ? Color.gray4 : Color.gray3};
+	background-color: transparent;
+	cursor: ${props => props.disabled ? 'default' : 'pointer'};
+	:hover{
+		background-color: ${props => props.disabled ? 'transparent' : Color.gray6};
+	}
 `
 
 const Button = (props: Props) => {
   	return (
-		<ButtonStyled
-			type="button"
-			{...props}
-		>
-			<P weight='semibold'>
-				{props.label}
-			</P>
-		</ButtonStyled>
+		props.design === 'secondary' ?
+			<ButtonSecondary
+				type="button"
+				{...props}
+			>
+				{props.icon && props.icon}
+				<P 
+					weight='semibold'
+					style={{marginLeft: props.icon ? 6 : 0}}
+				>
+					{props.label}
+				</P>
+			</ButtonSecondary>
+		: props.design === 'text' ?
+			<ButtonText
+				type="button"
+				{...props}
+			>
+				{props.icon && props.icon}
+				<P 
+					weight='semibold'
+					style={{marginLeft: props.icon ? 6 : 0}}
+				>
+					{props.label}
+				</P>
+			</ButtonText>
+		:
+			<ButtonPrimary
+				type="button"
+				{...props}
+			>
+				{props.icon && props.icon}
+				<P 
+					weight='semibold'
+					style={{marginLeft: props.icon ? 6 : 0}}
+				>
+					{props.label}
+				</P>
+			</ButtonPrimary>
   	);
 };
 export default Button;
 export interface Props extends ComponentPropsWithoutRef<"button">{
 	label: string;
+	design?: 'primary' | 'secondary' | 'text',
+	icon?: React.ReactElement
 }
