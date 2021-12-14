@@ -51,7 +51,12 @@ const Checkbox = (props: Props) =>{
                 selected={selected}
             >
                 {selected &&
-                    <Check height={18} width={18} stroke='white'/>
+                    <Check 
+                        data-testid="check-icon"
+                        height={18} 
+                        width={18} 
+                        stroke='white'
+                    />
                 }
             </Box>
             <TextView>
