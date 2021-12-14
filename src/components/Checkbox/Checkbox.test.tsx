@@ -70,16 +70,4 @@ describe("Checkbox", () => {
         )
         expect(screen.queryByTestId('check-icon')).not.toBeInTheDocument()
     })
-    it("onClick", () => {
-        const handleClick = jest.fn();
-        render(
-            <Checkbox 
-                label={'Checkbox label'}
-                selected={false}
-                onClick={handleClick}
-            />
-        )
-        fireEvent.click(screen.getByTestId('checkbox'))
-        expect(screen.getByTestId('check-icon')).toBeInTheDocument()
-    })
 })

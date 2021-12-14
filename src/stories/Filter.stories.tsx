@@ -7,10 +7,44 @@ export default {
 	component: Filter,
 	args: {
 		label: 'Filter',
-		disabled: false
+		disabled: false,
+		options: [
+			{
+				id: 'option_1',
+				label: 'Option 1'
+			},
+			{
+				id: 'option_2',
+				label: 'Option 2'
+			},
+			{
+				id: 'option_3',
+				label: 'Option 3'
+			},
+			{
+				id: 'option_4',
+				label: 'Option 4'
+			},
+			{
+				id: 'option_5',
+				label: 'Option 5'
+			},
+			{
+				id: 'option_6',
+				label: 'Option 6'
+			},
+			{
+				id: 'option_7',
+				label: 'Option 7'
+			},
+			{
+				id: 'option_8',
+				label: 'Option 8'
+			}
+		]
 	},
 	argTypes: {
-		onChange: { action: 'clicked' },
+		onChange: { action: 'onChange' },
 		design: { 
 			options: ['single', 'multiple', 'ratio'],
 			control: { type: 'select' }
@@ -22,5 +56,12 @@ const Template: ComponentStory<typeof Filter> = (args) => <Filter {...args} />;
 
 export const SingleSelection = Template.bind({});
 SingleSelection.args = {
-    design: 'single'
+    design: 'single',
+	id: 'single'
+};
+
+export const MultipleSelection = Template.bind({});
+MultipleSelection.args = {
+    design: 'multiple',
+	id: 'multiple'
 };

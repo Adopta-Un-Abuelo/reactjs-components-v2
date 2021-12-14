@@ -8,7 +8,7 @@ const Container = styled.div`
 
 const CheckboxList = (props: Props) =>{
 
-    const [ selection, setSelection ] = useState<Array<{id: string}>>([]);
+    const [ selection, setSelection ] = useState(props.options.filter(e => e.defaultSelection));
     const [ update, setUpdate ] = useState(false);
 
     const onClick = (item: any) =>{
@@ -48,7 +48,7 @@ export interface Props{
         id: string,
         label: string,
         sublabel?: string,
-        selected?: boolean
+        defaultSelection?: boolean
     }>,
     selection: 'single' | 'multiple',
     onChange?: Function

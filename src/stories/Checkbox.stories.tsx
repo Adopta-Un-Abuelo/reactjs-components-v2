@@ -6,7 +6,7 @@ export default {
 	title: 'Basic/Checkbox',
 	component: Checkbox,
     argTypes: {
-		onChange: { action: 'clicked' },
+		onChange: { action: 'onChange' },
 		selection: { 
 			options: ['single', 'multiple'],
 			control: { type: 'select' }
