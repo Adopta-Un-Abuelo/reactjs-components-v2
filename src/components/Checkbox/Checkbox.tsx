@@ -10,8 +10,9 @@ const Container = styled.button`
     flex-direction: row;
     background: none;
     border: none;
-    cursor: pointer;
+    cursor: ${props => props.disabled ? 'default' : 'pointer'};
     padding: 0px;
+    opacity: ${props => props.disabled ? 0.5 : 1.0};
 `
 const Box = styled.div<{selected: boolean}>`
     display: flex;
@@ -21,15 +22,18 @@ const Box = styled.div<{selected: boolean}>`
     width: 24px;
     background-color: ${props => props.selected ? Color.blue3 : Color.gray6};
     border-radius: 8px;
-    margin-right: 10px;
+`
+const TextView = styled.div`
+    margin-left: 10px;
+    text-align: left;
 `
 
 const Checkbox = (props: Props) =>{
 
-    const [ selected, setSelected ] = useState(props.selected ? props.selected : false);
+    const [ selected, setSelected ] = useState(props.selected);
 
     useEffect(() =>{
-        setSelected(props.selected ? props.selected : false);
+        setSelected(props.selected);
     },[props.selected]);
 
     const onClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>{
@@ -39,7 +43,9 @@ const Checkbox = (props: Props) =>{
 
     return(
         <Container
+            data-testid="checkbox"
             onClick={onClick}
+            {...props}
         >
             <Box
                 selected={selected}
@@ -48,13 +54,24 @@ const Checkbox = (props: Props) =>{
                     <Check height={18} width={18} stroke='white'/>
                 }
             </Box>
-            <P>
-                Hola
-            </P>
+            <TextView>
+                <P>
+                    {props.label}
+                </P>
+                {props.sublabel &&
+                    <P
+                        style={{fontSize: 12}}
+                    >
+                        {props.sublabel}
+                    </P>
+                }
+            </TextView>
         </Container>
     )
 }
 export default Checkbox;
 export interface Props extends ComponentPropsWithoutRef<"button">{
-    selected?: boolean
+    selected: boolean,
+    label: string,
+    sublabel?: string
 }
