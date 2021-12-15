@@ -7,6 +7,7 @@ import Color from '../../constants/Color';
 const SearchBar = (props: Props) =>{
     return(
         <Input
+            data-testid="searchbar"
             icon={<Search height={22} width={22} stroke={Color.gray2}/>}
             {...props}
         />

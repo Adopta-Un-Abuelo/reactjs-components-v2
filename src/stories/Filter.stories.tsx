@@ -7,7 +7,6 @@ export default {
 	component: Filter,
 	args: {
 		label: 'Filter',
-		disabled: false,
 		options: [
 			{
 				id: 'option_1',
@@ -41,7 +40,8 @@ export default {
 				id: 'option_8',
 				label: 'Option 8'
 			}
-		]
+		],
+		disabled: false
 	},
 	argTypes: {
 		onChange: { action: 'onChange' },

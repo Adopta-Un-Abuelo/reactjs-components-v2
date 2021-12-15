@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react'
-import Checkbox from './Checkbox';
-import CheckboxList from './CheckboxList';
+import Checkbox from '../components/Checkbox/Checkbox';
+import { Checkbox as CheckboxList } from '../components';
 
 describe("Checkbox", () => {
     it("render", () => {
@@ -69,5 +69,30 @@ describe("Checkbox", () => {
             />
         )
         expect(screen.queryByTestId('check-icon')).not.toBeInTheDocument()
+    })
+})
+
+describe("CheckboxList", () => {
+    it("render", () => {
+        render(
+            <CheckboxList
+                options={[
+                    {
+                        id: 'option1',
+                        label: 'Option 1'
+                    },
+                    {
+                        id: 'option2',
+                        label: 'Option 2'
+                    },
+                    {
+                        id: 'option3',
+                        label: 'Option 3'
+                    }
+                ]} 
+                selection={'single'}            
+            />
+        )
+        expect(screen.getByTestId("checkboxlist")).toBeInTheDocument()
     })
 })

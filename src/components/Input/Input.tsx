@@ -26,6 +26,7 @@ const Input = (props: Props) =>{
 
     return(
         <InputView
+            data-testid="input"
             style={style}
         >
             {props.icon && props.icon}

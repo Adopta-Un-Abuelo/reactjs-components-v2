@@ -25,7 +25,9 @@ const CheckboxList = (props: Props) =>{
     }
 
     return(
-        <Container>
+        <Container
+            data-testid="checkboxlist"
+        >
             {props.options.map(item => {
                 const active = selection.some(e => e.id === item.id);
                 return(
