@@ -1,6 +1,5 @@
 name: CI
 on: [push]
-  branches: [ main, feature/build ]
 workflow_dispatch:
 jobs:
   build-and-deploy:
