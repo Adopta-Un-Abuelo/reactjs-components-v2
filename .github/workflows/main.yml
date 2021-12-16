@@ -1,6 +1,6 @@
 name: CI
 on: [push]
-workflow_dispatch:
+  branches: [ main, feature/build ]
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
