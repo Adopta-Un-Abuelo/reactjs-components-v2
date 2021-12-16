@@ -19,6 +19,8 @@ jobs:
         env:
           GH_TOKEN: MyCompany:${{ secrets.TOKEN }}
         run: |
+          git config --global user.email "guillermomarcoalija@gmail.com"
+          git config --global user.name "gmalija"
           npm run deploy-storybook
       - run: echo "🍏 This job's status is ${{ job.status }}."
 
