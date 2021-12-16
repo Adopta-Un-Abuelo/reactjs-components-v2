@@ -17,6 +17,8 @@ jobs:
           npm run build-storybook
       - name: Deploy 🚀
         run: |
+          git config --global user.email "guillermo.marco@adoptaunabuelo.com"
+          git config --global user.name "gmarco"
           npm run deploy-storybook
       - run: echo "🍏 This job's status is ${{ job.status }}."
 
