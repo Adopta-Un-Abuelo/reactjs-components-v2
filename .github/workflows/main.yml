@@ -1,6 +1,5 @@
 name: CI
 on: [push]
-  branches: [ main, feature/build ]
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
