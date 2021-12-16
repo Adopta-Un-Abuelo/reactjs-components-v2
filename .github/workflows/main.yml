@@ -1,7 +1,7 @@
 name: CI
 on: [push]
 jobs:
-  build-and-deploy:
+  Build-And-Deploy:
     runs-on: ubuntu-latest
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
@@ -15,6 +15,9 @@ jobs:
         run: |
           npm install
           npm run build-storybook
+      - name: Deploy 🚀
+        run: |
+          npm run deploy-storybook
       - run: echo "🍏 This job's status is ${{ job.status }}."
 
 
