@@ -15,12 +15,11 @@ jobs:
         run: |
           npm install
           npm run build-storybook
-      - name: Setup SSH Keys and known_hosts
+      - name: Setup SSH Keys
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
         run: |
-          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
-          ssh-add - <<< "${{ secrets.SSH_PRIVATE_KEY }}"
+          ssh-keyscan -H github.com >> ~/.ssh/known_hosts
       - name: Deploy 🚀
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
