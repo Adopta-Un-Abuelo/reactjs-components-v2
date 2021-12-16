@@ -6,7 +6,7 @@ name: CI
 on:
   # Triggers the workflow on push but only for the main branch
   push:
-    branches: [ main ]
+    branches: [ main, feature/build ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -17,9 +17,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v2.3.1
-        with:
-          persist-credentials: false
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
       - name: Install and Build 🔧
         run: | # Install npm packages and build the Storybook files
           npm install
