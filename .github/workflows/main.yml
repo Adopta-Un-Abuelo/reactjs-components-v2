@@ -15,15 +15,10 @@ jobs:
         run: |
           npm install
           npm run build-storybook
-      - name: Setup SSH Keys
-        env:
-          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-        run: |
-          ssh-keyscan -H github.com >> ~/.ssh/known_hosts
       - name: Deploy 🚀
-        env:
-          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
         run: |
+          git config --global user.email "guillermomarcoalija@gmail.com"
+          git config --global user.name "gmalija"
           npm run deploy-storybook
       - run: echo "🍏 This job's status is ${{ job.status }}."
 
