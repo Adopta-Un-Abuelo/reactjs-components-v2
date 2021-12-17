@@ -42,7 +42,7 @@ const ButtonText = styled.button`
 	padding: 0px 16px;
 	border-radius: 20px;
 	border: none;
-	color: ${props => props.disabled ? Color.gray4 : Color.gray3};
+	color: ${props => props.disabled ? Color.gray4 : Color.gray2};
 	background-color: transparent;
 	cursor: ${props => props.disabled ? 'default' : 'pointer'};
 	:hover{
@@ -61,7 +61,7 @@ const Button = (props: Props) => {
 				{props.icon && props.icon}
 				<P 
 					weight='semibold'
-					style={{marginLeft: props.icon ? 6 : 0}}
+					style={{marginLeft: props.icon ? 6 : 0, color: props.disabled ? Color.gray3 : Color.blue3}}
 				>
 					{props.label}
 				</P>
@@ -75,7 +75,7 @@ const Button = (props: Props) => {
 				{props.icon && props.icon}
 				<P 
 					weight='semibold'
-					style={{marginLeft: props.icon ? 6 : 0}}
+					style={{marginLeft: props.icon ? 6 : 0, color: props.disabled ? Color.gray4 : Color.gray2}}
 				>
 					{props.label}
 				</P>
@@ -89,7 +89,7 @@ const Button = (props: Props) => {
 				{props.icon && props.icon}
 				<P 
 					weight='semibold'
-					style={{marginLeft: props.icon ? 6 : 0}}
+					style={{marginLeft: props.icon ? 6 : 0, color: 'white'}}
 				>
 					{props.label}
 				</P>
