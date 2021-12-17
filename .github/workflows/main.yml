@@ -15,13 +15,14 @@ jobs:
         run: |
           npm install
           npm run build-storybook
-      - name: Deploy 🚀
+      - name: Deploy to GitHub Pages
+        if: success()
+        uses: crazy-max/ghaction-github-pages@v2
+        with:
+          target_branch: gh-pages
+          build_dir: public
         env:
-          GH_TOKEN: MyCompany:${{ secrets.TOKEN }}
-        run: |
-          git config --global user.email "guillermomarcoalija@gmail.com"
-          git config --global user.name "gmalija"
-          npm run deploy-storybook
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
 
 
