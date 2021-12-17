@@ -12,7 +12,7 @@ export default {
 		disabled: false
 	},
 	argTypes: {
-		onClick: { action: 'clicked' },
+		onClick: { action: 'onClick' },
 		design: { 
 			options: ['primary', 'secondary', 'text'],
 			control: { type: 'select' }
