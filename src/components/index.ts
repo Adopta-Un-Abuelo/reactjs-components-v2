@@ -4,3 +4,4 @@ export { default as Filter } from './Filter/Filter';
 export { default as Checkbox } from './Checkbox/CheckboxList';
 export { default as Input } from './Input/Input';
 export { default as SearchBar } from './Input/SearchBar';
+export { default as Feedback } from './Feedback/Feedback';
