@@ -19,7 +19,7 @@ const LabelStyled = styled.div`
 `
 const Label = (props: Props) =>{
     return(
-        <LabelStyled id="Label" {...props}>
+        <LabelStyled data-testid="Label" id="Label" {...props}>
             <P style={{"fontFamily?": "Poppins","fontSize?": "14px","fontStyle?": "normal","fontWeight": "600","lineHeight": "22px","letterSpacing": "0em","textAlign": "left", "color":props.color}}>{props.text}</P>
         </LabelStyled>
     )

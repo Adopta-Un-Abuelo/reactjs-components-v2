@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react'
-import Label from './Label';
+import Label from '../components/Label/Label';
 
 
 describe("Label", () => {
@@ -18,7 +18,7 @@ describe("Label", () => {
                 color={"red"}
             />
         )
-        expect(document.getElementById("Label")).toHaveStyle("color:red")
+        expect(document.getElementsByTagName("p").item(0)).toHaveStyle("color:red")
     })   
     it("Change background", () => {
         render(
@@ -38,6 +38,6 @@ describe("Label", () => {
        />
    )
    expect(document.getElementById("Label")).toHaveStyle("backgroundColor:red")
-   expect(document.getElementById("Label")).toHaveStyle("color:white")
+   expect(document.getElementsByTagName("p").item(0)).toHaveStyle("color:white")
 }) 
 })
