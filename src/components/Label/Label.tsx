@@ -1,4 +1,4 @@
-import React, { ComponentPropsWithoutRef } from 'react';
+import React, { ComponentPropsWithoutRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import P from '../Text/P';
 const LabelStyled = styled.div`
@@ -15,25 +15,12 @@ const LabelStyled = styled.div`
     left: 117px;
     top: 382px;
     background: ${props=> props.backgroundColor ? props.backgroundColor:"red"};
-    color: ${props=> props.color ? props.color:"white"};
     border-radius: 4px;
 `
-
-const Text = styled.p`
-//styleName: Paragraph Medium/Sem Text *;
-font-family: Poppins;
-font-size: 14px;
-font-style: normal;
-font-weight: 600;
-line-height: 22px;
-letter-spacing: 0em;
-text-align: left;
-
-`;
 const Label = (props: Props) =>{
     return(
         <LabelStyled id="Label" {...props}>
-            <P style={{"fontFamily?": "Poppins","fontSize?": "14px","fontStyle?": "normal","fontWeight": "600","lineHeight": "22px","letterSpacing": "0em","textAlign": "left"}}>{props.text}</P>
+            <P style={{"fontFamily?": "Poppins","fontSize?": "14px","fontStyle?": "normal","fontWeight": "600","lineHeight": "22px","letterSpacing": "0em","textAlign": "left", "color":props.color}}>{props.text}</P>
         </LabelStyled>
     )
 }

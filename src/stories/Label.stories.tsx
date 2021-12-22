@@ -49,3 +49,17 @@ Baja.args = {
     backgroundColor:"#FCEDF1",
     color:"#FF5A5A"
 };
+
+export const Particular = Template.bind({});
+Particular.args = {
+    text: 'Particular',
+    backgroundColor:"#EBF9FF",
+    color:"#2D55B5"
+};
+
+export const Residencia = Template.bind({});
+Residencia.args = {
+    text: 'Residencia',
+    backgroundColor:"#EBECFF",
+    color:"#5963F6"
+};
