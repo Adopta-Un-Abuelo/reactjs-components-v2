@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import { Input, SearchBar } from '../components';
 import { Star } from 'react-feather';
 import React from 'react';
@@ -10,6 +10,7 @@ describe("Input", () => {
         )
         expect(screen.getByTestId("input")).toBeInTheDocument()
     })
+   
     it("icon", () => {
         render(
             <Input
@@ -28,3 +29,19 @@ describe("SearchBar", () => {
         expect(screen.getByTestId("searchbar")).toBeInTheDocument()
     })
 })
+
+// checking hover
+
+it("hover", () => {
+    render(
+        <Input/>
+    )
+    const input = document.getElementsByTagName("input")
+    fireEvent.focus(input.item(0))
+    expect(screen.getByTestId("input")).toBeInTheDocument()
+})
+// checking focus
+
+//checking text border color change
+
+// check seleccionar tipo big y small 
