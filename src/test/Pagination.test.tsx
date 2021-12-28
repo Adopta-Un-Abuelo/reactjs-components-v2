@@ -38,16 +38,44 @@ describe("Pagination", () => {
         render(
             <Pagination lenght={30} rowsPerPage={10} start={1}/>
         );
-        let prevDiv = screen.getAllByTestId("right-arrow")
-        fireEvent.click(prevDiv[0])
+        let nextDiv = screen.getAllByTestId("right-arrow")
+        fireEvent.click(nextDiv[0])
         expect(screen.getAllByText("2")[0]).toBeInTheDocument()
     })
 
     //unable prev 
-
+    it("unable prev styles", () => {
+        render(
+            <Pagination lenght={30} rowsPerPage={10}/>
+        );
+        let prevDiv = screen.getAllByTestId("left-arrow")
+        expect(prevDiv[0]).toHaveStyle('background:white')
+    })
     //unable next
 
-    //forcing a right click
-
-    //forcing a left click
+    it("unable next styles", () => {
+        render(
+            <Pagination lenght={30} rowsPerPage={10} start={2}/>
+        );
+        let nextDiv = screen.getAllByTestId("right-arrow")
+        expect(nextDiv[0]).toHaveStyle('background:white')
+    })
+    //forcing a next click in max lenght
+    xit("forcing a next click", () => {
+        render(
+            <Pagination lenght={30} rowsPerPage={10} start={3}/>
+        );
+        let nextDiv = screen.getAllByTestId("right-arrow")
+        fireEvent.click(nextDiv[0])
+        expect(screen.getAllByText("3")[0]).toBeInTheDocument()
+    })
+    //forcing a prev click in max lenght
+    xit("forcing a prev click", () => {
+        render(
+            <Pagination lenght={30} rowsPerPage={10}/>
+        );
+        let prevDiv = screen.getAllByTestId("left-arrow")
+        fireEvent.click(prevDiv[0])
+        expect(screen.getAllByText("0")[0]).toBeInTheDocument()
+    })
 });
