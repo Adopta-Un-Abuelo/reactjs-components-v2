@@ -9,6 +9,7 @@ const InputView = styled.div`
     border-radius: 40px;
     border: 1px solid ${Color.gray5};
     padding: 0px 16px;
+    width: auto;
 `
 const InputStyled = styled.input`
     font-family: 'Poppins';
