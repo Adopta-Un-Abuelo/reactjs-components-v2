@@ -84,8 +84,8 @@ const Input = (props: Props) =>{
         props.type==="date" ?
          <><InputView data-testid="input">
          <IconStyle><Calendar stroke={Color.gray2}/></IconStyle>
-         <InputStyled {...props} placeholder="dd/mm/yyyy" onKeyDown={onInputKeyPress} maxLength={10}  onChange={onDateChange}  type="tel" style={{fontSize:16,"paddingLeft":"64px", border:props.error ? `1px solid #FF5A5A`:value?"1px solid #00BA88":""}} value={value}/>
-         {value && <IconStyle onClick={()=>setValue("")} style={{right:16, cursor:"pointer"}}><X stroke={Color.gray2}/></IconStyle>}
+         <InputStyled aria-label={props.label} {...props} placeholder="dd/mm/yyyy" onKeyDown={onInputKeyPress} maxLength={10}  onChange={onDateChange}  type="tel" style={{fontSize:16,"paddingLeft":"64px", border:props.error ? `1px solid #FF5A5A`:value?"1px solid #00BA88":""}} value={value}/>
+         {value && <IconStyle onClick={()=>setValue("")} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
           </InputView>
          {error && <ErrorDiv>{error}</ErrorDiv>}</>
         :
@@ -95,8 +95,8 @@ const Input = (props: Props) =>{
         props.type==="phone" ?
         <><InputView data-testid="input">
         <IconStyle><Phone stroke={Color.gray2}/></IconStyle>
-        <InputStyled type="tel" onChange={onValuechange} {...props}  style={{fontSize:16,"paddingLeft":"64px", border:props.error ? `1px solid #FF5A5A`:value?"1px solid #00BA88":""}} value={value}/>
-        {value && <IconStyle onClick={()=>setValue("")} style={{right:16, cursor:"pointer"}}><X stroke={Color.gray2}/></IconStyle>}
+        <InputStyled aria-label={props.label} {...props} type="tel" onChange={onValuechange} style={{fontSize:16,"paddingLeft":"64px", border:props.error ? `1px solid #FF5A5A`:value?"1px solid #00BA88":""}} value={value}/>
+        {value && <IconStyle onClick={()=>setValue("")} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
          </InputView>
         {error && <ErrorDiv>{error}</ErrorDiv>}</>:
         
@@ -105,8 +105,8 @@ const Input = (props: Props) =>{
         props.type==="email" ?
         <><InputView data-testid="input">
         <IconStyle><Mail stroke={Color.gray2}/></IconStyle>
-        <InputStyled type="email" onChange={onValuechange} {...props}  style={{fontSize:16,"paddingLeft":"64px", border:props.error ? `1px solid #FF5A5A`:value?"1px solid #00BA88":""}} value={value}/>
-        {value && <IconStyle onClick={()=>setValue("")} style={{right:16, cursor:"pointer"}}><X stroke={Color.gray2}/></IconStyle>}
+        <InputStyled aria-label={props.label} type="email" onChange={onValuechange} {...props}  style={{fontSize:16,"paddingLeft":"64px", border:props.error ? `1px solid #FF5A5A`:value?"1px solid #00BA88":""}} value={value}/>
+        {value && <IconStyle onClick={()=>setValue("")} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
          </InputView>
         {error && <ErrorDiv>{error}</ErrorDiv>}</>:
        
@@ -115,8 +115,8 @@ const Input = (props: Props) =>{
         props.type==="location" ?
         <><InputView data-testid="input">
         <IconStyle><MapPin stroke={Color.gray2}/></IconStyle>
-        <InputStyled type="text" onChange={onValuechange} {...props}  style={{fontSize:16,"paddingLeft":"64px", border:props.error ? `1px solid #FF5A5A`:value?"1px solid #00BA88":""}} value={value}/>
-        {value && <IconStyle onClick={()=>setValue("")} style={{right:16, cursor:"pointer"}}><X stroke={Color.gray2}/></IconStyle>}
+        <InputStyled aria-label={props.label} type="text" onChange={onValuechange} {...props}  style={{fontSize:16,"paddingLeft":"64px", border:props.error ? `1px solid #FF5A5A`:value?"1px solid #00BA88":""}} value={value}/>
+        {value && <IconStyle onClick={()=>setValue("")} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
          </InputView>
         {error && <ErrorDiv>{error}</ErrorDiv>}</>:
          
@@ -124,8 +124,8 @@ const Input = (props: Props) =>{
          //TEXT
             <><InputView data-testid="input">
             <IconStyle><User stroke={Color.gray2}/></IconStyle>
-            <InputStyled onChange={onValuechange} {...props}  style={{fontSize:16,"paddingLeft":"64px", border:props.error ? `1px solid #FF5A5A`:value?"1px solid #00BA88":""}} value={value}/>
-            {value && <IconStyle onClick={()=>setValue("")} style={{right:16, cursor:"pointer"}}><X stroke={Color.gray2}/></IconStyle>}
+            <InputStyled aria-label={props.label} onChange={onValuechange} {...props}  style={{fontSize:16,"paddingLeft":"64px", border:props.error ? `1px solid #FF5A5A`:value?"1px solid #00BA88":""}} value={value}/>
+            {value && <IconStyle onClick={()=>setValue("")} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
              </InputView>
             {error && <ErrorDiv>{error}</ErrorDiv>}</>
         
@@ -139,5 +139,6 @@ export interface Props extends ComponentPropsWithoutRef<"input">{
     placeholder?:string,
     value?:string,
     type?: 'text' | 'phone' | 'email' | 'date'| 'location',
-    error?:string
+    error?:string,
+    label?:string
 }
