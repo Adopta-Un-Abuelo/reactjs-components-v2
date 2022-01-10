@@ -6,7 +6,7 @@ import Color from '../../constants/Color';
 import P from '../Text/P';
 import CheckboxList from '../Checkbox/CheckboxList';
 import Button from '../Button/Button';
-import SearchBar from '../Input/SearchBar';
+import SearchBar from '../SearchBar/SearchBar';
 
 const Container = styled.div`
 `
