@@ -10,7 +10,6 @@ const AvatarContainer = styled.div`
     align-items: center;
     text-align: center;
     border-radius: 50%;
-    border: 2px solid #5963F6;
 `
 const Text = styled.p`
     font-family: Poppins;
@@ -31,7 +30,7 @@ const Icon = styled.img`
 
 const Avatar = (props: Props) =>{
     return(
-        <AvatarContainer data-testid="avatar">
+        <AvatarContainer data-testid="avatar" style={{border: props.icon ? `2px solid ${Color.gray6}` : "2px solid #5963F6"}}>
             {props.icon ? <Icon src={props.icon}/> :props.name?  <Text>{props.name.substring(0,1).toLocaleUpperCase()}</Text>:null }
         </AvatarContainer>
     )
