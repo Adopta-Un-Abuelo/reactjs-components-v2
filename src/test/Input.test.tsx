@@ -37,3 +37,16 @@ describe("Input text phone", () => {
         expect(screen.getByLabelText("phone").value).toEqual("")
     })
 })
+
+describe("Displayin error message", () => {
+    beforeEach(()=>{
+        render(
+            <Input type={"phone"} label="phone" error={"Invalid phone"}/>
+        )
+    })
+    it("render", () => {
+        expect(screen.getByText("Invalid phone")).toBeInTheDocument()
+    })
+    
+    
+})
