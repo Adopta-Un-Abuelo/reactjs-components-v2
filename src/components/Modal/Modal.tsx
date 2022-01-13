@@ -68,7 +68,7 @@ const Modal = (props: Props) =>{
                 {props.children}
             </ChildrenElements>}
         <Buttons>
-            <Button onClick={onClose} style={{marginRight:8}} label={"Cancelar"} design={"text"}/>
+            <Button data-testid="close_but" onClick={onClose} style={{marginRight:8}} label={"Cancelar"} design={"text"}/>
             <Button disabled={props.disableButton} onClick={onSave} label={"Guardar"}/>
         </Buttons>
            

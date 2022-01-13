@@ -1,9 +1,22 @@
-import { render,screen } from '@testing-library/react'
+import { fireEvent, render,screen } from '@testing-library/react'
 import React from 'react';
 import { Modal } from '../components';
 import { mount } from 'enzyme'
 
 describe("Modal", () => {
+    const element = document.createElement('div');
+    const closeFn = jest.fn();
+    it('when ESC key is pressed', () => {
+        render(
+            <Modal onClose={closeFn}>Hello World</Modal>
+        );
+        var el=document.getElementById("close_but");
+        fireEvent.click(screen.getByTestId('close_but'))
+        expect(closeFn).toHaveBeenCalledTimes(1);
+        closeFn.mockReset(); 
+    });
+  
+
     it("render", () => {
         render(
             <Modal/>
@@ -54,6 +67,8 @@ describe("Modal", () => {
         expect(screen.getByText("Primer child")).toBeInTheDocument();
         expect(screen.getByText("Segundo child")).toBeInTheDocument();
     })
+    
+
 
     /* it("Click cancel button", () => {
         render(
