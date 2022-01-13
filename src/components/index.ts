@@ -6,3 +6,4 @@ export { default as Input } from './Input/Input';
 export { default as SearchBar } from './Input/SearchBar';
 export { default as Feedback } from './Feedback/Feedback';
 export { default as TextArea } from './TextArea/TextArea';
+export { default as RadioButton } from './Input/RadioButton';
