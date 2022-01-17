@@ -4,7 +4,7 @@ import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import './Editor.css'
 import ButtonEditor from '../Button/ButtonEditor'
-import { convertToRaw } from 'draft-js';
+import { convertToRaw, EditorState, ContentState, convertFromHTML } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 const TextAreaView = styled.textarea`
     display: flex;
@@ -51,11 +51,19 @@ const TextAreaView = styled.textarea`
 const TextArea = (props: Props) =>{
     const { style, ...restProps } = props;
     const [ editorState, setEditorState] = useState<any>(undefined);
-    const [value, setValue] = useState(undefined);
+    const [value, setValue] = useState<any>(undefined)
     
     useEffect(()=>{
-      // if(editorState) console.log((editorState.lastChangeType()))//console.log(convertToRaw(editorState))
-     },[editorState])
+        if(props.value && props.type==="edit"){
+            setEditorState(EditorState.createWithContent(
+                ContentState.createFromBlockArray(
+                  convertFromHTML(props.value)
+                )
+              ))
+            
+        }
+        else if(props.value) setValue(props.value)
+     },[props.value])
 
      const onTextAreChange = (value?:string, data?:any) => {
         let result = value?value: draftToHtml(convertToRaw(data.getCurrentContent()))
@@ -75,7 +83,7 @@ const TextArea = (props: Props) =>{
                 <ButtonEditor style={{"text-decoration": "line-through"}} text="S" type={{control:"inline", value:"STRIKETHROUGH"}}/>, 
                 <ButtonEditor text="H1" type={{control:"blockType", value:"header-one"}}/>, 
             ]}  wrapperClassName="wrapper" editorClassName="editor" toolbarClassName="toolbar" />:
-            <TextAreaView onChange={(e)=>{onTextAreChange(e.target.value)}} data-testid="text_area"style={style} placeholder={props.placeholder}/>
+            <TextAreaView value={props.value} onChange={(e)=>{onTextAreChange(e.target.value)}} data-testid="text_area"style={style} placeholder={props.placeholder}/>
         }
         </>
         
@@ -83,7 +91,7 @@ const TextArea = (props: Props) =>{
 } 
 export default TextArea;
 export interface Props extends ComponentPropsWithoutRef<"textarea">{
-    text?: string,
+    value?: string,
     placeholder?:string
     type?: "normal" | "edit"
 }

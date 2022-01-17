@@ -1,11 +1,15 @@
-import { convertToRaw, RichUtils } from "draft-js";
+import { RichUtils } from "draft-js";
 import React, { useEffect } from "react";
 import { useState } from "react";
 //Button para el editir de texto 
 export const ButtonEditor = (props:any)=> {
     const { editorState, onChange } = props;
     const [selected , setSelected] = useState(false)
-
+    useEffect(()=>{
+      const inlineStyle = editorState.getCurrentInlineStyle();
+      if(props.type.control==="inline")setSelected(inlineStyle.has(props.type.value));
+      if(props.type.control==="blockType")setSelected(RichUtils.getCurrentBlockType(editorState)===props.type.value);
+    },[editorState])
     const controlClicked = () => {
       let newState = null
       setSelected(!selected)
