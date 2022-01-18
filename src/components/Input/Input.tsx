@@ -6,9 +6,6 @@ const InputView = styled.div`
     display: flex;
     align-items: center;
     height: 38px;
-    border-radius: 40px;
-    border: 1px solid ${Color.gray5};
-    padding: 0px 16px;
     width: auto;
 `
 const InputStyled = styled.input`
@@ -41,8 +38,8 @@ const IconStyle = styled.div`
     margin-left:24px;
 `;
 const ErrorDiv = styled.div`
+    margin-top:16px;
     font-family: Poppins;
-    margin-top:4px;
     margin-left: 30px;
     font-style: normal;
     font-weight: 500;
