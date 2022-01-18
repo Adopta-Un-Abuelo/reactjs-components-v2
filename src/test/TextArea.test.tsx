@@ -1,9 +1,6 @@
 import { TextArea } from '../components';
-import { render, screen, fireEvent,waitFor, wait } from '@testing-library/react'
-import { Input, SearchBar } from '../components';
-import { Star } from 'react-feather';
-import React, {useState} from 'react'
-import userEvent from '@testing-library/user-event';
+import { render, screen, fireEvent} from '@testing-library/react'
+import React from 'react'
 
 describe("TextArea", () => {
     it("render", () => {

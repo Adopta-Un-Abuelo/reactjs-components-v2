@@ -1,7 +1,11 @@
-import React, { ComponentPropsWithoutRef } from 'react';
+import React, { ComponentPropsWithoutRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Color } from '../../constants';
-
+import { Editor } from 'react-draft-wysiwyg';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import './Editor.css'
+import ButtonEditor from '../Button/ButtonEditor'
+import { convertToRaw, EditorState, ContentState, convertFromHTML } from 'draft-js';
+import draftToHtml from 'draftjs-to-html';
 const TextAreaView = styled.textarea`
     display: flex;
     flex-direction: row;
@@ -44,19 +48,52 @@ const TextAreaView = styled.textarea`
 `
 
 
-
-
 const TextArea = (props: Props) =>{
     const { style, ...restProps } = props;
+    const [ editorState, setEditorState] = useState<any>(undefined);
+    const [value, setValue] = useState<any>(undefined)
+    
+    useEffect(()=>{
+        if(props.value && props.type==="edit"){
+            setEditorState(EditorState.createWithContent(
+                ContentState.createFromBlockArray(
+                  convertFromHTML(props.value)
+                )
+              ))
+            
+        }
+        else if(props.value) setValue(props.value)
+     },[props.value])
 
-    return(
-        <TextAreaView data-testid="text_area"
-        style={style} placeholder={props.placeholder}>
-        </TextAreaView>
+     const onTextAreChange = (value?:string, data?:any) => {
+        let result = value?value: draftToHtml(convertToRaw(data.getCurrentContent()))
+        if(data) setEditorState(data)
+        setValue(result)
+        props.onChange && props.onChange(result)
+    }
+    return(<>{
+            props.type==="edit" ? 
+            <Editor  editorState= {editorState}
+            onEditorStateChange={(data)=>{onTextAreChange(undefined, data)}} placeholder={props.placeholder} toolbar={{
+                options: ['emoji'],
+              }} toolbarCustomButtons={[
+                <ButtonEditor text="B" type={{control:"inline", value:"BOLD"}}/>, 
+                <ButtonEditor style={{"font-style": "italic"}} text="I" type={{control:"inline", value:"ITALIC"}}/>,
+                <ButtonEditor style={{"text-decoration":"underline"}} text="U" type={{control:"inline", value:"UNDERLINE"}}/>, 
+                <ButtonEditor style={{"text-decoration": "line-through"}} text="S" type={{control:"inline", value:"STRIKETHROUGH"}}/>, 
+                <ButtonEditor text="H1" type={{control:"blockType", value:"header-one"}}/>, 
+            ]}  wrapperClassName="wrapper" editorClassName="editor" toolbarClassName="toolbar" />:
+            <TextAreaView value={props.value} onChange={(e)=>{onTextAreChange(e.target.value)}} data-testid="text_area"style={style} placeholder={props.placeholder}/>
+        }
+        </>
+        
     )
 } 
 export default TextArea;
 export interface Props extends ComponentPropsWithoutRef<"textarea">{
-    text?: string,
+    value?: string,
     placeholder?:string
+    type?: "normal" | "edit"
 }
+
+
