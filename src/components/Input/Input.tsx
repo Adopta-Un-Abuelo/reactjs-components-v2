@@ -1,45 +1,144 @@
-import React, { ComponentPropsWithoutRef } from 'react';
+import React, { ComponentPropsWithoutRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Color } from '../../constants';
-
+import Color from '../../constants/Color';
+import { Calendar, Phone, User, Mail, X, MapPin } from 'react-feather'
 const InputView = styled.div`
     display: flex;
     align-items: center;
-    height: 38px;
-    border-radius: 40px;
-    border: 1px solid ${Color.gray5};
-    padding: 0px 16px;
+    padding: 0px;
+    margin: 0;
+    height: auto;
+    width: 100%;
+    position: relative;
 `
 const InputStyled = styled.input`
+    background: ${Color.gray6};
+    border-radius: 24px;
     font-family: 'Poppins';
     font-size: 14px;
-    border: none;
     padding: 0px;
-    height: 100%;
-    width: -webkit-fill-available;
+    height: 64px;
+    width: 100%;
     outline: none;
+    border: 0;
+    :focus{
+        border: 1px solid ${Color.gray3};
+        cursor:text;
+    }
+    /* :placeholder-shown{
+        :focus{
+            border: 1px solid ${Color.gray5};
+            cursor:text;
+        }
+    } */
 `
-
+const IconStyle = styled.div`
+    position:absolute;
+    display:flex; 
+    align-items:center; 
+    height:24px;
+    width:24px;
+    margin-left:24px;
+`;
+const ErrorDiv = styled.div`
+    font-family: Poppins;
+    margin-top:4px;
+    margin-left: 30px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 22px;
+    display: flex;
+    color: #FF5A5A;
+`;
 const Input = (props: Props) =>{
-
-    const { style, ...restProps } = props;
-
+    const [value, setValue] = useState("")
+    const [ error, setError] = useState("")
+    useEffect(()=>{
+        if(props.value) setValue(props.value)
+        if(props.error) setError(props.error)
+    },[props.value, props.error])
+    const onValuechange = (e:any) => {
+        setValue(e.target.value)
+    }
+    const onDateChange = (e:any) =>{
+        setValue(e.target.value);
+        if(e.target.value.length === 2 || e.target.value.length === 5){
+            setValue(e.target.value+'/');
+        }
+    }
+    const onInputKeyPress = (e:any) =>{
+        if(e.keyCode === 8){
+            if(e.target.value[e.target.value.length -2]==="/")
+                setValue(value.substring(0, value.length - 2));
+            
+        }
+    }
     return(
-        <InputView
-            data-testid="input"
-            style={style}
-        >
-            {props.icon && props.icon}
-            <InputStyled
-                style={{
-                    marginLeft: props.icon ? 16 : 0,
-                }}
-                {...restProps}
-            />
-        </InputView>
+       
+        <>
+        
+        {
+        
+        //DATE
+        props.type==="date" ?
+         <><InputView data-testid="input">
+         <IconStyle><Calendar stroke={Color.gray2}/></IconStyle>
+         <InputStyled aria-label={props.label} {...props} placeholder="dd/mm/yyyy" onKeyDown={onInputKeyPress} maxLength={10}  onChange={onDateChange}  type="tel" style={{fontSize:16,"paddingLeft":"64px", border:props.error ? `1px solid #FF5A5A`:value?"1px solid #00BA88":""}} value={value}/>
+         {value && <IconStyle onClick={()=>setValue("")} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
+          </InputView>
+         {error && <ErrorDiv>{error}</ErrorDiv>}</>
+        :
+        
+        
+        //PHONE
+        props.type==="phone" ?
+        <><InputView data-testid="input">
+        <IconStyle><Phone stroke={Color.gray2}/></IconStyle>
+        <InputStyled aria-label={props.label} {...props} type="tel" onChange={onValuechange} style={{fontSize:16,"paddingLeft":"64px", border:props.error ? `1px solid #FF5A5A`:value?"1px solid #00BA88":""}} value={value}/>
+        {value && <IconStyle onClick={()=>setValue("")} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
+         </InputView>
+        {error && <ErrorDiv>{error}</ErrorDiv>}</>:
+        
+        
+        //PHONE
+        props.type==="email" ?
+        <><InputView data-testid="input">
+        <IconStyle><Mail stroke={Color.gray2}/></IconStyle>
+        <InputStyled aria-label={props.label} type="email" onChange={onValuechange} {...props}  style={{fontSize:16,"paddingLeft":"64px", border:props.error ? `1px solid #FF5A5A`:value?"1px solid #00BA88":""}} value={value}/>
+        {value && <IconStyle onClick={()=>setValue("")} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
+         </InputView>
+        {error && <ErrorDiv>{error}</ErrorDiv>}</>:
+       
+       
+       //ADDRES
+        props.type==="location" ?
+        <><InputView data-testid="input">
+        <IconStyle><MapPin stroke={Color.gray2}/></IconStyle>
+        <InputStyled aria-label={props.label} type="text" onChange={onValuechange} {...props}  style={{fontSize:16,"paddingLeft":"64px", border:props.error ? `1px solid #FF5A5A`:value?"1px solid #00BA88":""}} value={value}/>
+        {value && <IconStyle onClick={()=>setValue("")} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
+         </InputView>
+        {error && <ErrorDiv>{error}</ErrorDiv>}</>:
+         
+         
+         //TEXT
+            <><InputView data-testid="input">
+            <IconStyle><User stroke={Color.gray2}/></IconStyle>
+            <InputStyled aria-label={props.label} onChange={onValuechange} {...props}  style={{fontSize:16,"paddingLeft":"64px", border:props.error ? `1px solid #FF5A5A`:value?"1px solid #00BA88":""}} value={value}/>
+            {value && <IconStyle onClick={()=>setValue("")} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
+             </InputView>
+            {error && <ErrorDiv>{error}</ErrorDiv>}</>
+        
+        }
+        </>
+        
     )
 }
 export default Input;
 export interface Props extends ComponentPropsWithoutRef<"input">{
-    icon?: any
+    placeholder?:string,
+    value?:string,
+    type?: 'text' | 'phone' | 'email' | 'date'| 'location',
+    error?:string,
+    label?:string
 }
