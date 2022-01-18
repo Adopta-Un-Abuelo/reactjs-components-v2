@@ -5,6 +5,7 @@ export { default as Checkbox } from './Checkbox/CheckboxList';
 export { default as SearchBar } from './SearchBar/SearchBar';
 export { default as Input } from './Input/Input';
 export { default as SearchBar } from './Input/SearchBar';
+export { default as Chip } from './Chip/Chip';
 export { default as Pagination } from './Pagination/Pagination';
 export { default as Label } from './Label/Label';
 export { default as Feedback } from './Feedback/Feedback';
