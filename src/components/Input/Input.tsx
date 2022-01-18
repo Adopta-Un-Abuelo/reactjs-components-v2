@@ -5,11 +5,11 @@ import { Calendar, Phone, User, Mail, X, MapPin } from 'react-feather'
 const InputView = styled.div`
     display: flex;
     align-items: center;
-    padding: 0px;
-    margin: 0;
-    height: auto;
-    width: 100%;
-    position: relative;
+    height: 38px;
+    border-radius: 40px;
+    border: 1px solid ${Color.gray5};
+    padding: 0px 16px;
+    width: auto;
 `
 const InputStyled = styled.input`
     background: ${Color.gray6};
