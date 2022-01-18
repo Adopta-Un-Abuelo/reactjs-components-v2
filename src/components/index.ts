@@ -12,3 +12,5 @@ export { default as Pagination } from './Pagination/Pagination';
 export { default as Label } from './Label/Label';
 export { default as Feedback } from './Feedback/Feedback';
 export { default as Modal } from './Modal/Modal';
+export { default as TextArea } from './TextArea/TextArea';
+export { default as RadioButton } from './Input/RadioButton';
