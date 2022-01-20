@@ -56,7 +56,6 @@ const Pagination = (props: Props) =>{
     },[props.start, props.lenght, props.rowsPerPage])
     const nextPage = () => {
         if(start<Math.ceil(props.lenght/props.rowsPerPage))setStart(start+1)
-        console.log(start, Math.ceil(length/rowsPerPage), start===Math.ceil(length/rowsPerPage))
     }
     const prevPage = () => {
         if(start>0)setStart(start-1)
@@ -71,8 +70,8 @@ const Pagination = (props: Props) =>{
                 <P weight={"semibold"} style={{color:Color.gray3,paddingRight:8}}>de</P>
                 <P weight={"semibold"} style={{color:Color.gray3}}>{Math.ceil(length/rowsPerPage)-1}</P>
            </PaginationDiv>
-           <Icon data-testid="right-arrow" onClick={nextPage} style ={{background:start===Math.ceil(length/rowsPerPage) ? "white" : Color.gray6, cursor:start===(Math.ceil(length/rowsPerPage)) ? "auto":"pointer"}}>
-               <ArrowRight style ={{stroke:start===(Math.ceil(length/rowsPerPage)) ? Color.gray4 : Color.gray2}}/>
+           <Icon data-testid="right-arrow" onClick={nextPage} style ={{background:start===Math.ceil(length/rowsPerPage)-1 ? "white" : Color.gray6, cursor:start===(Math.ceil(length/rowsPerPage)) ? "auto":"pointer"}}>
+               <ArrowRight style ={{stroke:start===(Math.ceil(length/rowsPerPage)-1) ? Color.gray4 : Color.gray2}}/>
             </Icon>
         </Container>
     )

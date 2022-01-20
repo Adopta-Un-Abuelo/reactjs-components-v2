@@ -4,7 +4,6 @@ import P from '../Text/P'
 import Color from '../../constants/Color';
 import Avatar from '../Avatar/Avatar'
 import { ChevronDown, ChevronUp, User } from 'react-feather';
-import { title } from 'process';
 
 const DropdownContainer = styled.div`
     display: flex;
@@ -61,7 +60,7 @@ const Option = styled.div`
 `;
 const Dropdown = (props: Props) =>{
     const [ open, setOpen] = useState(false)
-    const [ selected, setSelected] = useState(undefined)
+    const [ selected, setSelected] = useState<any>(undefined)
     const [ data, setData] = useState<Array<any>>([])
 
     useEffect(()=>{
@@ -105,7 +104,7 @@ const Dropdown = (props: Props) =>{
 }
 export default Dropdown;
 export interface Props extends ComponentPropsWithoutRef<"div">{
-    data:Array<any>,
+    data?:Array<any>,
     title:string,
     selected?:any
 }

@@ -1,7 +1,7 @@
 import React, { ComponentPropsWithoutRef } from 'react';
 import styled from 'styled-components';
 
-import Check from '../../assets/images/Check.svg';
+import Check from '../../assets/images/Check';
 
 const Container = styled.div`
 display: flex;
@@ -12,7 +12,7 @@ width: 336px;
 height: 40px;
 left: 124px;
 top: 293px;
-background: #59C183;;
+background: #59C183;
 box-shadow: 2px 0px 20px rgba(0, 0, 0, 0.09), 0px 4px 8px rgba(0, 0, 0, 0.1);
 border-radius: 4px;
 `
@@ -33,7 +33,7 @@ color: #FFFFFF;
 const FeedBack = (props: Props) =>{
     return(
         <Container data-testid="feedback">
-            <Icon src={Check}></Icon>
+            <Check style={{marginLeft:11, marginRight:11}}/>
             <Text>{props.text}</Text>
         </Container>
     )

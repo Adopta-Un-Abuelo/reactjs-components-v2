@@ -1,12 +1,12 @@
 import { fireEvent, render, screen } from '@testing-library/react'
-import { debug } from 'console';
+import React from 'react';
 import { Dropdown } from '../components';
 
 
 describe("Dropdown", () => {
     beforeEach(()=>{
         render(
-            <Dropdown/>
+            <Dropdown title={"prueba"}/>
         );
     })
     it("render", () => {

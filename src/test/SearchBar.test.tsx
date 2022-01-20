@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import { SearchBar } from '../components';
 import { Star } from 'react-feather';
+import React from 'react';
 describe("SearchBar", () => {
     it("render", () => {
         render(

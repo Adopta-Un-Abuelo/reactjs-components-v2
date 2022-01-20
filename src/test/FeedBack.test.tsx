@@ -21,7 +21,7 @@ describe("Feedback", () => {
         render(
             <Feedback text={"Exito"} type={"success"}/>
         );
-        expect(screen.getByTestId('feedback')).toHaveStyle("background:#dbe0dd")
+        expect(screen.getByTestId('feedback')).toHaveStyle("background:#59C183")
     })
 
 });
