@@ -17,7 +17,7 @@ jobs:
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
       - name: Install and Build 🔧
         run: |
-          npm install
+          npm install --force
           npm run build-storybook
       - name: Deploy 🚀 to GH PAGES
         uses: JamesIves/github-pages-deploy-action@3.6.2
