@@ -11,3 +11,6 @@ export default {
 const Template: ComponentStory<typeof TextArea> = (args) => <TextArea {...args} />;
 
 export const TextAreaView = Template.bind({});
+TextAreaView.args={
+	value:"<b>Hola</b>"
+}

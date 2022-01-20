@@ -1,4 +1,3 @@
-import ReactDOM from "react-dom";
 import styled from "styled-components";
 import React, { ComponentPropsWithoutRef, useEffect, useState } from 'react';
 import P from '../Text/P'
@@ -50,7 +49,7 @@ const RadioButton = (props: Props) =>{
       onClick={onClick}
     >
       <RadioOuterCircle style={{border: props.disabled ? `2px solid ${Color.gray4}`:` 2px solid ${Color.blue3}`}}>
-        <RadioInnerCircle style={{background: (props.disabled && props.value && props.selected && props.value === props.selected)? `${Color.blue3}`:"white"}}/>
+        <RadioInnerCircle style={{background: (props.disabled && props.value && selected && props.value === selected)? `${Color.blue3}`:"white"}}/>
       </RadioOuterCircle>
       <P style={{color:`${Color.gray2}`}}>{props.text}</P>
     </RadioButtonContainer>

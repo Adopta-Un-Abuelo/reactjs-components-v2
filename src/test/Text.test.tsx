@@ -1,6 +1,7 @@
 import { render } from '@testing-library/react'
 import { P } from '../components';
 import { screen } from '@testing-library/react'
+import React from 'react';
 
 
 describe("P", () => {

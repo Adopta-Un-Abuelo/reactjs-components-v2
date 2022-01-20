@@ -22,15 +22,5 @@ describe("TextArea_background", () => {
         expect(screen.getByTestId("text_area")).toHaveStyle('background: #F2F2F2;');
     })
 });
-describe("TextArea_placeholder", () => {
-    it("render", () => {
-        render(
-            <TextArea placeholder="Escribe">
-                
-            </TextArea>
-        );
-        fireEvent.focus(screen.getByPlaceholderText('Escribe'))
-        expect(screen.getByPlaceholderText('Escribe')).toHaveStyle('1px solid #5963F6;');;
-    })
-});
+
 

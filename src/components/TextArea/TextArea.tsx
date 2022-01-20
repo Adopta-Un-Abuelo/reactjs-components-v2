@@ -2,7 +2,7 @@ import React, { ComponentPropsWithoutRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import './Editor.css'
+import './Editor.scss'
 import ButtonEditor from '../Button/ButtonEditor'
 import { convertToRaw, EditorState, ContentState, convertFromHTML } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
@@ -55,10 +55,9 @@ const TextArea = (props: Props) =>{
     
     useEffect(()=>{
         if(props.value && props.type==="edit"){
+            let convert = convertFromHTML(props.value)
             setEditorState(EditorState.createWithContent(
-                ContentState.createFromBlockArray(
-                  convertFromHTML(props.value)
-                )
+                ContentState.createFromBlockArray(convert.contentBlocks,convert.entityMap)
               ))
             
         }
@@ -66,7 +65,7 @@ const TextArea = (props: Props) =>{
      },[props.value])
 
      const onTextAreChange = (value?:string, data?:any) => {
-        let result = value?value: draftToHtml(convertToRaw(data.getCurrentContent()))
+        let result:any = value?value: draftToHtml(convertToRaw(data.getCurrentContent()))
         if(data) setEditorState(data)
         setValue(result)
         props.onChange && props.onChange(result)
@@ -74,7 +73,7 @@ const TextArea = (props: Props) =>{
     return(<>{
             props.type==="edit" ? 
             <Editor  editorState= {editorState}
-            onEditorStateChange={(data)=>{onTextAreChange(undefined, data)}} placeholder={props.placeholder} toolbar={{
+            onEditorStateChange={(data:any)=>{onTextAreChange(undefined, data)}} placeholder={props.placeholder} toolbar={{
                 options: ['emoji'],
               }} toolbarCustomButtons={[
                 <ButtonEditor text="B" type={{control:"inline", value:"BOLD"}}/>, 
@@ -92,7 +91,7 @@ const TextArea = (props: Props) =>{
 export default TextArea;
 export interface Props extends ComponentPropsWithoutRef<"textarea">{
     value?: string,
-    placeholder?:string
+    placeholder?:string,
     type?: "normal" | "edit"
 }
 

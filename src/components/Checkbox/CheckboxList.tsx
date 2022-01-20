@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-
+import React from 'react'
 import Checkbox from './Checkbox';
 
 const Container = styled.div`
@@ -25,9 +25,7 @@ const CheckboxList = (props: Props) =>{
     }
 
     return(
-        <Container
-            data-testid="checkboxlist"
-        >
+        <Container data-testid="checkboxlist">
             {props.options.map(item => {
                 const active = selection.some(e => e.id === item.id);
                 return(
