@@ -3,6 +3,7 @@ import React from 'react';
 
 import { Modal } from '../components';
 import { SearchBar } from '../components';
+import { Input} from '../components'
 export default {
 	title: 'Basic/Modal',
 	component: Modal
@@ -20,9 +21,9 @@ ModalView.args = {
 
 const Template2: ComponentStory<typeof Modal> = (args) => 
 <Modal {...args} > 
-<SearchBar/>
-<SearchBar/>
-<SearchBar/>
+<Input style={{"marginBottom":"16px"}} error={"Error input"}/>
+<Input/>
+<Input/>
 </Modal>;
 
 export const ModalViewChilds = Template2.bind({});

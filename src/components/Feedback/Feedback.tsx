@@ -16,10 +16,7 @@ background: #59C183;
 box-shadow: 2px 0px 20px rgba(0, 0, 0, 0.09), 0px 4px 8px rgba(0, 0, 0, 0.1);
 border-radius: 4px;
 `
-const Icon = styled.img`
-margin-right:11px;
-margin-left:11px;
-`;
+
 
 const Text = styled.p`
 font-family: Poppins;
@@ -27,7 +24,13 @@ font-style: normal;
 font-weight: 500;
 font-size: 14px;
 line-height: 22px;
+width: 300px;
 color: #FFFFFF;
+text-overflow: ellipsis;
+white-space: nowrap;
+overflow: hidden;
+margin-right: 11px;
+
 `;
 
 const FeedBack = (props: Props) =>{
