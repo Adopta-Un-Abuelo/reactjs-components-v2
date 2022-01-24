@@ -55,7 +55,7 @@ const Pagination = (props: Props) =>{
             setStart(props.start)
     },[props.start, props.lenght, props.rowsPerPage])
     const nextPage = () => {
-        if(start<Math.ceil(props.lenght/props.rowsPerPage))setStart(start+1)
+        if(start<Math.ceil(props.lenght/props.rowsPerPage)-1)setStart(start+1)
     }
     const prevPage = () => {
         if(start>0)setStart(start-1)

@@ -46,9 +46,9 @@ const Buttons = styled.div`
 const ChildrenElements =  styled.div`
     width:100%; 
     margin-bottom:16px;
-    >*{
-        margin-bottom: 16px;
-    }
+    /* >*{
+        margin-bottom: 0px;
+    } */
 `;
 const Modal = (props: Props) =>{
 
