@@ -44,7 +44,9 @@
     "storybook": "start-storybook -p 6006 -s public",
     "predeploy": "npm run build-storybook",
     "deploy-storybook": "gh-pages -d storybook-static",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run build"
   },
   "eslintConfig": {
     "extends": [
