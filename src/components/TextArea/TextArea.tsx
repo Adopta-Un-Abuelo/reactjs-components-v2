@@ -2,7 +2,7 @@ import React, { ComponentPropsWithoutRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import './Editor.scss'
+import './Editor.css'
 import ButtonEditor from '../Button/ButtonEditor'
 import { convertToRaw, EditorState, ContentState, convertFromHTML } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
