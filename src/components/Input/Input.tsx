@@ -124,7 +124,7 @@ const Input = (props: Props) =>{
          //TEXT
         <><InputView {...props} data-testid="input">
         <IconStyle><User stroke={Color.gray2}/></IconStyle>
-        <InputStyled aria-label={props.label} onChange={onValuechange} {...props}  style={{fontSize:16,"paddingLeft":"64px", border:props.error ? `1px solid #FF5A5A`:value?"1px solid #00BA88":""}} value={value}/>
+        <InputStyled aria-label={props.label} {...props}  style={{fontSize:16,"paddingLeft":"64px", border:props.error ? `1px solid #FF5A5A`:value?"1px solid #00BA88":""}}/>
         {value && <IconStyle onClick={()=>setValue("")} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
         </InputView>
         {error && <ErrorDiv>{error}</ErrorDiv>}
