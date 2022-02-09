@@ -20,8 +20,6 @@ const InputStyled = styled.input`
     width: 100%;
     outline: none;
     border: 0;
-    font-size:16px;
-    padding-left:"64px";
     :focus{
         border: 1px solid ${Color.gray3};
         cursor:text;
@@ -53,45 +51,40 @@ const ErrorDiv = styled.div`
     display: flex;
     color: #FF5A5A;
 `;
-const Input = ({name,
-    type,
-    placeholder,
-    onChange,
-    className,
-    value,
-    error,
-    children,
-    label,
-    ...props}: Props) =>{
+const Input = (props: Props) =>{
+    const [value, setValue] = useState("")
+    const [ error, setError] = useState("")
+    useEffect(()=>{
+        if(props.value!==undefined && props.value!==null) setValue(props.value)
+        if(props.error) setError(props.error)
+    },[props.value, props.error])
 
-     const onValuechange = (e:any) => {
-       onChange &&  onChange(e)
-    } 
+    const onValuechange = (e:any) => {
+        setValue(e.target.value)
+    }
     const onDateChange = (e:any) =>{
-        onChange && onChange(e.target.value);
+        setValue(e.target.value);
         if(e.target.value.length === 2 || e.target.value.length === 5){
-            e.target.value = e.target.value+'/'
-            onChange && onChange(e);
+            setValue(e.target.value+'/');
         }
     }
     const onInputKeyPress = (e:any) =>{
         if(e.keyCode === 8){
-            if(e.target.value[e.target.value.length -2]==="/"){
-                e.target.value = value ? value.substring(0, value.length - 2): ""
-                onChange && onChange(e);
-            }
+            if(e.target.value[e.target.value.length -2]==="/")
+                setValue(value.substring(0, value.length - 2));
+            
         }
     }
     return(
        
         <>
         {
-        /* //DATE
+        //DATE
         props.type==="date" ?
          <><InputView {...props} data-testid="input">
          <IconStyle><Calendar stroke={Color.gray2}/></IconStyle>
          <InputStyled aria-label={props.label} {...props} placeholder="dd/mm/yyyy" onKeyDown={onInputKeyPress} maxLength={10}  onChange={onDateChange}  type="tel" style={{fontSize:16,"paddingLeft":"64px", border:props.error ? `1px solid #FF5A5A`:value?"1px solid #00BA88":""}} value={value}/>
-         {value && <IconStyle onClick={()=>onValuechange("")} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
+         {value && <IconStyle onClick={()=>setValue("")} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
          {error && <ErrorDiv>{error}</ErrorDiv>}
           </InputView>
          </>
@@ -101,8 +94,8 @@ const Input = ({name,
         props.type==="phone" ?
         <><InputView {...props} data-testid="input">
         <IconStyle><Phone stroke={Color.gray2}/></IconStyle>
-        <InputStyled aria-label={props.label} {...props} type="tel" style={{fontSize:16,"paddingLeft":"64px", border:props.error ? `1px solid #FF5A5A`:value?"1px solid #00BA88":""}}/>
-        {value && <IconStyle onClick={()=>onValuechange("")} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
+        <InputStyled aria-label={props.label} {...props} type="tel" onChange={onValuechange} style={{fontSize:16,"paddingLeft":"64px", border:props.error ? `1px solid #FF5A5A`:value?"1px solid #00BA88":""}} value={value}/>
+        {value && <IconStyle onClick={()=>setValue("")} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
         {error && <ErrorDiv>{error}</ErrorDiv>}
          </InputView>
         </>:
@@ -111,8 +104,8 @@ const Input = ({name,
         props.type==="email" ?
         <><InputView {...props} data-testid="input">
         <IconStyle><Mail stroke={Color.gray2}/></IconStyle>
-        <InputStyled aria-label={props.label} type="email" {...props}  style={{fontSize:16,"paddingLeft":"64px", border:props.error ? `1px solid #FF5A5A`:value?"1px solid #00BA88":""}}/>
-        {value && <IconStyle onClick={()=>onValuechange("")} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
+        <InputStyled aria-label={props.label} type="email" onChange={onValuechange} {...props}  style={{fontSize:16,"paddingLeft":"64px", border:props.error ? `1px solid #FF5A5A`:value?"1px solid #00BA88":""}} value={value}/>
+        {value && <IconStyle onClick={()=>setValue("")} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
         {error && <ErrorDiv>{error}</ErrorDiv>}
          </InputView>
         </>:
@@ -121,23 +114,17 @@ const Input = ({name,
         props.type==="location" ?
         <><InputView {...props} data-testid="input">
         <IconStyle><MapPin stroke={Color.gray2}/></IconStyle>
-        <InputStyled aria-label={props.label} type="text" {...props}  style={{fontSize:16,"paddingLeft":"64px", border:props.error ? `1px solid #FF5A5A`:value?"1px solid #00BA88":""}}/>
-        {value && <IconStyle onClick={()=>onValuechange("")} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
+        <InputStyled aria-label={props.label} type="text" onChange={onValuechange} {...props}  style={{fontSize:16,"paddingLeft":"64px", border:props.error ? `1px solid #FF5A5A`:value?"1px solid #00BA88":""}} value={value}/>
+        {value && <IconStyle onClick={()=>setValue("")} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
         {error && <ErrorDiv>{error}</ErrorDiv>}
         </InputView></>
-        : */
+        :
          
          //TEXT
-        <><InputView data-testid="input">
+        <><InputView {...props} data-testid="input">
         <IconStyle><User stroke={Color.gray2}/></IconStyle>
-        <input  id={name}
-        name={name}
-        type={type}
-        placeholder={placeholder}
-        onChange={onChange}
-        value={value}
-        style={{border:error ? `1px solid #FF5A5A`:value?"1px solid #00BA88":""}}/>
-        {value && <IconStyle onClick={()=>onValuechange("")} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
+        <InputStyled aria-label={props.label} onChange={onValuechange} {...props}  style={{fontSize:16,"paddingLeft":"64px", border:props.error ? `1px solid #FF5A5A`:value?"1px solid #00BA88":""}} value={value}/>
+        {value && <IconStyle onClick={()=>setValue("")} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
         </InputView>
         {error && <ErrorDiv>{error}</ErrorDiv>}
         </>
@@ -147,12 +134,10 @@ const Input = ({name,
     )
 }
 export default Input;
-
 export interface Props extends ComponentPropsWithoutRef<"input">{
     placeholder?:string,
     value?:string,
-    type?: 'text' | 'phone' | 'email' | 'date'| 'location' | 'password',
-    error?:string | boolean,
+    type?: 'text' | 'phone' | 'email' | 'date'| 'location',
+    error?:string,
     label?:string
 }
-
