@@ -130,7 +130,7 @@ const Input = ({name,
          //TEXT
         <><InputView data-testid="input">
         <IconStyle><User stroke={Color.gray2}/></IconStyle>
-        <InputStyled  id={name}
+        <input  id={name}
         name={name}
         type={type}
         placeholder={placeholder}
