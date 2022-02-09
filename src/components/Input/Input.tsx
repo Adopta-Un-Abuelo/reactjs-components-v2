@@ -20,6 +20,8 @@ const InputStyled = styled.input`
     width: 100%;
     outline: none;
     border: 0;
+    font-size:16px;
+    padding-left:"64px";
     :focus{
         border: 1px solid ${Color.gray3};
         cursor:text;
@@ -51,17 +53,16 @@ const ErrorDiv = styled.div`
     display: flex;
     color: #FF5A5A;
 `;
-const Input = (props: Props) =>{
-    const [value, setValue] = useState("")
-    const [ error, setError] = useState<string | boolean>("")
-    const { onChange } = props;
-    useEffect(()=>{
-       setValue(props.value? props.value:"")
-    },[props.value])
-
-    useEffect(()=>{
-        if(props.error) setError(props.error)
-    },[props.value, props.error])
+const Input = ({name,
+    type,
+    placeholder,
+    onChange,
+    className,
+    value,
+    error,
+    children,
+    label,
+    ...props}: Props) =>{
 
      const onValuechange = (e:any) => {
        onChange &&  onChange(e)
@@ -129,7 +130,13 @@ const Input = (props: Props) =>{
          //TEXT
         <><InputView data-testid="input">
         <IconStyle><User stroke={Color.gray2}/></IconStyle>
-        <InputStyled {...props} aria-label={props.label} onChange={onChange} value={value} style={{fontSize:16,"paddingLeft":"64px", border:props.error ? `1px solid #FF5A5A`:value?"1px solid #00BA88":""}}/>
+        <InputStyled  id={name}
+        name={name}
+        type={type}
+        placeholder={placeholder}
+        onChange={onChange}
+        value={value}
+        style={{border:error ? `1px solid #FF5A5A`:value?"1px solid #00BA88":""}}/>
         {value && <IconStyle onClick={()=>onValuechange("")} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
         </InputView>
         {error && <ErrorDiv>{error}</ErrorDiv>}
@@ -140,6 +147,7 @@ const Input = (props: Props) =>{
     )
 }
 export default Input;
+
 export interface Props extends ComponentPropsWithoutRef<"input">{
     placeholder?:string,
     value?:string,
@@ -147,3 +155,4 @@ export interface Props extends ComponentPropsWithoutRef<"input">{
     error?:string | boolean,
     label?:string
 }
+
