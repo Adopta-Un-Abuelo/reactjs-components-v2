@@ -54,7 +54,13 @@ const ErrorDiv = styled.div`
 const Input = (props: Props) =>{
     /* const [value, setValue] = useState("") */
     const [ error, setError] = useState<string | boolean>("")
-    const { onChange , value} = props;
+    const { onChange } = props;
+    const [ value, setValue] = useState(props.value)
+    useEffect(()=>{
+       /*  if(props.value) setValue(props.value) */
+        if(props.error) setError(props.error)
+        setValue(props.value)
+    },[props.value, props.error])
 
     useEffect(()=>{
        /*  if(props.value) setValue(props.value) */
