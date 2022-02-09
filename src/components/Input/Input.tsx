@@ -61,6 +61,7 @@ const Input = (props: Props) =>{
 
     const onValuechange = (e:any) => {
         setValue(e.target.value)
+        props.onChange && props.onChange(e.target.value)
     }
     const onDateChange = (e:any) =>{
         setValue(e.target.value);
