@@ -52,9 +52,8 @@ const ErrorDiv = styled.div`
     color: #FF5A5A;
 `;
 const Input = (props: Props) =>{
-    const [value, setValue] = useState("")
-    const [ error, setError] = useState("")
-    useEffect(()=>{
+   const {value} = props
+   /*  useEffect(()=>{
         if(props.value!==undefined && props.value!==null) setValue(props.value)
         if(props.error) setError(props.error)
     },[props.value, props.error])
@@ -62,8 +61,8 @@ const Input = (props: Props) =>{
     const onValuechange = (e:any) => {
         setValue(e.target.value)
         props.onChange && props.onChange(e.target.value)
-    }
-    const onDateChange = (e:any) =>{
+    } */
+ /*    const onDateChange = (e:any) =>{
         setValue(e.target.value);
         if(e.target.value.length === 2 || e.target.value.length === 5){
             setValue(e.target.value+'/');
@@ -75,12 +74,12 @@ const Input = (props: Props) =>{
                 setValue(value.substring(0, value.length - 2));
             
         }
-    }
+    } */
     return(
        
         <>
         {
-        //DATE
+        /* //DATE
         props.type==="date" ?
          <><InputView {...props} data-testid="input">
          <IconStyle><Calendar stroke={Color.gray2}/></IconStyle>
@@ -119,15 +118,15 @@ const Input = (props: Props) =>{
         {value && <IconStyle onClick={()=>setValue("")} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
         {error && <ErrorDiv>{error}</ErrorDiv>}
         </InputView></>
-        :
+        : */
          
          //TEXT
         <><InputView data-testid="input">
         <IconStyle><User stroke={Color.gray2}/></IconStyle>
         <InputStyled aria-label={props.label} {...props}  style={{fontSize:16,"paddingLeft":"64px", border:props.error ? `1px solid #FF5A5A`:value?"1px solid #00BA88":""}}/>
-        {value && <IconStyle onClick={()=>setValue("")} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
+        {value && <IconStyle onClick={(e)=>{} } style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
         </InputView>
-        {error && <ErrorDiv>{error}</ErrorDiv>}
+       {/*  {error && <ErrorDiv>{error}</ErrorDiv>} */}
         </>
         }
         </>
