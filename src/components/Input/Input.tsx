@@ -53,7 +53,7 @@ const ErrorDiv = styled.div`
 `;
 const Input = (props: Props) =>{
     /* const [value, setValue] = useState("") */
-    const [ error, setError] = useState("")
+    const [ error, setError] = useState<string | boolean>("")
     const { onChange , value} = props;
 
     useEffect(()=>{
@@ -140,7 +140,7 @@ export default Input;
 export interface Props extends ComponentPropsWithoutRef<"input">{
     placeholder?:string,
     value?:string,
-    type?: 'text' | 'phone' | 'email' | 'date'| 'location',
-    error?:string,
+    type?: 'text' | 'phone' | 'email' | 'date'| 'location' | 'password',
+    error?:string | boolean,
     label?:string
 }
