@@ -52,20 +52,17 @@ const ErrorDiv = styled.div`
     color: #FF5A5A;
 `;
 const Input = (props: Props) =>{
-    /* const [value, setValue] = useState("") */
+    const [value, setValue] = useState("")
     const [ error, setError] = useState<string | boolean>("")
     const { onChange } = props;
-    const [ value, setValue] = useState(props.value)
     useEffect(()=>{
-       /*  if(props.value) setValue(props.value) */
-        if(props.error) setError(props.error)
-        setValue(props.value)
-    },[props.value, props.error])
+       setValue(props.value? props.value:"")
+    },[props.value])
 
     useEffect(()=>{
-       /*  if(props.value) setValue(props.value) */
         if(props.error) setError(props.error)
     },[props.value, props.error])
+
      const onValuechange = (e:any) => {
        onChange &&  onChange(e.target.value)
     } 
@@ -130,7 +127,7 @@ const Input = (props: Props) =>{
         :
          
          //TEXT
-        <><InputView {...props} data-testid="input">
+        <><InputView data-testid="input">
         <IconStyle><User stroke={Color.gray2}/></IconStyle>
         <InputStyled aria-label={props.label} onChange={onChange} value={value} style={{fontSize:16,"paddingLeft":"64px", border:props.error ? `1px solid #FF5A5A`:value?"1px solid #00BA88":""}}/>
         {value && <IconStyle onClick={()=>onValuechange("")} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
