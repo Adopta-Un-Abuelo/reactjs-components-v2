@@ -60,7 +60,8 @@ const Input = (props: Props) =>{
     },[props.error])
 
     const onValuechange = (e:any) => {
-        const result = e.target;
+        const {value, name} = e.target;
+        const result:any={value, name}
         onChange && onChange(result)
     }
     const onDateChange = (e:any) =>{
