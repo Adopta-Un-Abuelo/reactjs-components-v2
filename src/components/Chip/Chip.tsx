@@ -29,11 +29,11 @@ const ChipsContainerBig = styled.div`
 
 const Chip = (props: Props) =>{
     return(<>
-        { props.type ==="small" && <ChipsContainerSmall data-testid="chip">
+        { props.type ==="small" && <ChipsContainerSmall data-testid="chip" style={props.style}>
             <P weight={"semibold"} style={{color:Color.blue3}}>{props.text.slice(0,1).toLocaleUpperCase()+props.text.slice(1,2)}</P> 
         </ChipsContainerSmall>
         }
-         { props.type !=="small" && <ChipsContainerBig data-testid="chip">
+         { props.type !=="small" && <ChipsContainerBig data-testid="chip" style={props.style}>
            <P style={{color:Color.blue3}}>{props.text}</P> 
         </ChipsContainerBig>
         }
