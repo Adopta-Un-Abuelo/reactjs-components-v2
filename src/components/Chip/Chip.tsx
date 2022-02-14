@@ -34,7 +34,7 @@ const Chip = (props: Props) =>{
         </ChipsContainerSmall>
         }
          { props.type !=="small" && <ChipsContainerBig data-testid="chip" style={props.style}>
-           <P style={{color:Color.blue3}}>{props.text.slice(0,1).toLocaleUpperCase()+props.text.slice(1,-1).toLocaleLowerCase()}</P> 
+           <P style={{color:Color.blue3}}>{props.text.slice(0,1).toLocaleUpperCase()+props.text.slice(1,props.text.length).toLocaleLowerCase()}</P> 
         </ChipsContainerBig>
         }
     </>)
