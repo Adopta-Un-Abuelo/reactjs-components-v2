@@ -63,7 +63,7 @@ const Button = (props: Props) => {
 				{props.icon && props.icon}
 				<P 
 					weight='semibold'
-					style={{width:"100%",marginLeft: props.icon ? 6 : 0, color: props.disabled ? Color.gray3 : Color.blue3}}
+					style={{fontSize: props.style?.fontSize ? props.style?.fontSize :16 ,width:"100%",marginLeft: props.icon ? 6 : 0, color: props.disabled ? Color.gray3 : Color.blue3}}
 				>
 					{props.label}
 				</P>
@@ -77,7 +77,7 @@ const Button = (props: Props) => {
 				{props.icon && props.icon}
 				<P 
 					weight='semibold'
-					style={{width:"100%",marginLeft: props.icon ? 6 : 0, color: props.disabled ? Color.gray4 : Color.gray2}}
+					style={{fontSize: props.style?.fontSize ? props.style?.fontSize :16 ,width:"100%",marginLeft: props.icon ? 6 : 0, color: props.disabled ? Color.gray4 : Color.gray2}}
 				>
 					{props.label}
 				</P>
