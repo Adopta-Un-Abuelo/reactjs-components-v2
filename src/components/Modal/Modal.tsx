@@ -65,7 +65,7 @@ const Modal = (props: Props) =>{
         props.onSave && props.onSave()
     }
     return(
-       <Container data-testid="modal">
+       <Container style={props.style} data-testid="modal">
            <X style={{position:"absolute", alignSelf:"flex-end", cursor:"pointer"}}/>
            {props.title &&<Title>{props.title}</Title>}
            {props.subtitle &&<Subtitle>{props.subtitle}</Subtitle>}
