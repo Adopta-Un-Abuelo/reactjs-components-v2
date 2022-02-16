@@ -1,6 +1,5 @@
 import React, { ComponentPropsWithoutRef } from 'react';
 import styled from 'styled-components';
-import Color from '../../constants/Color';
 import Button from '../Button/Button'
 import { X } from 'react-feather'
 const Container = styled.div`
@@ -15,6 +14,11 @@ const Container = styled.div`
     background: #FFFFFF;
     box-shadow: 2px 0px 20px rgba(0, 0, 0, 0.09), 0px 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 `;
 const Title = styled.div`
     font-family: Poppins;

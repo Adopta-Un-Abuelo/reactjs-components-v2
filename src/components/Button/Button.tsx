@@ -9,7 +9,6 @@ const ButtonPrimary = styled.button`
 	flex-direction: row;
 	align-items: center;
 	height: 40px;
-	width: 100%;
 	padding: 0px 16px;
 	border-radius: 20px;
 	border: none;
