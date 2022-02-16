@@ -123,7 +123,16 @@ const Input = (props: Props) =>{
         </InputView>
         {error && <ErrorDiv>{error}</ErrorDiv>}</>
         :
-         
+        //PASSWORD
+        props.type==="password" ?
+        <><InputView  data-testid="input">
+        <IconStyle><User stroke={Color.gray2}/></IconStyle>
+        <InputStyled aria-label={props.label} {...props}  style={{border:error ? `1px solid #FF5A5A`:value!=undefined && value!==null && value.length?"1px solid #00BA88":""}} value={value}/>
+        {value && <IconStyle onClick={()=>{props.delete && props.delete()}} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
+        </InputView>
+        {error && <ErrorDiv>{error}</ErrorDiv>}
+        </>
+        :
          //TEXT
         <><InputView  data-testid="input">
         <IconStyle><User stroke={Color.gray2}/></IconStyle>
@@ -141,7 +150,7 @@ export default Input;
 export interface Props extends ComponentPropsWithoutRef<"input">{
     placeholder?:string,
     value?:string,
-    type?: 'text' | 'phone' | 'email' | 'date'| 'location',
+    type?: 'text' | 'phone' | 'email' | 'date'| 'location' | 'password',
     error?:string|undefined,
     delete?:()=>void,
     label?:string
