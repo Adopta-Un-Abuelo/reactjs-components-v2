@@ -10,7 +10,7 @@ const Container = styled.div`
     min-width: 353px;
     min-height: 170px;
     max-width: 700px;
-    max-height: 800px;
+    max-height: 700px;
     background: #FFFFFF;
     box-shadow: 2px 0px 20px rgba(0, 0, 0, 0.09), 0px 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
