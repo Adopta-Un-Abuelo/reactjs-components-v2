@@ -20,6 +20,8 @@ const Container = styled.div`
     z-index: 1;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+    overflow:hidden;
+    overflow-y: auto;
 `;
 const Title = styled.div`
     font-family: Poppins;
