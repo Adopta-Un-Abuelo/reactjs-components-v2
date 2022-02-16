@@ -19,7 +19,6 @@ const ChipsContainerBig = styled.div`
     justify-content: center;
     align-items: center;
     padding: 4px 16px;
-    width: 105px;
     height: 30px;
     left: 118px;
     top: 1082px;
