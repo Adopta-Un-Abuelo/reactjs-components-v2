@@ -24,6 +24,7 @@ const ButtonSecondary = styled.button`
 	flex-direction: row;
 	align-items: center;
 	height: 40px;
+	width: 100%;
 	padding: 0px 16px;
 	border-radius: 20px;
 	border: ${props => props.disabled ? '1px solid '+ Color.gray3 : '1px solid '+ Color.blue3};
@@ -61,7 +62,7 @@ const Button = (props: Props) => {
 				{props.icon && props.icon}
 				<P 
 					weight='semibold'
-					style={{marginLeft: props.icon ? 6 : 0, color: props.disabled ? Color.gray3 : Color.blue3}}
+					style={{fontSize: props.style?.fontSize ? props.style?.fontSize :16 ,width:"100%",marginLeft: props.icon ? 6 : 0, color: props.disabled ? Color.gray3 : Color.blue3}}
 				>
 					{props.label}
 				</P>
@@ -75,7 +76,7 @@ const Button = (props: Props) => {
 				{props.icon && props.icon}
 				<P 
 					weight='semibold'
-					style={{marginLeft: props.icon ? 6 : 0, color: props.disabled ? Color.gray4 : Color.gray2}}
+					style={{fontSize: props.style?.fontSize ? props.style?.fontSize :16 ,width:"100%",marginLeft: props.icon ? 6 : 0, color: props.disabled ? Color.gray4 : Color.gray2}}
 				>
 					{props.label}
 				</P>
@@ -89,7 +90,7 @@ const Button = (props: Props) => {
 				{props.icon && props.icon}
 				<P 
 					weight='semibold'
-					style={{marginLeft: props.icon ? 6 : 0, color: 'white'}}
+					style={{width:"100%",marginLeft: props.icon ? 6 : 0, color: 'white'}}
 				>
 					{props.label}
 				</P>

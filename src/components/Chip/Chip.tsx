@@ -19,7 +19,6 @@ const ChipsContainerBig = styled.div`
     justify-content: center;
     align-items: center;
     padding: 4px 16px;
-    width: 105px;
     height: 30px;
     left: 118px;
     top: 1082px;
@@ -29,12 +28,12 @@ const ChipsContainerBig = styled.div`
 
 const Chip = (props: Props) =>{
     return(<>
-        { props.type ==="small" && <ChipsContainerSmall data-testid="chip">
-            <P weight={"semibold"} style={{color:Color.blue3}}>{props.text.slice(0,1).toLocaleUpperCase()+props.text.slice(1,2)}</P> 
+        { props.type ==="small" && <ChipsContainerSmall data-testid="chip" style={props.style}>
+            <P weight={"semibold"} style={{fontSize:12,color:Color.blue3}}>{props.text.slice(0,1).toLocaleUpperCase()+props.text.slice(1,2)}</P> 
         </ChipsContainerSmall>
         }
-         { props.type !=="small" && <ChipsContainerBig data-testid="chip">
-           <P style={{color:Color.blue3}}>{props.text}</P> 
+         { props.type !=="small" && <ChipsContainerBig data-testid="chip" style={props.style}>
+           <P weight={"semibold"} style={{fontSize:12,color:Color.blue3}}>{props.text.slice(0,1).toLocaleUpperCase()+props.text.slice(1,props.text.length).toLocaleLowerCase()}</P> 
         </ChipsContainerBig>
         }
     </>)
