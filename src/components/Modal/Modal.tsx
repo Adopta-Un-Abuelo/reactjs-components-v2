@@ -68,7 +68,7 @@ const Modal = (props: Props) =>{
     }
     return(
        <Container style={props.style} data-testid="modal">
-           <X style={{position:"absolute", alignSelf:"flex-end", cursor:"pointer"}}/>
+           <X onClick={onClose} style={{position:"absolute", alignSelf:"flex-end", cursor:"pointer"}}/>
            {props.title &&<Title>{props.title}</Title>}
            {props.subtitle &&<Subtitle>{props.subtitle}</Subtitle>}
            {props.children && <ChildrenElements>
