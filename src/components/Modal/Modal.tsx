@@ -1,6 +1,7 @@
 import React, { ComponentPropsWithoutRef } from 'react';
 import styled from 'styled-components';
 import Button from '../Button/Button'
+import P from '../Text/P'
 import { X } from 'react-feather'
 const Container = styled.div`
     display: flex;
@@ -47,8 +48,8 @@ const Buttons = styled.div`
     margin-top: auto;
     display: flex;
     bottom: 0;
+    align-items: center;
     width: 100%;
-    justify-content: flex-end;
 `;
 const ChildrenElements =  styled.div`
     width:100%; 
@@ -75,7 +76,8 @@ const Modal = (props: Props) =>{
                 {props.children}
             </ChildrenElements>}
         <Buttons>
-            <Button data-testid="close_but" onClick={onClose} style={{marginRight:8}} label={"Cancelar"} design={"text"}/>
+            {props.error && <P style={{color:"red", fontSize:12}}>{props.error}</P>}
+            <Button data-testid="close_but" onClick={onClose} style={{marginRight:8, marginLeft:"auto"}} label={"Cancelar"} design={"text"}/>
             <Button disabled={props.disableButton} onClick={onSave} label={"Guardar"}/>
         </Buttons>
            
@@ -87,6 +89,7 @@ export interface Props extends ComponentPropsWithoutRef<"div">{
     title?:string,
     subtitle?:string,
     disableButton?:boolean,
+    error?:string,
     onClose?:()=>void,
     onSave?:()=>void
 }
