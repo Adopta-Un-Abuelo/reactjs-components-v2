@@ -21,7 +21,8 @@ const H1 = (props: Props) =>{
 		<P
 			style={{
 				fontSize: type === 'h1' ? 42 : type === 'h2' ? 24 : type === 'h3' ? 20 : type === 'h4' ? 18 : 16,
-				fontWeight: type === 'h4' || type === 'h5' ? 600 : 700
+				fontWeight: type === 'h4' || type === 'h5' ? 600 : 700,
+				...style
 			}}
 			{...rest}
 		>

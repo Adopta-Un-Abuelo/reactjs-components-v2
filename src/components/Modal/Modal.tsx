@@ -1,4 +1,4 @@
-import React, { ComponentPropsWithoutRef } from 'react';
+import React, { ComponentPropsWithoutRef, forwardRef, Ref, useImperativeHandle } from 'react';
 import styled from 'styled-components';
 import Button from '../Button/Button'
 import Text from '../Text/Text'
@@ -12,12 +12,7 @@ const Screen = styled.div`
     background: rgba(0, 0, 0, 0.6);
 `;
 const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 16px;
     min-width: 353px;
-    min-height: 170px;
     max-width: 700px;
     max-height: 700px;
     background: #FFFFFF;
@@ -32,6 +27,15 @@ const Container = styled.div`
     overflow:hidden;
     overflow-y: auto;
 `;
+const TitleView = styled.div`
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+`
+const ChildrenView = styled.div`
+    padding: 0px 16px;
+`
 const Title = styled.div`
     font-family: Poppins;
     font-style: normal;
@@ -39,13 +43,10 @@ const Title = styled.div`
     font-size: 18px;
     line-height: 22px;
     color: #4F4F4F;
-    margin-bottom:16px;
     width: 95%;
 `;
-
 const Subtitle = styled.div`
     font-family: Poppins;
-    margin-bottom:16px;
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
@@ -53,20 +54,20 @@ const Subtitle = styled.div`
     color: #828282;
 `;
 const Buttons = styled.div`
-    margin-top: auto;
     display: flex;
+    flex: 1;
     bottom: 0;
     align-items: center;
-    width: 100%;
+    padding: 16px 16px;
 `;
-const ChildrenElements =  styled.div`
-    width:100%; 
-    margin-bottom:16px;
-    /* >*{
-        margin-bottom: 0px;
-    } */
-`;
-const Modal = (props: Props) =>{
+
+const Modal = forwardRef((props: ModalProps, ref: Ref<ModalRef>) =>{
+
+    useImperativeHandle(ref, () => ({
+        close(){
+            onClose();
+        }
+    }));
 
     const onClose = () =>{
         props.onClose && props.onClose();
@@ -76,30 +77,64 @@ const Modal = (props: Props) =>{
         props.onSave && props.onSave()
     }
     return(
-     <Screen>
-       <Container style={props.style} data-testid="modal">
-           <X onClick={onClose} style={{position:"absolute", alignSelf:"flex-end", cursor:"pointer"}}/>
-           {props.title &&<Title>{props.title}</Title>}
-           {props.subtitle &&<Subtitle>{props.subtitle}</Subtitle>}
-           {props.children && <ChildrenElements>
-                {props.children}
-            </ChildrenElements>}
-        <Buttons>
-            {props.error && <Text type='p' style={{color:"red", fontSize:12}}>{props.error}</Text>}
-            <Button data-testid="close_but" onClick={onClose} style={{marginRight:8, marginLeft:"auto"}} label={"Cancelar"} design={"text"}/>
-            <Button disabled={props.disableButton} onClick={onSave} label={"Guardar"}/>
-        </Buttons>
-           
-       </Container>
-    </Screen>
+        <Screen>
+            <Container style={props.style} data-testid="modal">
+                {!props.hideHeader &&
+                    <TitleView>
+                        {!props.hideClose &&
+                            <X onClick={onClose} style={{position:"absolute", alignSelf:"flex-end", cursor:"pointer"}}/>
+                        }
+                        {props.title &&
+                            <Title>{props.title}</Title>
+                        }
+                        {props.subtitle &&
+                            <Subtitle>{props.subtitle}</Subtitle>
+                        }
+                    </TitleView>
+                }
+                <ChildrenView
+                    style={props.contentStyle}
+                >
+                    {props.children}
+                </ChildrenView>
+                {(props.onSave || props.onClose) &&
+                    <Buttons>
+                        {props.error && 
+                            <Text type='p' style={{color:"red", fontSize:12}}>
+                                {props.error}
+                            </Text>
+                        }
+                        {props.onClose &&
+                            <Button 
+                                data-testid="close_but" 
+                                onClick={onClose} 
+                                style={{marginRight:8, marginLeft:"auto"}} 
+                                label={"Cancelar"} 
+                                design={"text"}
+                            />
+                        }
+                        {props.onSave &&
+                            <Button disabled={props.disableButton} onClick={onSave} label={props.buttonLabel ? props.buttonLabel : "Guardar"}/>
+                        }
+                    </Buttons>
+                }
+            </Container>
+        </Screen>
     )
-}
+})
 export default Modal;
-export interface Props extends ComponentPropsWithoutRef<"div">{
+export interface ModalProps extends ComponentPropsWithoutRef<"div">{
     title?:string,
     subtitle?:string,
     disableButton?:boolean,
     error?:string,
+    hideClose?: boolean,
+    hideHeader?: boolean,
+    contentStyle?: any,
+    buttonLabel?: string
     onClose?:()=>void,
     onSave?:()=>void
+}
+export interface ModalRef{
+    close: () => void
 }
