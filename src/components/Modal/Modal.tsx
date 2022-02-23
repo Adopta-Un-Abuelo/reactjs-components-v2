@@ -10,6 +10,7 @@ const Screen = styled.div`
     width:100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
 `;
 const Container = styled.div`
     min-width: 353px;
@@ -21,7 +22,6 @@ const Container = styled.div`
     position: fixed;
     top: 50%;
     left: 50%;
-    z-index: 1;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     overflow:hidden;
