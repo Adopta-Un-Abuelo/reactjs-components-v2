@@ -3,7 +3,14 @@ import styled from 'styled-components';
 import Button from '../Button/Button'
 import Text from '../Text/Text'
 import { X } from 'react-feather'
-
+const Screen = styled.div`
+   position: fixed;
+    top: 0;
+    left: 0;
+    width:100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+`;
 const Container = styled.div`
     min-width: 353px;
     max-width: 700px;
@@ -64,6 +71,7 @@ const Modal = (props: ModalProps) =>{
         props.onSave && props.onSave()
     }
     return(
+     <Screen>
         <Container style={props.style} data-testid="modal">
             <TitleView>
                 {!props.hideClose &&
@@ -103,6 +111,7 @@ const Modal = (props: ModalProps) =>{
                 </Buttons>
             }
        </Container>
+    </Screen>
     )
 }
 export default Modal;
