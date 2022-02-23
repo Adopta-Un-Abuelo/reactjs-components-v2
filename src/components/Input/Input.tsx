@@ -65,11 +65,11 @@ const Input = (props: Props) =>{
         onChange && onChange(e)
     }
     const onDateChange = (e:any) =>{
-        onChange && onChange(e);
         if(e.target.value.length === 2 || e.target.value.length === 5){
             e.target.value = e.target.value+'/'
-            onChange && onChange(e);
         }
+        console.log(e)
+        onChange && onChange(e);
     }
     const onInputKeyPress = (e:any) =>{
         if(e.keyCode === 8){
@@ -87,7 +87,7 @@ const Input = (props: Props) =>{
         props.type==="date" ?
          <><InputView data-testid="input">
          <IconStyle><Calendar stroke={Color.gray2}/></IconStyle>
-         <InputStyled aria-label={props.label} placeholder="dd/mm/yyyy" onKeyDown={onInputKeyPress} maxLength={10}  onChange={onDateChange}  type="tel" style={{border:error ? `1px solid #FF5A5A`:value!=undefined && value!==null && value.length?"1px solid #00BA88":""}} value={value}/>
+         <InputStyled aria-label={props.label} placeholder="dd/mm/yyyy" onKeyDown={onInputKeyPress} maxLength={10}  onChange={onDateChange}  type="tel" style={{border:error ? `1px solid #FF5A5A`:value!==undefined && value!==null && value.length?"1px solid #00BA88":""}} value={value}/>
          {value && <IconStyle onClick={()=>props.delete && props.delete()} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
           </InputView>
           {error && <ErrorDiv>{error}</ErrorDiv>}
@@ -98,7 +98,7 @@ const Input = (props: Props) =>{
         props.type==="phone" ?
         <><InputView data-testid="input">
         <IconStyle><Phone stroke={Color.gray2}/></IconStyle>
-        <InputStyled aria-label={props.label} type="tel" onChange={onValuechange} style={{border:error ? `1px solid #FF5A5A`:value!=undefined && value!==null && value.length?"1px solid #00BA88":""}} value={value}/>
+        <InputStyled aria-label={props.label} type="tel" onChange={onValuechange} style={{border:error ? `1px solid #FF5A5A`:value!==undefined && value!==null && value.length?"1px solid #00BA88":""}} value={value}/>
         {value && <IconStyle onClick={()=>props.delete && props.delete()} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
          </InputView>
          {error && <ErrorDiv>{error}</ErrorDiv>}
@@ -108,7 +108,7 @@ const Input = (props: Props) =>{
         props.type==="email" ?
         <><InputView data-testid="input">
         <IconStyle><Mail stroke={Color.gray2}/></IconStyle>
-        <InputStyled aria-label={props.label} type="email" {...props}  style={{border:error ? `1px solid #FF5A5A`:value!=undefined && value!==null && value.length?"1px solid #00BA88":""}}/>
+        <InputStyled aria-label={props.label} type="email" {...props}  style={{border:error ? `1px solid #FF5A5A`:value!==undefined && value!==null && value.length?"1px solid #00BA88":""}}/>
         {value && <IconStyle onClick={()=>props.delete && props.delete()} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
          </InputView>
          {error && <ErrorDiv>{error}</ErrorDiv>}
@@ -118,7 +118,7 @@ const Input = (props: Props) =>{
         props.type==="location" ?
         <><InputView data-testid="input">
         <IconStyle><MapPin stroke={Color.gray2}/></IconStyle>
-        <InputStyled aria-label={props.label} type="text" {...props}  style={{border:error ? `1px solid #FF5A5A`:value!=undefined && value!==null && value.length?"1px solid #00BA88":""}} />
+        <InputStyled aria-label={props.label} type="text" {...props}  style={{border:error ? `1px solid #FF5A5A`:value!==undefined && value!==null && value.length?"1px solid #00BA88":""}} />
         {value && <IconStyle onClick={()=>props.delete && props.delete()} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
         </InputView>
         {error && <ErrorDiv>{error}</ErrorDiv>}</>
@@ -127,7 +127,7 @@ const Input = (props: Props) =>{
         props.type==="password" ?
         <><InputView  data-testid="input">
         <IconStyle><User stroke={Color.gray2}/></IconStyle>
-        <InputStyled aria-label={props.label} {...props}  style={{border:error ? `1px solid #FF5A5A`:value!=undefined && value!==null && value.length?"1px solid #00BA88":""}} value={value}/>
+        <InputStyled aria-label={props.label} {...props}  style={{border:error ? `1px solid #FF5A5A`:value!==undefined && value!==null && value.length?"1px solid #00BA88":""}} value={value}/>
         {value && <IconStyle onClick={()=>{props.delete && props.delete()}} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
         </InputView>
         {error && <ErrorDiv>{error}</ErrorDiv>}
@@ -136,7 +136,7 @@ const Input = (props: Props) =>{
          //TEXT
         <><InputView  data-testid="input">
         <IconStyle><User stroke={Color.gray2}/></IconStyle>
-        <InputStyled aria-label={props.label} {...props}  style={{border:error ? `1px solid #FF5A5A`:value!=undefined && value!==null && value.length?"1px solid #00BA88":""}} value={value}/>
+        <InputStyled aria-label={props.label} {...props}  style={{border:error ? `1px solid #FF5A5A`:value!==undefined && value!==null && value.length?"1px solid #00BA88":""}} value={value}/>
         {value && <IconStyle onClick={()=>{props.delete && props.delete()}} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
         </InputView>
         {error && <ErrorDiv>{error}</ErrorDiv>}
