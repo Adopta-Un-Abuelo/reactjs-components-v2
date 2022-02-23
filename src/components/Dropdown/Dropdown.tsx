@@ -1,6 +1,6 @@
 import React, { ComponentPropsWithoutRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import P from '../Text/Paragraph'
+import Text from '../Text/Text'
 import Color from '../../constants/Color';
 import Avatar from '../Avatar/Avatar'
 import { ChevronDown, ChevronUp, User } from 'react-feather';
@@ -18,7 +18,7 @@ const DropdownContainer = styled.div`
     border-radius: 40px;
     position: relative;
 `
-const Text = styled.div`
+const TextS = styled.div`
     display: flex;
     width: 80%;
     margin-left: 40px;
@@ -78,9 +78,9 @@ const Dropdown = (props: Props) =>{
             <IconDiv>
                 {selected && selected.logo ?  selected.logo : selected ? <Avatar style={{height:24, width:24}} name={selected[props.title]} icon={selected.logo || selected.image}/>: <User style={{stroke:`${Color.gray3}`}}/>}
             </IconDiv>
-            <Text>
-                <P style={{color:`${Color.gray2}`}}>{selected? selected.name: "None"}</P>
-            </Text>
+            <TextS>
+                <Text type='p' style={{color:`${Color.gray2}`}}>{selected? selected.name: "None"}</Text>
+            </TextS>
             <IconDiv data-testid="svgMenu" style={{right:8}} onClick={()=>setOpen(!open)}>
                 {open ?  <ChevronUp style={{stroke:`${Color.gray3}`}}/>:<ChevronDown style={{stroke:`${Color.gray3}`}}/>} 
             </IconDiv>
@@ -93,7 +93,7 @@ const Dropdown = (props: Props) =>{
                             <div>
                                 <Avatar style={{height:24, width:24}} name={item[props.title]} icon={item.logo || item.image}/>
                             </div>
-                            <P style={{color:`${Color.gray2}`, marginLeft:10}}>{item[props.title]}</P>
+                            <Text type='p' style={{color:`${Color.gray2}`, marginLeft:10}}>{item[props.title]}</Text>
                         </Option>
                         })
                     }

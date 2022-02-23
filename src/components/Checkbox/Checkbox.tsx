@@ -1,7 +1,7 @@
 import React, { useState, useEffect, ComponentPropsWithoutRef } from 'react';
 import styled from 'styled-components';
 
-import P from '../Text/Paragraph';
+import Text from '../Text/Text';
 import { Check } from 'react-feather';
 import { Color } from '../../constants';
 
@@ -60,15 +60,18 @@ const Checkbox = (props: Props) =>{
                 }
             </Box>
             <TextView>
-                <P>
+                <Text
+                    type='p'
+                >
                     {props.label}
-                </P>
+                </Text>
                 {props.sublabel &&
-                    <P
+                    <Text
+                        type='p'
                         style={{fontSize: 12}}
                     >
                         {props.sublabel}
-                    </P>
+                    </Text>
                 }
             </TextView>
         </Container>

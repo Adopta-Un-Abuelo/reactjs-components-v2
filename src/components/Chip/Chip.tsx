@@ -1,6 +1,6 @@
 import React, { ComponentPropsWithoutRef } from 'react';
 import styled from 'styled-components';
-import P from '../Text/Paragraph';
+import Text from '../Text/Text';
 import Color from '../../constants/Color';
 
 const ChipsContainerSmall = styled.div`
@@ -29,11 +29,11 @@ const ChipsContainerBig = styled.div`
 const Chip = (props: Props) =>{
     return(<>
         { props.type ==="small" && <ChipsContainerSmall data-testid="chip" style={props.style}>
-            <P weight={"semibold"} style={{fontSize:12,color:Color.blue3}}>{props.text.slice(0,1).toLocaleUpperCase()+props.text.slice(1,2)}</P> 
+            <Text type='p' weight={"semibold"} style={{fontSize:12,color:Color.blue3}}>{props.text.slice(0,1).toLocaleUpperCase()+props.text.slice(1,2)}</Text> 
         </ChipsContainerSmall>
         }
          { props.type !=="small" && <ChipsContainerBig data-testid="chip" style={props.style}>
-           <P weight={"semibold"} style={{fontSize:12,color:Color.blue3}}>{props.text.slice(0,1).toLocaleUpperCase()+props.text.slice(1,props.text.length).toLocaleLowerCase()}</P> 
+           <Text type='p' weight={"semibold"} style={{fontSize:12,color:Color.blue3}}>{props.text.slice(0,1).toLocaleUpperCase()+props.text.slice(1,props.text.length).toLocaleLowerCase()}</Text> 
         </ChipsContainerBig>
         }
     </>)

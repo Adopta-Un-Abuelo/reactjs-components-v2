@@ -1,8 +1,9 @@
 import React, { ComponentPropsWithoutRef } from 'react';
 import styled from 'styled-components';
 import Button from '../Button/Button'
-import P from '../Text/P'
+import Text from '../Text/Text'
 import { X } from 'react-feather'
+
 const Container = styled.div`
     display: flex;
     flex-direction: column;
@@ -76,7 +77,7 @@ const Modal = (props: Props) =>{
                 {props.children}
             </ChildrenElements>}
         <Buttons>
-            {props.error && <P style={{color:"red", fontSize:12}}>{props.error}</P>}
+            {props.error && <Text type='p' style={{color:"red", fontSize:12}}>{props.error}</Text>}
             <Button data-testid="close_but" onClick={onClose} style={{marginRight:8, marginLeft:"auto"}} label={"Cancelar"} design={"text"}/>
             <Button disabled={props.disableButton} onClick={onSave} label={"Guardar"}/>
         </Buttons>

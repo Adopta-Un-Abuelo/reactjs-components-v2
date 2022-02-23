@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Fuse from 'fuse.js';
 
 import Color from '../../constants/Color';
-import P from '../Text/Paragraph';
+import Text from '../Text/Text';
 import CheckboxList from '../Checkbox/CheckboxList';
 import Button from '../Button/Button';
 import SearchBar from '../SearchBar/SearchBar';
@@ -155,9 +155,9 @@ const Filter = (props: Props) =>{
                 disabled={props.disabled}
                 onClick={onFilterClick}
             >
-                <P>
+                <Text type='p'>
                     {props.label}
-                </P>
+                </Text>
             </ButtonFilter>
             {showView &&
                 <FilterView>

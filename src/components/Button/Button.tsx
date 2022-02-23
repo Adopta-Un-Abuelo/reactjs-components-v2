@@ -1,7 +1,7 @@
 import React, { ComponentPropsWithoutRef } from 'react';
 import styled from 'styled-components';
 
-import P from '../Text/Paragraph';
+import Text from '../Text/Text';
 import Color from '../../constants/Color';
 
 const ButtonPrimary = styled.button`
@@ -60,12 +60,13 @@ const Button = (props: Props) => {
 				{...props}
 			>
 				{props.icon && props.icon}
-				<P 
+				<Text
+					type='p' 
 					weight='semibold'
 					style={{fontSize: props.style?.fontSize ? props.style?.fontSize :16 ,width:"100%",marginLeft: props.icon ? 6 : 0, color: props.disabled ? Color.gray3 : Color.blue3}}
 				>
 					{props.label}
-				</P>
+				</Text>
 			</ButtonSecondary>
 		: props.design === 'text' ?
 			<ButtonText
@@ -74,12 +75,13 @@ const Button = (props: Props) => {
 				{...props}
 			>
 				{props.icon && props.icon}
-				<P 
+				<Text
+					type='p'
 					weight='semibold'
 					style={{fontSize: props.style?.fontSize ? props.style?.fontSize :16 ,width:"100%",marginLeft: props.icon ? 6 : 0, color: props.disabled ? Color.gray4 : Color.gray2}}
 				>
 					{props.label}
-				</P>
+				</Text>
 			</ButtonText>
 		:
 			<ButtonPrimary
@@ -88,12 +90,13 @@ const Button = (props: Props) => {
 				{...props}
 			>
 				{props.icon && props.icon}
-				<P 
+				<Text
+					type='p'
 					weight='semibold'
 					style={{width:"100%",marginLeft: props.icon ? 6 : 0, color: 'white'}}
 				>
 					{props.label}
-				</P>
+				</Text>
 			</ButtonPrimary>
   	);
 };

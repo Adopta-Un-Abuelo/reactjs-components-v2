@@ -18,4 +18,5 @@ const Text = (props: Props) =>{
 export default Text;
 export interface Props extends ComponentPropsWithoutRef<"p">{
     type: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'p'
+    weight?: 'semibold' | 'bold'
 }

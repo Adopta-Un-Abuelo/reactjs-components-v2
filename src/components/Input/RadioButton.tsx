@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React, { ComponentPropsWithoutRef, useEffect, useState } from 'react';
-import P from '../Text/Paragraph'
+import Text from '../Text/Text'
 import { Color } from '../../constants';
 const RadioButtonContainer = styled.div`
   margin: 24px 0;
@@ -51,7 +51,7 @@ const RadioButton = (props: Props) =>{
       <RadioOuterCircle style={{border: props.disabled ? `2px solid ${Color.gray4}`:` 2px solid ${Color.blue3}`}}>
         <RadioInnerCircle style={{background: (props.disabled && props.value && selected && props.value === selected)? `${Color.blue3}`:"white"}}/>
       </RadioOuterCircle>
-      <P style={{color:`${Color.gray2}`}}>{props.text}</P>
+      <Text type='p' style={{color:`${Color.gray2}`}}>{props.text}</Text>
     </RadioButtonContainer>
   );
     
