@@ -72,9 +72,14 @@ const Input = (props: Props) =>{
         onChange && onChange(e);
     }
     const onInputKeyPress = (e:any) =>{
+        console.log(e.target.value,e.keyCode)
         if(e.keyCode === 8){
             if(e.target.value[e.target.value.length -2]==="/"){
                 e.target.value = e.target.value ? e.target.value.substring(0, e.target.value.length - 2) : ""
+                 onChange && onChange(e);
+            }
+            if(e.target.value[e.target.value.length -1]==="/"){
+                e.target.value = e.target.value ? e.target.value.substring(0, e.target.value.length - 1) : ""
                  onChange && onChange(e);
             }
         }
