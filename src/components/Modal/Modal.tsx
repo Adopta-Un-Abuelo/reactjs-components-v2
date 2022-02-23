@@ -79,17 +79,19 @@ const Modal = forwardRef((props: ModalProps, ref: Ref<ModalRef>) =>{
     return(
         <Screen>
             <Container style={props.style} data-testid="modal">
-                <TitleView>
-                    {!props.hideClose &&
-                        <X onClick={onClose} style={{position:"absolute", alignSelf:"flex-end", cursor:"pointer"}}/>
-                    }
-                    {props.title &&
-                        <Title>{props.title}</Title>
-                    }
-                    {props.subtitle &&
-                        <Subtitle>{props.subtitle}</Subtitle>
-                    }
-                </TitleView>
+                {!props.hideHeader &&
+                    <TitleView>
+                        {!props.hideClose &&
+                            <X onClick={onClose} style={{position:"absolute", alignSelf:"flex-end", cursor:"pointer"}}/>
+                        }
+                        {props.title &&
+                            <Title>{props.title}</Title>
+                        }
+                        {props.subtitle &&
+                            <Subtitle>{props.subtitle}</Subtitle>
+                        }
+                    </TitleView>
+                }
                 <ChildrenView
                     style={props.contentStyle}
                 >
@@ -127,6 +129,7 @@ export interface ModalProps extends ComponentProps<"div">{
     disableButton?:boolean,
     error?:string,
     hideClose?: boolean,
+    hideHeader?: boolean,
     contentStyle?: any,
     onClose?:()=>void,
     onSave?:()=>void
