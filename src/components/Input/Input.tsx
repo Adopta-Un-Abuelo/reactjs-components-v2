@@ -74,7 +74,7 @@ const Input = (props: Props) =>{
     const onInputKeyPress = (e:any) =>{
         if(e.keyCode === 8){
             if(e.target.value[e.target.value.length -2]==="/"){
-                e.target.value = value ? value.substring(0, value.length - 2) : ""
+                e.target.value = e.target.value ? e.target.value.substring(0, e.target.value.length - 2) : ""
                  onChange && onChange(e);
             }
         }
@@ -87,7 +87,7 @@ const Input = (props: Props) =>{
         props.type==="date" ?
          <><InputView data-testid="input">
          <IconStyle><Calendar stroke={Color.gray2}/></IconStyle>
-         <InputStyled aria-label={props.label} placeholder="dd/mm/yyyy" onKeyDown={onInputKeyPress} maxLength={10}  {...props}  type="tel" style={{border:error ? `1px solid #FF5A5A`:value!==undefined && value!==null && value.length?"1px solid #00BA88":""}} value={value}/>
+         <InputStyled aria-label={props.label} placeholder="dd/mm/yyyy" onKeyDown={onInputKeyPress} maxLength={10}  name={props.name} onChange={onDateChange} type="tel" style={{border:error ? `1px solid #FF5A5A`:value!==undefined && value!==null && value.length?"1px solid #00BA88":""}} value={value}/>
          {value && <IconStyle onClick={()=>props.delete && props.delete()} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
           </InputView>
           {error && <ErrorDiv>{error}</ErrorDiv>}
