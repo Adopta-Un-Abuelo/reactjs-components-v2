@@ -3,7 +3,14 @@ import styled from 'styled-components';
 import Button from '../Button/Button'
 import Text from '../Text/Text'
 import { X } from 'react-feather'
-
+const Screen = styled.div`
+   position: fixed;
+    top: 0;
+    left: 0;
+    width:100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+`;
 const Container = styled.div`
     display: flex;
     flex-direction: column;
@@ -69,6 +76,7 @@ const Modal = (props: Props) =>{
         props.onSave && props.onSave()
     }
     return(
+     <Screen>
        <Container style={props.style} data-testid="modal">
            <X onClick={onClose} style={{position:"absolute", alignSelf:"flex-end", cursor:"pointer"}}/>
            {props.title &&<Title>{props.title}</Title>}
@@ -83,6 +91,7 @@ const Modal = (props: Props) =>{
         </Buttons>
            
        </Container>
+    </Screen>
     )
 }
 export default Modal;
