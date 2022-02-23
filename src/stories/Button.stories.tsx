@@ -14,7 +14,7 @@ export default {
 	argTypes: {
 		onClick: { action: 'onClick' },
 		design: { 
-			options: ['primary', 'secondary', 'text'],
+			options: ['primary', 'secondary', 'text', 'image'],
 			control: { type: 'select' }
 		}
 	}
@@ -40,5 +40,11 @@ Text.args = {
 export const WithIcon = Template.bind({});
 WithIcon.args = {
 	design: 'primary',
+	icon: <Star/>
+};
+
+export const ImageButton = Template.bind({});
+ImageButton.args = {
+	design: 'image',
 	icon: <Star/>
 };
