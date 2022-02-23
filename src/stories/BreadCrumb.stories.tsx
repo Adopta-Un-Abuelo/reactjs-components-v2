@@ -1,17 +1,17 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import React from 'react';
 
-import { BreadCrumb } from '../components';
+import { BreadCrumb as BreadCrumbView } from '../components';
 
 export default {
 	title: 'Basic/BreadCrumb',
-	component: BreadCrumb
-} as ComponentMeta<typeof BreadCrumb>;
+	component: BreadCrumbView
+} as ComponentMeta<typeof BreadCrumbView>;
 
-const Template: ComponentStory<typeof BreadCrumb> = (args) => <BreadCrumb {...args}/>;
+const Template: ComponentStory<typeof BreadCrumbView> = (args) => <BreadCrumbView {...args}/>;
 
-export const DropdownView = Template.bind({});
-DropdownView.args = {
+export const BreadCrumb = Template.bind({});
+BreadCrumb.args = {
 	steps: 8,
     selectedStep: 4
 }
