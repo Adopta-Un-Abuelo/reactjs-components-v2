@@ -71,47 +71,47 @@ const Modal = (props: ModalProps) =>{
         props.onSave && props.onSave()
     }
     return(
-     <Screen>
-        <Container style={props.style} data-testid="modal">
-            <TitleView>
-                {!props.hideClose &&
-                    <X onClick={onClose} style={{position:"absolute", alignSelf:"flex-end", cursor:"pointer"}}/>
-                }
-                {props.title &&
-                    <Title>{props.title}</Title>
-                }
-                {props.subtitle &&
-                    <Subtitle>{props.subtitle}</Subtitle>
-                }
-            </TitleView>
-            <ChildrenView
-                style={props.contentStyle}
-            >
-                {props.children}
-            </ChildrenView>
-            {(props.onSave || props.onClose) &&
-                <Buttons>
-                    {props.error && 
-                        <Text type='p' style={{color:"red", fontSize:12}}>
-                            {props.error}
-                        </Text>
+        <Screen>
+            <Container style={props.style} data-testid="modal">
+                <TitleView>
+                    {!props.hideClose &&
+                        <X onClick={onClose} style={{position:"absolute", alignSelf:"flex-end", cursor:"pointer"}}/>
                     }
-                    {props.onClose &&
-                        <Button 
-                            data-testid="close_but" 
-                            onClick={onClose} 
-                            style={{marginRight:8, marginLeft:"auto"}} 
-                            label={"Cancelar"} 
-                            design={"text"}
-                        />
+                    {props.title &&
+                        <Title>{props.title}</Title>
                     }
-                    {props.onSave &&
-                        <Button disabled={props.disableButton} onClick={onSave} label={"Guardar"}/>
+                    {props.subtitle &&
+                        <Subtitle>{props.subtitle}</Subtitle>
                     }
-                </Buttons>
-            }
-       </Container>
-    </Screen>
+                </TitleView>
+                <ChildrenView
+                    style={props.contentStyle}
+                >
+                    {props.children}
+                </ChildrenView>
+                {(props.onSave || props.onClose) &&
+                    <Buttons>
+                        {props.error && 
+                            <Text type='p' style={{color:"red", fontSize:12}}>
+                                {props.error}
+                            </Text>
+                        }
+                        {props.onClose &&
+                            <Button 
+                                data-testid="close_but" 
+                                onClick={onClose} 
+                                style={{marginRight:8, marginLeft:"auto"}} 
+                                label={"Cancelar"} 
+                                design={"text"}
+                            />
+                        }
+                        {props.onSave &&
+                            <Button disabled={props.disableButton} onClick={onSave} label={"Guardar"}/>
+                        }
+                    </Buttons>
+                }
+            </Container>
+        </Screen>
     )
 }
 export default Modal;
