@@ -1,8 +1,12 @@
 import React, { ComponentPropsWithoutRef } from 'react';
 import styled from 'styled-components';
+import Lottie from 'react-lottie';
+
+import animation from '../../assets/animations/button-loading.json'
 
 import Text from '../Text/Text';
 import Color from '../../constants/Color';
+import ButtonImage from './ButtonImage';
 
 const ButtonPrimary = styled.button`
 	display: flex;
@@ -59,14 +63,30 @@ const Button = (props: Props) => {
 				type="button"
 				{...props}
 			>
-				{props.icon && props.icon}
-				<Text
-					type='p' 
-					weight='semibold'
-					style={{fontSize: props.style?.fontSize ? props.style?.fontSize :16 ,width:"100%",marginLeft: props.icon ? 6 : 0, color: props.disabled ? Color.gray3 : Color.blue3}}
-				>
-					{props.label}
-				</Text>
+				{props.loading ?
+					<Lottie 
+						options={{
+							loop: true,
+							autoplay: true, 
+							animationData: animation,
+							rendererSettings: {
+								preserveAspectRatio: 'xMidYMid slice'
+							}
+						}}
+						width={70}
+					/>
+				:
+					<>
+					{props.icon && props.icon}
+					<Text
+						type='p' 
+						weight='semibold'
+						style={{fontSize: props.style?.fontSize ? props.style?.fontSize :16 ,width:"100%",marginLeft: props.icon ? 6 : 0, color: props.disabled ? Color.gray3 : Color.blue3}}
+					>
+						{props.label}
+					</Text>
+					</>
+				}
 			</ButtonSecondary>
 		: props.design === 'text' ?
 			<ButtonText
@@ -83,26 +103,47 @@ const Button = (props: Props) => {
 					{props.label}
 				</Text>
 			</ButtonText>
+		: props.design === 'image' ?
+			<ButtonImage
+				{...props}
+			/>
 		:
 			<ButtonPrimary
 				data-testid="button"
 				type="button"
 				{...props}
 			>
-				{props.icon && props.icon}
-				<Text
-					type='p'
-					weight='semibold'
-					style={{width:"100%",marginLeft: props.icon ? 6 : 0, color: 'white'}}
-				>
-					{props.label}
-				</Text>
+				{props.loading ?
+					<Lottie 
+						options={{
+							loop: true,
+							autoplay: true, 
+							animationData: animation,
+							rendererSettings: {
+								preserveAspectRatio: 'xMidYMid slice'
+							}
+						}}
+						width={70}
+					/>
+				:
+					<>
+					{props.icon && props.icon}
+					<Text
+						type='p'
+						weight='semibold'
+						style={{width:"100%",marginLeft: props.icon ? 6 : 0, color: 'white'}}
+					>
+						{props.label}
+					</Text>
+					</>
+				}
 			</ButtonPrimary>
   	);
 };
 export default Button;
 export interface Props extends ComponentPropsWithoutRef<"button">{
 	label: string;
-	design?: 'primary' | 'secondary' | 'text',
-	icon?: React.ReactElement
+	design?: 'primary' | 'secondary' | 'text' | 'image',
+	icon?: React.ReactElement,
+	loading?: boolean
 }
