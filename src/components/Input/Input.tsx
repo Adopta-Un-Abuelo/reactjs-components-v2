@@ -87,7 +87,7 @@ const Input = (props: Props) =>{
         props.type==="date" ?
          <><InputView data-testid="input">
          <IconStyle><Calendar stroke={Color.gray2}/></IconStyle>
-         <InputStyled aria-label={props.label} placeholder="dd/mm/yyyy" onKeyDown={onInputKeyPress} maxLength={10}  onChange={onDateChange}  type="tel" style={{border:error ? `1px solid #FF5A5A`:value!==undefined && value!==null && value.length?"1px solid #00BA88":""}} value={value}/>
+         <InputStyled aria-label={props.label} placeholder="dd/mm/yyyy" onKeyDown={onInputKeyPress} maxLength={10}  {...props}  type="tel" style={{border:error ? `1px solid #FF5A5A`:value!==undefined && value!==null && value.length?"1px solid #00BA88":""}} value={value}/>
          {value && <IconStyle onClick={()=>props.delete && props.delete()} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
           </InputView>
           {error && <ErrorDiv>{error}</ErrorDiv>}
@@ -98,7 +98,7 @@ const Input = (props: Props) =>{
         props.type==="phone" ?
         <><InputView data-testid="input">
         <IconStyle><Phone stroke={Color.gray2}/></IconStyle>
-        <InputStyled aria-label={props.label} type="tel" onChange={onValuechange} style={{border:error ? `1px solid #FF5A5A`:value!==undefined && value!==null && value.length?"1px solid #00BA88":""}} value={value}/>
+        <InputStyled aria-label={props.label} type="tel" {...props} style={{border:error ? `1px solid #FF5A5A`:value!==undefined && value!==null && value.length?"1px solid #00BA88":""}} value={value}/>
         {value && <IconStyle onClick={()=>props.delete && props.delete()} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
          </InputView>
          {error && <ErrorDiv>{error}</ErrorDiv>}
