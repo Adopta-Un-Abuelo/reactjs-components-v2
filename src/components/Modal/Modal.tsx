@@ -114,7 +114,7 @@ const Modal = forwardRef((props: ModalProps, ref: Ref<ModalRef>) =>{
                             />
                         }
                         {props.onSave &&
-                            <Button disabled={props.disableButton} onClick={onSave} label={"Guardar"}/>
+                            <Button disabled={props.disableButton} onClick={onSave} label={props.buttonLabel ? props.buttonLabel : "Guardar"}/>
                         }
                     </Buttons>
                 }
@@ -131,6 +131,7 @@ export interface ModalProps extends ComponentPropsWithoutRef<"div">{
     hideClose?: boolean,
     hideHeader?: boolean,
     contentStyle?: any,
+    buttonLabel?: string
     onClose?:()=>void,
     onSave?:()=>void
 }
