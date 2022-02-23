@@ -1,4 +1,4 @@
-import React, { ComponentPropsWithoutRef } from 'react';
+import React, { ComponentProps, forwardRef, Ref, useImperativeHandle } from 'react';
 import styled from 'styled-components';
 import Button from '../Button/Button'
 import Text from '../Text/Text'
@@ -61,7 +61,13 @@ const Buttons = styled.div`
     padding: 16px 16px;
 `;
 
-const Modal = (props: ModalProps) =>{
+const Modal = forwardRef((props: ModalProps, ref: Ref<ModalRef>) =>{
+
+    useImperativeHandle(ref, () => ({
+        close(){
+            onClose();
+        }
+    }));
 
     const onClose = () =>{
         props.onClose && props.onClose();
@@ -113,9 +119,9 @@ const Modal = (props: ModalProps) =>{
             </Container>
         </Screen>
     )
-}
+})
 export default Modal;
-export interface ModalProps extends ComponentPropsWithoutRef<"div">{
+export interface ModalProps extends ComponentProps<"div">{
     title?:string,
     subtitle?:string,
     disableButton?:boolean,
@@ -124,4 +130,7 @@ export interface ModalProps extends ComponentPropsWithoutRef<"div">{
     contentStyle?: any,
     onClose?:()=>void,
     onSave?:()=>void
+}
+export interface ModalRef{
+    close: () => void
 }
