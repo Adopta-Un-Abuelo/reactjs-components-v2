@@ -15,3 +15,4 @@ export { default as TextArea } from './TextArea/TextArea';
 export { default as RadioButton } from './Input/RadioButton';
 export { default as Text } from './Text/Text';
 export { default as WebModal } from './Modal/WebModal';
+export { default as IconTabs } from './Tabs/IconTabs';
