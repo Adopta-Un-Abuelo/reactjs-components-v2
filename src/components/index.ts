@@ -18,3 +18,4 @@ export { default as WebModal } from './Modal/WebModal';
 export { default as IconTabs } from './Tabs/IconTabs';
 export { default as Payout } from './Payout/Payout';
 export { default as Select } from './Select/Select';
+export { default as Breadcrumb } from './Breadcrumb/Breadcrumb';
