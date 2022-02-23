@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import { PaymentMethod } from "@stripe/stripe-js";
 
 import Color from '../../constants/Color';
 import { isLessThan } from '../../constants/Screen';
@@ -29,7 +30,7 @@ const Payout = (props: Props) =>{
     const stripePromise = loadStripe(props.stripeKey);
     const isMobile = isLessThan('mobileL');
 
-    const [ option, setOption ] = useState('sepa_debit');
+    const [ option, setOption ] = useState<any>('sepa_debit');
     const [ showConfirmModal, setShowConfirmModal ] = useState(false);
     const [ paymentOptions, setPaymentOptions ] = useState([
         {
@@ -109,7 +110,7 @@ const Payout = (props: Props) =>{
         props.onSetupConfirmed && props.onSetupConfirmed();
     }
 
-    const onFormSubmit = (paymentMethod) =>{
+    const onFormSubmit = (paymentMethod: PaymentMethod | undefined) =>{
         props.onFinish && props.onFinish(paymentMethod);
     }
 
@@ -187,6 +188,6 @@ export interface Props{
     cardStyle?: any,
     error?: boolean,
     onSetupConfirmed?: () => void
-    onFinish?: () => void,
+    onFinish?: (a: PaymentMethod | undefined) => void,
     onLoading?: (a: boolean) => void
 }
