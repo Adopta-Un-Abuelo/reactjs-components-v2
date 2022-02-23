@@ -14,3 +14,4 @@ export { default as Modal } from './Modal/Modal';
 export { default as TextArea } from './TextArea/TextArea';
 export { default as RadioButton } from './Input/RadioButton';
 export { default as Text } from './Text/Text';
+export { default as WebModal } from './Modal/WebModal';

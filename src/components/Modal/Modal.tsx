@@ -5,12 +5,7 @@ import Text from '../Text/Text'
 import { X } from 'react-feather'
 
 const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 16px;
     min-width: 353px;
-    min-height: 170px;
     max-width: 700px;
     max-height: 700px;
     background: #FFFFFF;
@@ -25,6 +20,15 @@ const Container = styled.div`
     overflow:hidden;
     overflow-y: auto;
 `;
+const TitleView = styled.div`
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+`
+const ChildrenView = styled.div`
+    padding: 0px 16px;
+`
 const Title = styled.div`
     font-family: Poppins;
     font-style: normal;
@@ -32,13 +36,10 @@ const Title = styled.div`
     font-size: 18px;
     line-height: 22px;
     color: #4F4F4F;
-    margin-bottom:16px;
     width: 95%;
 `;
-
 const Subtitle = styled.div`
     font-family: Poppins;
-    margin-bottom:16px;
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
@@ -46,20 +47,14 @@ const Subtitle = styled.div`
     color: #828282;
 `;
 const Buttons = styled.div`
-    margin-top: auto;
     display: flex;
+    flex: 1;
     bottom: 0;
     align-items: center;
-    width: 100%;
+    padding: 16px 16px;
 `;
-const ChildrenElements =  styled.div`
-    width:100%; 
-    margin-bottom:16px;
-    /* >*{
-        margin-bottom: 0px;
-    } */
-`;
-const Modal = (props: Props) =>{
+
+const Modal = (props: ModalProps) =>{
 
     const onClose = () =>{
         props.onClose && props.onClose();
@@ -69,28 +64,55 @@ const Modal = (props: Props) =>{
         props.onSave && props.onSave()
     }
     return(
-       <Container style={props.style} data-testid="modal">
-           <X onClick={onClose} style={{position:"absolute", alignSelf:"flex-end", cursor:"pointer"}}/>
-           {props.title &&<Title>{props.title}</Title>}
-           {props.subtitle &&<Subtitle>{props.subtitle}</Subtitle>}
-           {props.children && <ChildrenElements>
+        <Container style={props.style} data-testid="modal">
+            <TitleView>
+                {!props.hideClose &&
+                    <X onClick={onClose} style={{position:"absolute", alignSelf:"flex-end", cursor:"pointer"}}/>
+                }
+                {props.title &&
+                    <Title>{props.title}</Title>
+                }
+                {props.subtitle &&
+                    <Subtitle>{props.subtitle}</Subtitle>
+                }
+            </TitleView>
+            <ChildrenView
+                style={props.contentStyle}
+            >
                 {props.children}
-            </ChildrenElements>}
-        <Buttons>
-            {props.error && <Text type='p' style={{color:"red", fontSize:12}}>{props.error}</Text>}
-            <Button data-testid="close_but" onClick={onClose} style={{marginRight:8, marginLeft:"auto"}} label={"Cancelar"} design={"text"}/>
-            <Button disabled={props.disableButton} onClick={onSave} label={"Guardar"}/>
-        </Buttons>
-           
+            </ChildrenView>
+            {(props.onSave || props.onClose) &&
+                <Buttons>
+                    {props.error && 
+                        <Text type='p' style={{color:"red", fontSize:12}}>
+                            {props.error}
+                        </Text>
+                    }
+                    {props.onClose &&
+                        <Button 
+                            data-testid="close_but" 
+                            onClick={onClose} 
+                            style={{marginRight:8, marginLeft:"auto"}} 
+                            label={"Cancelar"} 
+                            design={"text"}
+                        />
+                    }
+                    {props.onSave &&
+                        <Button disabled={props.disableButton} onClick={onSave} label={"Guardar"}/>
+                    }
+                </Buttons>
+            }
        </Container>
     )
 }
 export default Modal;
-export interface Props extends ComponentPropsWithoutRef<"div">{
+export interface ModalProps extends ComponentPropsWithoutRef<"div">{
     title?:string,
     subtitle?:string,
     disableButton?:boolean,
     error?:string,
+    hideClose?: boolean,
+    contentStyle?: any,
     onClose?:()=>void,
     onSave?:()=>void
 }
