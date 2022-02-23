@@ -1,7 +1,7 @@
 import React, { ComponentPropsWithoutRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Color } from '../../constants';
-import P from '../Text/P'
+import P from '../Text/Paragraph'
 import { ArrowLeft,ArrowRight } from 'react-feather';
 const Container = styled.div`
    display: flex;

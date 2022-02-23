@@ -1,5 +1,5 @@
 export { default as Button } from './Button/Button';
-export { default as P } from './Text/P';
+export { default as P } from './Text/Paragraph';
 export { default as Filter } from './Filter/Filter';
 export { default as Checkbox } from './Checkbox/CheckboxList';
 export { default as SearchBar } from './SearchBar/SearchBar';
@@ -13,3 +13,4 @@ export { default as Feedback } from './Feedback/Feedback';
 export { default as Modal } from './Modal/Modal';
 export { default as TextArea } from './TextArea/TextArea';
 export { default as RadioButton } from './Input/RadioButton';
+export { default as Text } from './Text/Text';

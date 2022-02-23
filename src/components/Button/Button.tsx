@@ -1,7 +1,7 @@
 import React, { ComponentPropsWithoutRef } from 'react';
 import styled from 'styled-components';
 
-import P from '../Text/P';
+import P from '../Text/Paragraph';
 import Color from '../../constants/Color';
 
 const ButtonPrimary = styled.button`

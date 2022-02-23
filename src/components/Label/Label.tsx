@@ -1,6 +1,6 @@
 import React, { ComponentPropsWithoutRef} from 'react';
 import styled from 'styled-components';
-import P from '../Text/P';
+import P from '../Text/Paragraph';
 const LabelStyled = styled.div`
     font-family: 'Poppins';
     font-size: 16px;

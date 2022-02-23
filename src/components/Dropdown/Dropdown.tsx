@@ -1,6 +1,6 @@
 import React, { ComponentPropsWithoutRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import P from '../Text/P'
+import P from '../Text/Paragraph'
 import Color from '../../constants/Color';
 import Avatar from '../Avatar/Avatar'
 import { ChevronDown, ChevronUp, User } from 'react-feather';

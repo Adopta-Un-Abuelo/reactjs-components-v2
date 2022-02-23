@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React, { ComponentPropsWithoutRef, useEffect, useState } from 'react';
-import P from '../Text/P'
+import P from '../Text/Paragraph'
 import { Color } from '../../constants';
 const RadioButtonContainer = styled.div`
   margin: 24px 0;

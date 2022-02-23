@@ -11,15 +11,18 @@ const PStyled = styled.p`
 `
 
 const P = (props: Props) =>{
+
+    const { style, children, weight, ...rest } = props;
+
     return(
         <PStyled
-            {...props}
             style={{
-                fontWeight: props.weight === 'bold' ? 700 : (props.weight === 'semibold' ? 600 : 400),
-                ...props.style
+                fontWeight: weight === 'bold' ? 700 : (weight === 'semibold' ? 600 : 400),
+                ...style
             }}
+            {...rest}
         >
-            {props.children}
+            {children}
         </PStyled>
     )
 }

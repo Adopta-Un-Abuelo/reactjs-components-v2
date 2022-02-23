@@ -1,7 +1,7 @@
 import React, { useState, useEffect, ComponentPropsWithoutRef } from 'react';
 import styled from 'styled-components';
 
-import P from '../Text/P';
+import P from '../Text/Paragraph';
 import { Check } from 'react-feather';
 import { Color } from '../../constants';
 
