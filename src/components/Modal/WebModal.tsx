@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { forwardRef, Ref, RefObject, useImperativeHandle, useRef } from 'react';
 import styled from 'styled-components';
 
-import Modal, { ModalProps } from '../Modal/Modal';
+import Modal, { ModalProps, ModalRef } from '../Modal/Modal';
 
 const WebView = styled.iframe``
 
-const WebModal = (props: Props) =>{
+const WebModal = (props: WebModalProps) =>{
+
     return(
         <Modal
             style={{width: '80%', height: '80%'}}
@@ -23,6 +24,7 @@ const WebModal = (props: Props) =>{
     )
 }
 export default WebModal;
-export interface Props extends ModalProps{
+export interface WebModalProps extends ModalProps{
+    ref: RefObject<ModalRef>
     url: string
 }

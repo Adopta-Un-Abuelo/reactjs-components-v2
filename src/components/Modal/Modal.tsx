@@ -1,4 +1,4 @@
-import React, { ComponentProps, forwardRef, Ref, useImperativeHandle } from 'react';
+import React, { ComponentPropsWithoutRef, forwardRef, Ref, useImperativeHandle } from 'react';
 import styled from 'styled-components';
 import Button from '../Button/Button'
 import Text from '../Text/Text'
@@ -121,7 +121,7 @@ const Modal = forwardRef((props: ModalProps, ref: Ref<ModalRef>) =>{
     )
 })
 export default Modal;
-export interface ModalProps extends ComponentProps<"div">{
+export interface ModalProps extends ComponentPropsWithoutRef<"div">{
     title?:string,
     subtitle?:string,
     disableButton?:boolean,

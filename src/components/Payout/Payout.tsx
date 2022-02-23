@@ -12,6 +12,7 @@ import PaycardIcon from '../../assets/images/Paycard';
 import IconTabs from '../Tabs/IconTabs';
 import BrandPaycardIcon from '../../assets/logo/Paycard';
 import WebModal from '../Modal/WebModal';
+import { ModalRef } from '../Modal/Modal';
 
 const Container = styled.div`
 `
@@ -26,7 +27,7 @@ const InfoView = styled.div`
 
 const Payout = (props: Props) =>{
 
-    const modal = useRef();
+    const modal = useRef<ModalRef>(null);
     const stripePromise = loadStripe(props.stripeKey);
     const isMobile = isLessThan('mobileL');
 
@@ -126,7 +127,7 @@ const Payout = (props: Props) =>{
         <Container
             style={props.style}
         >
-            {showConfirmModal &&
+            {showConfirmModal && props.stripeConfirmUrl &&
                 <WebModal
                     ref={modal}
                     hideClose={true}
@@ -181,10 +182,10 @@ const Payout = (props: Props) =>{
 }
 export default Payout;
 export interface Props{
+    style?: any
     stripeKey: string,
-    stripeConfirmUrl: string,
-    paymentOptions: ['sepa_debit', 'card'] | ['card'] | ['sepa_debit'],
-    style?: any,
+    stripeConfirmUrl?: string,
+    paymentOptions: Array<'sepa_debit' | 'card'>,
     cardStyle?: any,
     error?: boolean,
     onSetupConfirmed?: () => void
