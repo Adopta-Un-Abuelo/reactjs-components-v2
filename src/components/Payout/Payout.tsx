@@ -192,7 +192,6 @@ export interface PayoutProps{
     cardStyle?: any,
     error?: boolean,
     onSetupConfirmed?: () => void
-    onFinish?: (a: PaymentMethod | undefined) => void,
     onLoading?: (a: boolean) => void
 }
 export interface PayoutRef{

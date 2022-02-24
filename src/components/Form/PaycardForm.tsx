@@ -96,6 +96,7 @@ const PayoutForm = forwardRef((props: FormProps, ref: Ref<FormRef>) =>{
             }
         }
         else{
+            setInputError(true);
             return undefined;
         }
     }
