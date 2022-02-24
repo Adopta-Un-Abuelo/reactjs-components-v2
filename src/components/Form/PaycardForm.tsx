@@ -105,6 +105,11 @@ const PayoutForm = forwardRef((props: FormProps, ref: Ref<FormRef>) =>{
         setName(value);
     }
 
+    const onEmailInputChange = (value: string) =>{
+        setInputError(false);
+        setEmail(value);
+    }
+
     const onInputFocus = () =>{
         setInputFocus(true);
     }
@@ -125,6 +130,15 @@ const PayoutForm = forwardRef((props: FormProps, ref: Ref<FormRef>) =>{
                 onChange={(e) => onInputChange(e.target.value)}
                 error={inputError ? 'Error' : ""}
             />
+            {props.option === 'sepa_debit' &&
+                <Input
+                    title={props.placeholderEmail ? props.placeholderEmail : 'Email'}
+                    placeholder={props.placeholderEmail ? props.placeholderEmail : 'Email'}
+                    style={{marginBottom: 12}}
+                    onChange={(e) => onEmailInputChange(e.target.value)}
+                    error={inputError ? 'Error' : ""}
+                />
+            }
             <InputContainer
                 error={inputError}
                 focus={inputFocus}
@@ -182,6 +196,7 @@ export interface FormProps{
     option: 'card' | 'sepa_debit',
     error?: boolean,
     placeholderName?: string,
+    placeholderEmail?: string,
     onLoading?: (a: boolean) => void
 }
 export interface FormRef{
