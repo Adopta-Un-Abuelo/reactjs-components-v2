@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, forwardRef, useImperativeHandle, Ref } from 'react';
 import styled from 'styled-components';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
@@ -7,7 +7,7 @@ import { PaymentMethod } from "@stripe/stripe-js";
 import Color from '../../constants/Color';
 import { isLessThan } from '../../constants/Screen';
 
-import PaycardForm from '../Form/PaycardForm';
+import PaycardForm, { FormRef } from '../Form/PaycardForm';
 import PaycardIcon from '../../assets/images/Paycard';
 import IconTabs from '../Tabs/IconTabs';
 import BrandPaycardIcon from '../../assets/logo/Paycard';
@@ -25,9 +25,10 @@ const InfoView = styled.div`
 	background-color: white;
 `
 
-const Payout = (props: Props) =>{
+const Payout = forwardRef((props: PayoutProps, ref: Ref<PayoutRef>) =>{
 
     const modal = useRef<ModalRef>(null);
+    const form = useRef<FormRef>(null);
     const stripePromise = loadStripe(props.stripeKey);
     const isMobile = isLessThan('mobileL');
 
@@ -45,6 +46,12 @@ const Payout = (props: Props) =>{
             icon: PaycardIcon
         }
     ]);
+
+    useImperativeHandle(ref, () => ({
+        async getPaymentMethod(){
+            return await form.current?.getPaymentMethod();
+        }
+    }));
 
     useEffect(() => {
         if(props.stripeConfirmUrl) setShowConfirmModal(true);
@@ -111,10 +118,6 @@ const Payout = (props: Props) =>{
         props.onSetupConfirmed && props.onSetupConfirmed();
     }
 
-    const onFormSubmit = (paymentMethod: PaymentMethod | undefined) =>{
-        props.onFinish && props.onFinish(paymentMethod);
-    }
-
     const onLoading = (value: boolean) =>{
         props.onLoading && props.onLoading(value);
     }
@@ -150,9 +153,9 @@ const Payout = (props: Props) =>{
                 }}
             >
                 <PaycardForm
+                    ref={ref}
                     option={option}
                     style={props.cardStyle}
-                    onFinish={onFormSubmit}
                     onLoading={onLoading}
                     error={props.error}
                 />
@@ -179,9 +182,9 @@ const Payout = (props: Props) =>{
             }
         </Container>
     )
-}
+});
 export default Payout;
-export interface Props{
+export interface PayoutProps{
     style?: any
     stripeKey: string,
     stripeConfirmUrl?: string,
@@ -191,4 +194,7 @@ export interface Props{
     onSetupConfirmed?: () => void
     onFinish?: (a: PaymentMethod | undefined) => void,
     onLoading?: (a: boolean) => void
+}
+export interface PayoutRef{
+    getPaymentMethod: () => Promise<PaymentMethod | undefined>
 }

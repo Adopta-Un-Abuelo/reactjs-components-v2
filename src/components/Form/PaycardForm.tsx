@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, forwardRef, useImperativeHandle, Ref } from 'react';
 import styled from 'styled-components';
 import { CardElement, useElements, useStripe, IbanElement } from '@stripe/react-stripe-js';
 import { StripeElementChangeEvent, PaymentMethod } from "@stripe/stripe-js";
@@ -14,11 +14,13 @@ const InputContainer = styled.div<{error?: boolean, focus: boolean}>`
     background-color: ${props => props.focus ? 'white' : Color.gray6};
 `
 
-const PayoutForm = (props: Props) =>{
+const PayoutForm = forwardRef((props: FormProps, ref: Ref<FormRef>) =>{
 
     const [ name, setName ] = useState<string | undefined>(undefined);
+    const [ email, setEmail ] = useState<string | undefined>(undefined);
     const [ inputError, setInputError ] = useState(props.error);
     const [ inputFocus, setInputFocus ] = useState(false);
+    const [ paymentMethod, setPaymentMethod ] = useState<StripeElementChangeEvent | undefined>(undefined);
 
     const container = useRef<HTMLDivElement | null>(null);
 
@@ -29,63 +31,72 @@ const PayoutForm = (props: Props) =>{
         setInputError(props.error);
     }, [props.error]);
 
+    useImperativeHandle(ref, () => ({
+        async getPaymentMethod(){
+            return await createPaymentMethod();
+        }
+    }));
+
     const onPaymentChange = async (payment: StripeElementChangeEvent) =>{
         setInputError(false);
-        if(elements && stripe){
-            if(payment.complete){
-                if(payment.elementType === 'iban'){
-                    props.onLoading && props.onLoading(true);
-                    const ibanElement = elements.getElement(IbanElement);
-                    if(ibanElement && name){
-                        const {error, paymentMethod} = await stripe.createPaymentMethod({
-                            type: 'sepa_debit',
-                            sepa_debit: ibanElement,
-                            billing_details:{
-                                name: name,
-                                email: 'email@sdd.es'   //FIXME
-                            }
-                        });
-                        if (error) {
-                            console.error(error);
-                            props.onLoading && props.onLoading(false);
-                            props.onFinish && props.onFinish(undefined);
-                        } 
-                        else {
-                            props.onLoading && props.onLoading(false);
-                            props.onFinish && props.onFinish(paymentMethod);
+        if(payment.complete){
+            setPaymentMethod(payment);
+        }
+        else{
+            setPaymentMethod(undefined);
+        }
+    }
+
+    const createPaymentMethod = async () =>{
+        if(elements && stripe && paymentMethod && name){
+            if(paymentMethod.elementType === 'iban'){
+                props.onLoading && props.onLoading(true);
+                const ibanElement = elements.getElement(IbanElement);
+                if(ibanElement && email){
+                    const {error, paymentMethod} = await stripe.createPaymentMethod({
+                        type: 'sepa_debit',
+                        sepa_debit: ibanElement,
+                        billing_details:{
+                            name: name,
+                            email: email
                         }
-                    }
-                }
-                else{
-                    props.onLoading && props.onLoading(true);
-                    const cardElement = elements.getElement(CardElement);
-                    if(cardElement){
-                        const {error, paymentMethod} = await stripe.createPaymentMethod({
-                            type: 'card',
-                            card: cardElement,
-                            billing_details:{
-                                name: name
-                            }
-                        });
-                        if (error) {
-                            console.error(error);
-                            props.onLoading && props.onLoading(false);
-                            props.onFinish && props.onFinish(undefined);
-                        } 
-                        else {
-                            props.onLoading && props.onLoading(false);
-                            props.onFinish && props.onFinish(paymentMethod);
-                        }
+                    });
+                    if (error) {
+                        console.error(error);
+                        props.onLoading && props.onLoading(false);
+                        return undefined;
+                    } 
+                    else {
+                        props.onLoading && props.onLoading(false);
+                        return paymentMethod;
                     }
                 }
             }
             else{
-                props.onFinish && props.onFinish(undefined);
+                props.onLoading && props.onLoading(true);
+                const cardElement = elements.getElement(CardElement);
+                if(cardElement){
+                    const {error, paymentMethod} = await stripe.createPaymentMethod({
+                        type: 'card',
+                        card: cardElement,
+                        billing_details:{
+                            name: name
+                        }
+                    });
+                    if (error) {
+                        console.error(error);
+                        props.onLoading && props.onLoading(false);
+                        return undefined;
+                    } 
+                    else {
+                        props.onLoading && props.onLoading(false);
+                        return paymentMethod;
+                    }
+                }
             }
         }
         else{
-            props.onLoading && props.onLoading(false);
-            props.onFinish && props.onFinish(undefined);
+            return undefined;
         }
     }
 
@@ -164,13 +175,15 @@ const PayoutForm = (props: Props) =>{
             </Text>
         </div>
     )
-}
+});
 export default PayoutForm;
-export interface Props{
+export interface FormProps{
     style?: any,
     option: 'card' | 'sepa_debit',
     error?: boolean,
     placeholderName?: string,
-    onLoading?: (a: boolean) => void,
-    onFinish?: (a: PaymentMethod | undefined) => void
+    onLoading?: (a: boolean) => void
+}
+export interface FormRef{
+    getPaymentMethod: () => Promise<PaymentMethod | undefined>
 }
