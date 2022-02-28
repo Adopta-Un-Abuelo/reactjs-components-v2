@@ -31,16 +31,16 @@ const TitleView = styled.div`
     position: relative;
     display: flex;
     flex-direction: column;
-    padding: 16px;
+    padding: 24px;
 `
 const ChildrenView = styled.div`
-    padding: 0px 16px;
+    padding: 0px 24px;
 `
 const Title = styled.div`
     font-family: Poppins;
     font-style: normal;
     font-weight: 600;
-    font-size: 18px;
+    font-size: 32px;
     line-height: 22px;
     color: #4F4F4F;
     width: 95%;
@@ -49,8 +49,9 @@ const Subtitle = styled.div`
     font-family: Poppins;
     font-style: normal;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 18px;
     line-height: 22px;
+    margin-top:14px;
     color: #828282;
 `;
 const Buttons = styled.div`
