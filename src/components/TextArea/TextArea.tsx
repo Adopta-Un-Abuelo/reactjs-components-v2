@@ -4,6 +4,7 @@ import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import './Editor.css'
 import ButtonEditor from '../Button/ButtonEditor'
+import Color from '../../constants/Color'
 import { convertToRaw, EditorState, ContentState, convertFromHTML } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 const TextAreaView = styled.textarea`
@@ -14,6 +15,10 @@ const TextAreaView = styled.textarea`
     width: -webkit-fill-available;
     height: 100px;
     background: #F2F2F2;
+    font-family: 'Poppins';
+    font-size: 16px;
+    margin: 0px;
+    color: ${Color.gray2};
     //Remove resize handle
     resize: none;
     //Remove default scrollbars
@@ -51,7 +56,6 @@ const TextAreaView = styled.textarea`
 const TextArea = (props: Props) =>{
     const { style, ...restProps } = props;
     const [ editorState, setEditorState] = useState<any>(undefined);
-    const [value, setValue] = useState<any>(undefined)
     
     useEffect(()=>{
         if(props.value && props.type==="edit"){
@@ -61,13 +65,22 @@ const TextArea = (props: Props) =>{
               ))
             
         }
-        else if(props.value) setValue(props.value)
      },[props.value])
 
-     const onTextAreChange = (value?:string, data?:any) => {
-        let result:any = value?value: draftToHtml(convertToRaw(data.getCurrentContent()))
+     const onTextAreChange = (value?:React.ChangeEvent<HTMLTextAreaElement>, data?:any) => {
+        let result:any = undefined;
+        if(value) result= value
+        else {
+            let convert= draftToHtml(convertToRaw(data.getCurrentContent()))
+            result = {
+                target:{
+                    name:props.name,
+                    value: convert
+                }
+            }
+        }
+        
         if(data) setEditorState(data)
-        setValue(result)
         props.onChange && props.onChange(result)
     }
     return(<>{
@@ -82,7 +95,7 @@ const TextArea = (props: Props) =>{
                 <ButtonEditor style={{"text-decoration": "line-through"}} text="S" type={{control:"inline", value:"STRIKETHROUGH"}}/>, 
                 <ButtonEditor text="H1" type={{control:"blockType", value:"header-one"}}/>, 
             ]}  wrapperClassName="wrapper" editorClassName="editor" toolbarClassName="toolbar" />:
-            <TextAreaView value={props.value} onChange={(e)=>{onTextAreChange(e.target.value)}} data-testid="text_area"style={style} placeholder={props.placeholder}/>
+            <TextAreaView value={props.value} onChange={onTextAreChange} data-testid="text_area"style={style} placeholder={props.placeholder}/>
         }
         </>
         
