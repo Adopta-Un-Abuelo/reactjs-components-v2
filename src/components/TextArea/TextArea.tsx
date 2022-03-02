@@ -95,7 +95,7 @@ const TextArea = (props: Props) =>{
                 <ButtonEditor style={{"text-decoration": "line-through"}} text="S" type={{control:"inline", value:"STRIKETHROUGH"}}/>, 
                 <ButtonEditor text="H1" type={{control:"blockType", value:"header-one"}}/>, 
             ]}  wrapperClassName="wrapper" editorClassName="editor" toolbarClassName="toolbar" />:
-            <TextAreaView value={props.value} onChange={onTextAreChange} data-testid="text_area"style={style} placeholder={props.placeholder}/>
+            <TextAreaView value={props.value} name={props.name} onChange={onTextAreChange} data-testid="text_area"style={style} placeholder={props.placeholder}/>
         }
         </>
         
