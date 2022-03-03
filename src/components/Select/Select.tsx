@@ -49,7 +49,7 @@ const Icon = styled.div`
 const Select = (props: Props) =>{
 
     const [ showMenu, setShowMenu ] = useState(false);
-    const [ selectedItem, setSelectedItem ] = useState(props.options[0]);
+    const [ selectedItem, setSelectedItem ] = useState(props.options && props.options[0]);
 
     useEffect(() =>{
         window.addEventListener('click', (e) => closeMenu(e));
@@ -118,7 +118,7 @@ const Select = (props: Props) =>{
                 <OptionsView
                     style={props.optionStyle}
                 >
-                    {props.options.map((item, index)=>{
+                    {props.options && props.options.map((item, index)=>{
                         return(
                             <Option
                                 key={'country'+index}
@@ -145,7 +145,7 @@ export interface Props{
     optionStyle?: any
     title?: string
     hideTitle?: boolean,
-    options: Array<any>
+    options?: Array<any>
     selectedItem?: any
     onChange?: (a: any) => void
 }
