@@ -23,7 +23,7 @@ const TextAreaView = styled.textarea`
     resize: none;
     //Remove default scrollbars
     overflow: auto;
-    border-radius: 4px;
+    border: none;
     :placeholder-shown{
         :focus{
             border: 1.5px solid #5963F6;
