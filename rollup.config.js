@@ -6,7 +6,8 @@ import dts from "rollup-plugin-dts";
 import { terser } from "rollup-plugin-terser";
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import json from '@rollup/plugin-json';
-
+import replace from "@rollup/plugin-replace";
+import svgr from '@svgr/rollup'
 const packageJson = require("./package.json");
 
 export default [
@@ -31,7 +32,14 @@ export default [
       typescript({ tsconfig: "./tsconfig.json" }),
       postcss(),
       terser(),
-      json()
+      json(),
+      svgr(),
+      replace({
+        include: ["./**/flags.ts"],
+        preventAssignment: true,
+        // Replace ReactComponent to allow resolution of SVG files under Rollup
+        "ReactComponent": "default"
+      })
     ],
   },
   {

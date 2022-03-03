@@ -1,26 +1,26 @@
-import {ReactComponent as SpainFlag} from '../assets/images/flags/espana.svg';
-import {ReactComponent as FranceFlag} from '../assets/images/flags/francia.svg';
-import {ReactComponent as MexicoFlag} from '../assets/images/flags/mexico.svg';
-import {ReactComponent as ArgentinaFlag} from '../assets/images/flags/argentina.svg';
-import {ReactComponent as PeruFlag} from '../assets/images/flags/peru.svg';
-import {ReactComponent as ColombiaFlag} from '../assets/images/flags/colombia.svg';
-import {ReactComponent as ChileFlag} from '../assets/images/flags/chile.svg';
-import {ReactComponent as EcuadorFlag} from '../assets/images/flags/ecuador.svg';
-import {ReactComponent as CostaRicaFlag} from '../assets/images/flags/costa-rica.svg';
-import {ReactComponent as VenezuelaFlag} from '../assets/images/flags/venezuela.svg';
-import {ReactComponent as GuatemalaFlag} from '../assets/images/flags/guatemala.svg';
-import {ReactComponent as BoliviaFlag} from '../assets/images/flags/bolivia.svg';
-import {ReactComponent as ElSalvadorFlag} from '../assets/images/flags/el-salvador.svg';
-import {ReactComponent as EEUUFlag} from '../assets/images/flags/estados-unidos.svg';
-import {ReactComponent as PuertoRicoFlag} from '../assets/images/flags/puerto-rico.svg';
-import {ReactComponent as UKFlag} from '../assets/images/flags/reino-unido.svg';
-import {ReactComponent as PortugalFlag} from '../assets/images/flags/portugal.svg';
-import {ReactComponent as ItalyFlag} from '../assets/images/flags/italia.svg';
-import {ReactComponent as GermanFlag} from '../assets/images/flags/alemania.svg';
-import {ReactComponent as GreeceFlag } from '../assets/images/flags/grecia.svg';
-import {ReactComponent as NetherlandFlag } from '../assets/images/flags/paises-bajos.svg';
-import {ReactComponent as SuizaFlag } from '../assets/images/flags/suiza.svg';
-import {ReactComponent as BrasilFlag } from '../assets/images/flags/brasil.svg';
+import {SpainFlag, 
+        FranceFlag, 
+        MexicoFlag, 
+        ArgentinaFlag, 
+        PeruFlag,
+        ColombiaFlag,
+        ChileFlag,
+        EcuadorFlag,
+        CostaRicaFlag,
+        VenezuelaFlag,
+        GuatemalaFlag,
+        BoliviaFlag,
+        ElSalvadorFlag,
+        PuertoRicoFlag,
+        EEUUFlag,
+        UKFlag,
+        PortugalFlag,
+        ItalyFlag,
+        BrasilFlag,
+        GermanFlag,
+        NetherlandFlag,
+        GreeceFlag,
+        SuizaFlag} from '../assets/images/flags/flags'
 
 const Country = [
 	{
