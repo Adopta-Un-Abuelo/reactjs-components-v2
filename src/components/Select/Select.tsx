@@ -78,7 +78,7 @@ const Select = (props: Props) =>{
         }
     }
 
-    const onOptionClick = (option: OptionProps, e: any) =>{
+    const onOptionClick = (option: any, e: any) =>{
         if (!e) var e: any = window.event;
         e.cancelBubble = true;
         if (e.stopPropagation) e.stopPropagation();
@@ -105,7 +105,7 @@ const Select = (props: Props) =>{
                         type='p'
                         style={{flex: 1}}
                     >
-                        {props.title ? props.title : selectedItem.title}
+                        {props.title ? selectedItem[props.title] : selectedItem.title}
                     </Text>
                 }
                 {showMenu ?
@@ -129,7 +129,7 @@ const Select = (props: Props) =>{
                                         <item.icon/>
                                     </Icon>
                                 }
-                                <Text type='p'>{item.title}</Text>
+                                <Text type='p'>{props.title ? item[props.title ] : item.title}</Text>
                             </Option>
                         )
                     })}
@@ -145,12 +145,7 @@ export interface Props{
     optionStyle?: any
     title?: string
     hideTitle?: boolean,
-    options: Array<OptionProps>
-    selectedItem?: OptionProps
-    onChange?: (a: OptionProps) => void
-}
-export interface OptionProps{
-    id: string,
-    icon?: any,
-    title: string
+    options: Array<any>
+    selectedItem?: any
+    onChange?: (a: any) => void
 }

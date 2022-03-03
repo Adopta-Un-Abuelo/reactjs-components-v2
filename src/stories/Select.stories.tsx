@@ -10,20 +10,21 @@ const Template2: ComponentStory<typeof SelectView> = (args) => <SelectView {...a
 
 export const Select = Template2.bind({});
 Select.args = {
+    title:"sese",
     id: 'select',
     options: [
         {
             id: 'option1',
-            title: 'Option 1',
+            sese: 'Option 1',
             icon: VenezuelaFlag
         },
         {
             id: 'option2',
-            title: 'Option 2'
+            sese: 'Option 2'
         }
     ],
     selectedItem: {
         id: 'option2',
-        title: 'Option 2'
+        sese: 'Option 2'
     }
 };

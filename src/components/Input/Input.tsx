@@ -60,9 +60,11 @@ const Input = (props: Props) =>{
    
     const [ error, setError] = useState<string | undefined>("")
     const [ flag, setFlag ] = useState<any>(undefined)
+    const [ options, setOptions] = useState<any>(undefined)
     useEffect(()=>{
        setError(props.error)
        if(props.type==="phone"){
+            setOptions(props.options);
             const index = Country.findIndex((item)=>props.value && item.title.includes(props.value))
             if(index>=0) setFlag(Country[index])
        }
@@ -103,7 +105,7 @@ const Input = (props: Props) =>{
         //PHONE
         props.type==="phone" ?
         <><InputView data-testid="input">
-        <IconStyle><Select onChange={props.onCountryChange} style={{ background:"#F2F2F2", border:"none", padding:0}} id="country" options={Country}/></IconStyle>
+        <IconStyle><Select title={"prefix"} selectedItem={flag} onChange={props.onCountryChange} style={{ background:"#F2F2F2", border:"none", padding:0}} id="country" options={options}/></IconStyle>
         <InputStyled aria-label={props.label} type="tel" {...props} style={{paddingLeft:117,border:error ? `1px solid #FF5A5A`:value!==undefined && value!==null && value.length?"1px solid #00BA88":""}} value={value}/>
         {value && <IconStyle onClick={()=>props.delete && props.delete()} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
          </InputView>
@@ -157,5 +159,6 @@ export interface Props extends ComponentPropsWithoutRef<"input">{
     error?:string|undefined,
     delete?:()=>void,
     onCountryChange?:(item:any)=>void
-    label?:string
+    label?:string,
+    options?:Array<any>
 }
