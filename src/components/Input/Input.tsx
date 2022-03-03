@@ -105,7 +105,7 @@ const Input = (props: Props) =>{
         //PHONE
         props.type==="phone" ?
         <><InputView data-testid="input">
-        <IconStyle><Select title={"prefix"} selectedItem={flag} onChange={props.onCountryChange} style={{ background:"#F2F2F2", border:"none", padding:0}} id="country" options={options}/></IconStyle>
+        <IconStyle><Select title={"prefix"} selectedItem={flag} onChange={props.onCountryChange} style={{ background:"#F2F2F2", border:"none", padding:0}} id="country" options={props.options}/></IconStyle>
         <InputStyled aria-label={props.label} type="tel" {...props} style={{paddingLeft:117,border:error ? `1px solid #FF5A5A`:value!==undefined && value!==null && value.length?"1px solid #00BA88":""}} value={value}/>
         {value && <IconStyle onClick={()=>props.delete && props.delete()} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
          </InputView>
