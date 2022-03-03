@@ -97,7 +97,7 @@ const Select = (props: Props) =>{
             >
                 {selectedItem && selectedItem.icon && 
                     <Icon>
-                        {selectedItem.icon}
+                        <selectedItem.icon/>
                     </Icon>
                 }
                 {!props.hideTitle &&
@@ -126,7 +126,7 @@ const Select = (props: Props) =>{
                             >
                                 {item.icon && 
                                     <Icon>
-                                        {item.icon}
+                                        <item.icon/>
                                     </Icon>
                                 }
                                 <Text type='p'>{item.title}</Text>
