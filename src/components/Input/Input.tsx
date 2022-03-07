@@ -89,7 +89,7 @@ const Input = (props: Props) =>{
     }
     const onPhoneChange = (valPhone?:any,flagVal?:any) =>{
         if(flagVal)setFlag(flagVal)
-        if(valPhone) setPhoneValue(valPhone)
+        if(valPhone!==null) setPhoneValue(valPhone)
         props.onPhoneChange && props.onPhoneChange({
             country: flagVal? flagVal.title: flag,
             phone: valPhone? valPhone: phoneValue
