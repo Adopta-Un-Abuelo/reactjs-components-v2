@@ -60,11 +60,11 @@ const Input = (props: Props) =>{
    
     const [ error, setError] = useState<string | undefined>("")
     const [ flag, setFlag ] = useState<any>(undefined)
+    const [ phoneValue , setPhoneValue ] = useState(undefined)
     useEffect(()=>{
        setError(props.error)
        if(props.type==="phone"){
-            const index = Country.findIndex((item)=>props.value && props.value.includes(item.title))
-            if(index>=0) setFlag(Country[index])
+           initPhone(value) 
        }
     },[props.error, props.value])
 
@@ -86,6 +86,29 @@ const Input = (props: Props) =>{
             }
         }
     }
+    const onPhoneChange = (valPhone?:any,flagVal?:any) =>{
+        if(flagVal)setFlag(flagVal)
+        if(valPhone) setPhoneValue(valPhone)
+        props.onPhoneChange && props.onPhoneChange({
+            country: flagVal? flagVal.title: flag,
+            phone: valPhone? valPhone: phoneValue
+        });
+    } 
+    
+    const initPhone = (phone:string): void=> {
+        let result = {
+            country:"",
+            phone:""
+        }
+        const search = Country.findIndex((it: any)=>phone.includes(it.title))
+        if(search>=0) setFlag(Country[search])
+        if(search<0) result.phone=phone;
+        else{
+            result.country= Country[search].title;
+            result.phone = phone.replace(Country[search].title,"")
+        }
+        props.onPhoneChange && props.onPhoneChange(result)
+    }
     return(
        
         <>
@@ -103,8 +126,8 @@ const Input = (props: Props) =>{
         //PHONE
         props.type==="phone" ?
         <><InputView data-testid="input">
-        <IconStyle><Select  selectedItem={flag} onChange={props.onCountryChange} style={{ background:"#F2F2F2", border:"none", padding:0}} id="country" options={Country}/></IconStyle>
-        <InputStyled aria-label={props.label} type="tel" {...props} style={{paddingLeft:117,border:error ? `1px solid #FF5A5A`:value!==undefined && value!==null && value.length?"1px solid #00BA88":""}} value={value}/>
+        <IconStyle><Select  selectedItem={flag} onChange={item => onPhoneChange(null, item)} style={{ background:"#F2F2F2", border:"none", padding:0}} id="country" options={Country}/></IconStyle>
+        <InputStyled aria-label={props.label} type="tel" name={props.name} onChange={e=>onPhoneChange(e.target.value)} style={{paddingLeft:117,border:error ? `1px solid #FF5A5A`:value!==undefined && value!==null && value.length?"1px solid #00BA88":""}} value={phoneValue}/>
         {value && <IconStyle onClick={()=>props.delete && props.delete()} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
          </InputView>
         </>:
@@ -152,11 +175,11 @@ const Input = (props: Props) =>{
 export default Input;
 export interface Props extends ComponentPropsWithoutRef<"input">{
     placeholder?:string,
-    value?:string,
+    value:string,
     type?: 'text' | 'phone' | 'email' | 'date'| 'location' | 'password',
     error?:string|undefined,
     delete?:()=>void,
-    onCountryChange?:(item:any)=>void
+    onPhoneChange?:(item:any)=>void
     label?:string,
     options?:Array<any>
 }
