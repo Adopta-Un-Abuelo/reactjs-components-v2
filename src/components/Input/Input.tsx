@@ -129,7 +129,7 @@ const Input = (props: Props) =>{
         <><InputView data-testid="input">
         <IconStyle><Select  selectedItem={flag} onChange={item => onPhoneChange(null, item)} style={{ background:"#F2F2F2", border:"none", padding:0}} id="country" options={Country}/></IconStyle>
         <InputStyled aria-label={props.label} type="tel" name={props.name} onChange={e=>onPhoneChange(e.target.value)} style={{paddingLeft:117,border:error ? `1px solid #FF5A5A`:value!==undefined && value!==null && value.length?"1px solid #00BA88":""}} value={phoneValue}/>
-        {value && <IconStyle onClick={()=>props.delete && props.delete()} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
+        {value && <IconStyle onClick={()=>onPhoneChange("")} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
          </InputView>
         </>:
         
