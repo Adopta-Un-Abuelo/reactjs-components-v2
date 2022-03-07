@@ -12,15 +12,16 @@ const ButtonPrimary = styled.button`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	height: 40px;
-	padding: 0px 16px;
-	border-radius: 20px;
+	height: 48px;
+	padding: 0px 24px;
+	border-radius: 12px;
 	border: none;
 	color: white;
-	background-color: ${props => props.disabled ? Color.gray4 : Color.blue3};
+	background-color: ${Color.background.primary};
+	opacity: ${props => props.disabled ? 0.48 : 1};
 	cursor: ${props => props.disabled ? 'default' : 'pointer'};
 	:hover{
-		background-color: ${props => props.disabled ? Color.gray4 : '#3B43BD'};
+		background-color: ${props => props.disabled ? Color.background.primary : Color.status.primary.hover};
 	}
 `
 const ButtonSecondary = styled.button`
