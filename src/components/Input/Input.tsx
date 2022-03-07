@@ -109,7 +109,7 @@ const Input = (props: Props) =>{
         result.phone = phone.replace(Country[search].title,"")
         
         setPhoneValue(result.phone)
-        props.onPhoneChange && props.onPhoneChange({target: {name:props.name, value: result.country+result.phone}})
+        props.onPhoneChange && props.onPhoneChange({target: {name:props.name, value: Country[search].title+result.phone}})
     }
     return(
        
