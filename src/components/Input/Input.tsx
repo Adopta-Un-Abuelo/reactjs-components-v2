@@ -60,7 +60,7 @@ const Input = (props: Props) =>{
    
     const [ error, setError] = useState<string | undefined>("")
     const [ flag, setFlag ] = useState<any>(undefined)
-    const [ phoneValue , setPhoneValue ] = useState(undefined)
+    const [ phoneValue , setPhoneValue ] = useState<string>("")
     useEffect(()=>{
        setError(props.error)
        if(props.type==="phone"){
@@ -102,11 +102,11 @@ const Input = (props: Props) =>{
         }
         const search = phone ? Country.findIndex((it: any)=>phone.includes(it.title)) : 0
         if(search>=0) setFlag(Country[search])
-        if(search<0) result.phone=phone;
         else{
             result.country= Country[search].title;
             result.phone = phone.replace(Country[search].title,"")
         }
+        setPhoneValue(result.phone)
         props.onPhoneChange && props.onPhoneChange(result)
     }
     return(
