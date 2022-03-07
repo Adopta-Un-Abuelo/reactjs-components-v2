@@ -64,6 +64,7 @@ const Input = (props: Props) =>{
     useEffect(()=>{
        setError(props.error)
        if(props.type==="phone"){
+
            initPhone(value? value :"") 
        }
     },[props.error, props.value])
@@ -102,10 +103,10 @@ const Input = (props: Props) =>{
         }
         const search = phone ? Country.findIndex((it: any)=>phone.includes(it.title)) : 0
         if(search>=0) setFlag(Country[search])
-        else{
-            result.country= Country[search].title;
-            result.phone = phone.replace(Country[search].title,"")
-        }
+        
+        result.country= Country[search].title;
+        result.phone = phone.replace(Country[search].title,"")
+        
         setPhoneValue(result.phone)
         props.onPhoneChange && props.onPhoneChange(result)
     }
