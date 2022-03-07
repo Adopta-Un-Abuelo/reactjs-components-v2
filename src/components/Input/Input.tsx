@@ -64,7 +64,7 @@ const Input = (props: Props) =>{
     useEffect(()=>{
        setError(props.error)
        if(props.type==="phone"){
-           initPhone(value) 
+           initPhone(value? value :"") 
        }
     },[props.error, props.value])
 
@@ -100,7 +100,7 @@ const Input = (props: Props) =>{
             country:"",
             phone:""
         }
-        const search = Country.findIndex((it: any)=>phone.includes(it.title))
+        const search = phone ? Country.findIndex((it: any)=>phone.includes(it.title)) : 0
         if(search>=0) setFlag(Country[search])
         if(search<0) result.phone=phone;
         else{
@@ -175,7 +175,7 @@ const Input = (props: Props) =>{
 export default Input;
 export interface Props extends ComponentPropsWithoutRef<"input">{
     placeholder?:string,
-    value:string,
+    value?:string,
     type?: 'text' | 'phone' | 'email' | 'date'| 'location' | 'password',
     error?:string|undefined,
     delete?:()=>void,
