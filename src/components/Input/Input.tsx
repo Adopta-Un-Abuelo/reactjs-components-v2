@@ -117,7 +117,7 @@ const Input = (props: Props) =>{
         {
         //DATE
         props.type==="date" ?
-         <><InputView data-testid="input">
+         <><InputView data-testid="input" style={props.style}>
          <IconStyle><Calendar stroke={Color.gray2}/></IconStyle>
          <InputStyled aria-label={props.label} placeholder="dd/mm/yyyy" onKeyDown={onInputKeyPress} maxLength={10}  name={props.name} onChange={onDateChange} type="tel" style={{border:error ? `1px solid `+Color.status.color.error:value!==undefined && value!==null && value.length?"1px solid #00BA88":""}} value={value}/>
          {value && <IconStyle onClick={()=>props.delete && props.delete()} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
@@ -127,16 +127,16 @@ const Input = (props: Props) =>{
         
         //PHONE
         props.type==="phone" ?
-        <><InputView data-testid="input">
+        <><InputView data-testid="input" style={props.style}>
         <IconStyle><Select  selectedItem={flag} onChange={item => onPhoneChange(null, item)} style={{ border:"none", padding:0}} id="country" options={Country}/></IconStyle>
-        <InputStyled aria-label={props.label} type="tel" name={props.name} onChange={e=>onPhoneChange(e.target.value)} style={{paddingLeft:117,border:error ? `1px solid `+Color.status.color.error:value!==undefined && value!==null && value.length?"1px solid #00BA88":""}} value={phoneValue}/>
+        <InputStyled aria-label={props.label} type="tel" {...props} onChange={e=>onPhoneChange(e.target.value)} style={{paddingLeft:117,border:error ? `1px solid `+Color.status.color.error:value!==undefined && value!==null && value.length?"1px solid #00BA88":""}} value={phoneValue}/>
         {value && <IconStyle onClick={()=>onPhoneChange("")} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
          </InputView>
         </>:
         
         //EMAIL
         props.type==="email" ?
-        <><InputView data-testid="input">
+        <><InputView data-testid="input" style={props.style}>
         <IconStyle><Mail stroke={Color.gray2}/></IconStyle>
         <InputStyled aria-label={props.label} type="email" {...props}  style={{border:error ? `1px solid `+Color.status.color.error:value!==undefined && value!==null && value.length?"1px solid #00BA88":""}}/>
         {value && <IconStyle onClick={()=>props.delete && props.delete()} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
@@ -145,7 +145,7 @@ const Input = (props: Props) =>{
        
        //ADDRES
         props.type==="location" ?
-        <><InputView data-testid="input">
+        <><InputView data-testid="input" style={props.style}>
         <IconStyle><MapPin stroke={Color.gray2}/></IconStyle>
         <InputStyled aria-label={props.label} type="text" {...props}  style={{border:error ? `1px solid `+Color.status.color.error:value!==undefined && value!==null && value.length?"1px solid #00BA88":""}} />
         {value && <IconStyle onClick={()=>props.delete && props.delete()} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
@@ -154,7 +154,7 @@ const Input = (props: Props) =>{
         :
         //PASSWORD
         props.type==="password" ?
-        <><InputView  data-testid="input">
+        <><InputView  data-testid="input" style={props.style}>
         <IconStyle><User stroke={Color.gray2}/></IconStyle>
         <InputStyled aria-label={props.label} {...props}  style={{border:error ? `1px solid `+Color.status.color.error:value!==undefined && value!==null && value.length?"1px solid #00BA88":""}} value={value}/>
         {value && <IconStyle onClick={()=>{props.delete && props.delete()}} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
@@ -162,7 +162,7 @@ const Input = (props: Props) =>{
         </>
         :
          //TEXT
-        <><InputView  data-testid="input">
+        <><InputView  data-testid="input" style={props.style}>
         <IconStyle><User stroke={Color.gray2}/></IconStyle>
         <InputStyled aria-label={props.label} {...props}  style={{border:error ? `1px solid `+Color.status.color.error:value!==undefined && value!==null && value.length?"1px solid #00BA88":""}} value={value}/>
         {value && <IconStyle onClick={()=>{props.delete && props.delete()}} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
@@ -176,6 +176,7 @@ const Input = (props: Props) =>{
 }
 export default Input;
 export interface Props extends ComponentPropsWithoutRef<"input">{
+    style?: any
     placeholder?:string,
     value?:string,
     type?: 'text' | 'phone' | 'email' | 'date'| 'location' | 'password',
