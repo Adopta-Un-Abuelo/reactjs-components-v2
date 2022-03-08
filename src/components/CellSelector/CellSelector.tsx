@@ -113,7 +113,7 @@ export interface Props{
     style?: any,
     cellStyle?: any,
     options: Array<OptionProps>,
-    selectedOptions: Array<OptionProps>,
+    selectedOptions?: Array<OptionProps>,
     selection?: 'single' | 'multiple',
     onChange?: (array: Array<OptionProps>) => void,
     onClick?: (item: OptionProps) => void
