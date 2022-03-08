@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import React from 'react';
 
-import { Checkbox } from '../components';
+import { Checkbox, Text } from '../components';
 
 export default {
 	title: 'Basic/Checkbox',
@@ -43,6 +43,10 @@ List.args = {
 		{
 			id: 'option_3',
 			label: 'Option 3'
+		},
+		{
+			id: 'option_4',
+			Element:  <Text type='p'>Element</Text>
 		}
 	],
 	selection: 'single'

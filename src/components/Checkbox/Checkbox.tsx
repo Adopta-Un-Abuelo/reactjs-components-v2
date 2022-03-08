@@ -86,6 +86,6 @@ const Checkbox = (props: Props) =>{
 export default Checkbox;
 export interface Props extends ComponentPropsWithoutRef<"button">{
     selected: boolean,
-    label: string,
+    label?: string,
     sublabel?: string
 }

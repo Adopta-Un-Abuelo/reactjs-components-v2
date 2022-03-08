@@ -36,7 +36,9 @@ const CheckboxList = (props: Props) =>{
                         sublabel={item.sublabel}
                         selected={active}
                         onClick={() => onClick(item)}
-                    />
+                    >
+                        {item.Element}
+                    </Checkbox>
                 )
             })}
         </Container>
@@ -46,9 +48,10 @@ export default CheckboxList;
 export interface Props{
     options: Array<{
         id: string,
-        label: string,
+        label?: string,
         sublabel?: string,
-        defaultSelection?: boolean
+        defaultSelection?: boolean,
+        Element?: JSX.Element
     }>,
     selection: 'single' | 'multiple',
     onChange?: Function
