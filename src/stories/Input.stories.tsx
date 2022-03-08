@@ -1,15 +1,21 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import React from 'react';
 
-import { Input  } from '../components';
+import { Input, InputCode } from '../components';
 
  export default {
 	title: 'Basic/Input',
-	component: Input
+	component: Input,
+	argTypes: {
+		onChange: { action: 'onChange' }
+	}
 } as ComponentMeta<typeof Input>;
 
 const Template: ComponentStory<typeof Input> = (args) => <Input {...args}/>;
 export const Simple = Template.bind({});
 Simple.args = {
-    placeholder: 'Placeholder',
+    placeholder: 'Placeholder'
 }; 
+
+const Template2: ComponentStory<typeof InputCode> = (args) => <InputCode {...args}/>;
+export const Code = Template2.bind({});

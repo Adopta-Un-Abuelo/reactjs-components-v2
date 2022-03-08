@@ -20,6 +20,8 @@ const Box = styled.div<{selected: boolean}>`
     justify-content: center;
     height: 24px;
     width: 24px;
+    min-height: 24px;
+    min-width: 24px;
     background-color: ${props => props.selected ? Color.blue3 : Color.gray6};
     border-radius: 8px;
 `
@@ -60,24 +62,21 @@ const Checkbox = (props: Props) =>{
                 }
             </Box>
             <TextView>
-                {props.children ?
-                    props.children
-                :
-                    <>
+                {props.children && props.children}
+                {props.label &&
                     <Text
                         type='p'
                     >
                         {props.label}
                     </Text>
-                    {props.sublabel &&
-                        <Text
-                            type='p'
-                            style={{fontSize: 12}}
-                        >
-                            {props.sublabel}
-                        </Text>
-                    }
-                    </>
+                }
+                {props.sublabel &&
+                    <Text
+                        type='p'
+                        style={{fontSize: 12}}
+                    >
+                        {props.sublabel}
+                    </Text>
                 }
             </TextView>
         </Container>

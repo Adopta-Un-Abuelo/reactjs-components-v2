@@ -20,3 +20,4 @@ export { default as IconTabs } from './Tabs/IconTabs';
 export { default as Payout } from './Payout/Payout';
 export { default as Select } from './Select/Select';
 export { default as BreadCrumb } from './BreadCrumb/Default';
+export { default as InputCode } from './Input/InputCode';
