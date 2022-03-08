@@ -12,5 +12,5 @@ const Template: ComponentStory<typeof Chip> = (args) => <Chip {...args} />;
 export const ChipInfo = Template.bind({});
 ChipInfo.args = {
     text:"Aficiones",
-    type:"big"
+    type:"selector"
 }
