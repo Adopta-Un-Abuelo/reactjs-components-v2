@@ -60,18 +60,24 @@ const Checkbox = (props: Props) =>{
                 }
             </Box>
             <TextView>
-                <Text
-                    type='p'
-                >
-                    {props.label}
-                </Text>
-                {props.sublabel &&
+                {props.children ?
+                    props.children
+                :
+                    <>
                     <Text
                         type='p'
-                        style={{fontSize: 12}}
                     >
-                        {props.sublabel}
+                        {props.label}
                     </Text>
+                    {props.sublabel &&
+                        <Text
+                            type='p'
+                            style={{fontSize: 12}}
+                        >
+                            {props.sublabel}
+                        </Text>
+                    }
+                    </>
                 }
             </TextView>
         </Container>
