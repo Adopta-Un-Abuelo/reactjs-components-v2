@@ -96,6 +96,7 @@ const Input = (props: Props) =>{
             country: flagVal? flagVal: flag,
             phone: valPhone!==null? valPhone: phoneValue
         }
+        props.onChange && props.onChange({name:props.name, country:result.country.title, value: result.phone});
         props.onPhoneChange && props.onPhoneChange({target: {name:props.name, value: result.country.title+result.phone}});
     } 
     
@@ -111,6 +112,7 @@ const Input = (props: Props) =>{
         result.phone = phone.replace(Country[search].title,"")
         
         setPhoneValue(result.phone)
+        props.onChange && props.onChange({name:props.name, country: Country[search].title, value: result.phone})
         props.onPhoneChange && props.onPhoneChange({target: {name:props.name, value: Country[search].title+result.phone}})
     }
     return(
@@ -178,6 +180,7 @@ export interface Props extends ComponentPropsWithoutRef<"input">{
     type?: 'text' | 'phone' | 'email' | 'date'| 'location' | 'password',
     error?:string|undefined,
     delete?:()=>void,
+    onChange?:(item:any)=>void
     onPhoneChange?:(item:any)=>void
     label?:string,
     options?:Array<any>
