@@ -31,7 +31,7 @@ const Icon = styled.img`
 const Avatar = (props: Props) =>{
     return(
         <AvatarContainer data-testid="avatar" style={{border: props.icon ? `2px solid ${Color.gray6}` : "2px solid #5963F6", ...props.style}}>
-            {props.icon ? <Icon src={props.icon}/> :props.name?  <Text>{props.name.substring(0,1).toLocaleUpperCase()}</Text>:null }
+            {props.icon ? <Icon src={props.icon}/> :props.name?  <Text style={{fontSize:props.style?.fontSize}}>{props.name.substring(0,1).toLocaleUpperCase()}</Text>:null }
         </AvatarContainer>
     )
 }
