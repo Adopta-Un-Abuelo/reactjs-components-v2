@@ -23,3 +23,4 @@ export { default as BreadCrumb } from './BreadCrumb/Default';
 export { default as InputCode } from './Input/InputCode';
 export { default as CellSelector } from './CellSelector/CellSelector';
 export { default as TagSelector } from './Tags/TagSelector';
+export { default as ProgressBar } from './ProgressBar/ProgressBar';

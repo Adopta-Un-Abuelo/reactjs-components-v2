@@ -16,7 +16,7 @@ const Container = styled.button<{disabled?: boolean}>`
     border: none;
     background-color: transparent;
     :hover{
-        background-color: ${props => !props.disabled && Color.blue3}
+        background-color: ${props => !props.disabled && Color.status.neutral.hover}
     }
 `
 const Icon = styled.img`
