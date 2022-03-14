@@ -187,7 +187,7 @@ const PayoutForm = forwardRef((props: FormProps, ref: Ref<FormRef>) =>{
                 {props.option === 'card' ?
                     'El pago con tarjeta está protegido por nuestra pasarela de pago seguro'
                 :
-                    'Recuerda que debes añadir el IBAN (Ej.: ES1212341234110123456789)'
+                    'Recuerda que debes añadir el IBAN (Ej.: ES12 1234 1234 1101 2345 6789)'
                 }
             </Text>
         </div>
