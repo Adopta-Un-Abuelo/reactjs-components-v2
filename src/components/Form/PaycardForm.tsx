@@ -8,10 +8,10 @@ import Input from '../Input/Input';
 import Text from '../Text/Text';
 
 const InputContainer = styled.div<{error?: boolean, focus: boolean}>`
-    border: ${props => props.error ? '1px solid red' : (props.focus ? '1px solid '+Color.gray3 : 'none')};
-    border-radius: 24px;
-    padding: 22px;
-    background-color: ${props => props.focus ? 'white' : Color.gray6};
+    border: ${props => props.focus ? '2px solid '+Color.line.primarySoft : '1px solid '+Color.line.soft};
+    border-radius: 12px;
+    padding: 17px 22px;
+    background-color: white;
 `
 
 const PayoutForm = forwardRef((props: FormProps, ref: Ref<FormRef>) =>{
@@ -131,7 +131,7 @@ const PayoutForm = forwardRef((props: FormProps, ref: Ref<FormRef>) =>{
                 onChange={(e) => onInputChange(e.target.value)}
                 error={inputError ? 'Error' : ""}
             />
-            {props.option === 'sepa_debit' &&
+            {props.option === 'sepa_debit' && !props.userData?.email &&
                 <Input
                     title={props.placeholderEmail ? props.placeholderEmail : 'Email'}
                     placeholder={props.placeholderEmail ? props.placeholderEmail : 'Email'}
@@ -152,7 +152,7 @@ const PayoutForm = forwardRef((props: FormProps, ref: Ref<FormRef>) =>{
                                     fontWeight: 500,
                                     fontFamily: 'Poppins',
                                     fontSize: '16px',
-                                    '::placeholder': {color: 'rgba(0, 0, 0, 0.3)'},
+                                    '::placeholder': {color: Color.text.high},
                                 }
                             },
                             hidePostalCode: true
@@ -170,11 +170,13 @@ const PayoutForm = forwardRef((props: FormProps, ref: Ref<FormRef>) =>{
                                     fontWeight: 500,
                                     fontFamily: 'Poppins',
                                     fontSize: '16px',
-                                    '::placeholder': {color: 'rgba(0, 0, 0, 0.3)'},
+                                    '::placeholder': {color: Color.text.high},
                                 }
                             }
                         }}
                         onChange={onPaymentChange}
+                        onFocus={onInputFocus}
+                        onBlur={onInputBlur}
                     />
                 }
             </InputContainer>
@@ -198,6 +200,9 @@ export interface FormProps{
     error?: boolean,
     placeholderName?: string,
     placeholderEmail?: string,
+    userData?:{
+        email?: string
+    }
     onLoading?: (a: boolean) => void
 }
 export interface FormRef{
