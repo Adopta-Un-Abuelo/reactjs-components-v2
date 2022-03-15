@@ -103,7 +103,7 @@ const Input = (props: Props) =>{
             name:props.name, 
             country: result.country.title, 
             value: result.phone,
-            isValid: (result.phone > 8 && result.phone < 18) ? phoneUtil.isValidNumberForRegion(phoneUtil.parse(result.phone, result.country.region), result.country.region) : false
+            isValid: (result.phone.length > 8 && result.phone.length < 18) ? phoneUtil.isValidNumberForRegion(phoneUtil.parse(result.phone, result.country.region), result.country.region) : false
         });
         props.onPhoneChange && props.onPhoneChange({target: {name:props.name, value: result.country.title+result.phone}});
     } 
