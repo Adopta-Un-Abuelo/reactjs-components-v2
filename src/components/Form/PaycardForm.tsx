@@ -5,7 +5,6 @@ import { StripeElementChangeEvent, PaymentMethod } from "@stripe/stripe-js";
 
 import Color from '../../constants/Color';
 import Input from '../Input/Input';
-import Text from '../Text/Text';
 
 const InputContainer = styled.div<{error?: boolean, focus: boolean}>`
     border: ${props => props.focus ? '2px solid '+Color.line.primarySoft : '1px solid '+Color.line.soft};
@@ -30,6 +29,13 @@ const PayoutForm = forwardRef((props: FormProps, ref: Ref<FormRef>) =>{
     useEffect(() =>{
         setInputError(props.error);
     }, [props.error]);
+
+    useEffect(() =>{
+        if(props.userData && props.userData.email)
+            setEmail(props.userData.email);
+        else
+            setEmail(undefined);
+    }, [props.userData]);
 
     useImperativeHandle(ref, () => ({
         async getPaymentMethod(){
@@ -127,17 +133,17 @@ const PayoutForm = forwardRef((props: FormProps, ref: Ref<FormRef>) =>{
             <Input
                 title={(container && container.current && container.current.offsetWidth <= 400) ? 'Titular' : (props.placeholderName ? props.placeholderName : 'Nombre del titular')}
                 placeholder={props.placeholderName ? props.placeholderName : 'Nombre del titular'}
-                style={{marginBottom: 12}}
+                containerStyle={{marginBottom: 12}}
                 onChange={(e) => onInputChange(e.target.value)}
-                error={inputError ? 'Error' : ""}
+                error={inputError ? 'Error' : undefined}
             />
             {props.option === 'sepa_debit' && !props.userData?.email &&
                 <Input
                     title={props.placeholderEmail ? props.placeholderEmail : 'Email'}
                     placeholder={props.placeholderEmail ? props.placeholderEmail : 'Email'}
-                    style={{marginBottom: 12}}
+                    containerStyle={{marginBottom: 12}}
                     onChange={(e) => onEmailInputChange(e.target.value)}
-                    error={inputError ? 'Error' : ""}
+                    error={inputError ? 'Error' : undefined}
                 />
             }
             <InputContainer
@@ -180,16 +186,6 @@ const PayoutForm = forwardRef((props: FormProps, ref: Ref<FormRef>) =>{
                     />
                 }
             </InputContainer>
-            <Text
-                type='p'
-                style={{fontSize: 12, color: Color.gray4, marginTop: 8}}
-            >
-                {props.option === 'card' ?
-                    'El pago con tarjeta está protegido por nuestra pasarela de pago seguro'
-                :
-                    'Recuerda que debes añadir el IBAN (Ej.: ES12 1234 1234 1101 2345 6789)'
-                }
-            </Text>
         </div>
     )
 });

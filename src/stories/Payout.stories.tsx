@@ -1,14 +1,27 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import React from 'react';
+import React, { useRef } from 'react';
 
-import { Payout } from '../components';
+import { Payout, Button } from '../components';
+import { PayoutRef } from '../components/Payout/Payout';
 
 export default {
 	title: 'Basic/Payout',
 	component: Payout
 } as ComponentMeta<typeof Payout>;
 
-const Template: ComponentStory<typeof Payout> = (args) => <Payout {...args} />;
+const Template: ComponentStory<typeof Payout> = (args) => {
+    const payout = useRef<PayoutRef>(null);
+    return(
+        <>
+        <Payout ref={payout} {...args} />
+        <Button
+            style={{marginTop: 44}}
+            label='Obtener payment method'
+            onClick={async () => console.log(await payout.current?.getPaymentMethod())}
+        />
+        </>
+    )
+};
 
 export const Default = Template.bind({});
 Default.args = { 
