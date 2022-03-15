@@ -28,8 +28,8 @@ const InputStyled = styled.input`
         margin: 0;
     }
     ${media.lessThan("small")`
-        height: 41px;
-        width: 33px;
+        height: 50px;
+        width: 13%;
     `}
 `
 

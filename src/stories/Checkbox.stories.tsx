@@ -42,7 +42,8 @@ List.args = {
 		},
 		{
 			id: 'option_3',
-			label: 'Option 3'
+			label: 'Option 3',
+			error: true
 		},
 		{
 			id: 'option_4',

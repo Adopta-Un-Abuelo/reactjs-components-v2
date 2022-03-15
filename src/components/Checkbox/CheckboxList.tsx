@@ -25,7 +25,7 @@ const CheckboxList = (props: Props) =>{
     }
 
     return(
-        <Container data-testid="checkboxlist">
+        <Container data-testid="checkboxlist" style={props.style}>
             {props.options.map(item => {
                 const active = selection.some(e => e.id === item.id);
                 return(
@@ -34,6 +34,7 @@ const CheckboxList = (props: Props) =>{
                         style={{marginBottom: 16}}
                         label={item.label}
                         sublabel={item.sublabel}
+                        error={item.error}
                         selected={active}
                         onClick={() => onClick(item)}
                     >
@@ -46,12 +47,14 @@ const CheckboxList = (props: Props) =>{
 }
 export default CheckboxList;
 export interface Props{
+    style?: any,
     options: Array<{
         id: string,
         label?: string,
         sublabel?: string,
         defaultSelection?: boolean,
-        Element?: JSX.Element
+        Element?: JSX.Element,
+        error?: boolean
     }>,
     selection: 'single' | 'multiple',
     onChange?: Function

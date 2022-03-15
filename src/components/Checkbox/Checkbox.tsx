@@ -2,7 +2,7 @@ import React, { useState, useEffect, ComponentPropsWithoutRef } from 'react';
 import styled from 'styled-components';
 
 import Text from '../Text/Text';
-import { Check } from 'react-feather';
+import { Check } from 'lucide-react';
 import { Color } from '../../constants';
 
 const Container = styled.button`
@@ -14,7 +14,7 @@ const Container = styled.button`
     padding: 0px;
     opacity: ${props => props.disabled ? 0.5 : 1.0};
 `
-const Box = styled.div<{selected: boolean}>`
+const Box = styled.div<{selected: boolean, error?: boolean}>`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -22,8 +22,9 @@ const Box = styled.div<{selected: boolean}>`
     width: 24px;
     min-height: 24px;
     min-width: 24px;
-    background-color: ${props => props.selected ? Color.blue3 : Color.gray6};
-    border-radius: 8px;
+    background-color: ${props => props.selected ? (props.error ? Color.status.color.error : Color.background.primary) : (props.error ? Color.status.color.errorDefault : Color.background.primaryLow)};
+    border: ${props => props.selected ? '1px solid '+(props.error ? Color.status.color.error : Color.background.primary) : '1px solid '+(props.error ? Color.line.redSoft : Color.line.primarySoft)};
+    border-radius: 4px;
 `
 const TextView = styled.div`
     margin-left: 10px;
@@ -51,13 +52,15 @@ const Checkbox = (props: Props) =>{
         >
             <Box
                 selected={selected}
+                error={props.error}
             >
                 {selected &&
                     <Check 
                         data-testid="check-icon"
-                        height={18} 
-                        width={18} 
-                        stroke='white'
+                        height={20} 
+                        width={20}
+                        color='white'
+                        strokeWidth={2}
                     />
                 }
             </Box>
@@ -86,5 +89,6 @@ export default Checkbox;
 export interface Props extends ComponentPropsWithoutRef<"button">{
     selected: boolean,
     label?: string,
-    sublabel?: string
+    sublabel?: string,
+    error?: boolean
 }
