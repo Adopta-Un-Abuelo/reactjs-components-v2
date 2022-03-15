@@ -28,10 +28,10 @@ const ButtonSecondary = styled.button`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	height: 40px;
+	height: 48px;
 	width: 100%;
-	padding: 0px 16px;
-	border-radius: 20px;
+	padding: 0px 24px;
+	border-radius: 12px;
 	border: ${props => props.disabled ? '1px solid '+ Color.gray3 : '1px solid '+ Color.blue3};
 	color: ${props => props.disabled ? Color.gray3 : Color.blue3};
 	background-color: transparent;
@@ -44,9 +44,9 @@ const ButtonText = styled.button`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	height: 40px;
-	padding: 0px 16px;
-	border-radius: 20px;
+	height: 48px;
+	padding: 0px 24px;
+	border-radius: 12px;
 	border: none;
 	color: ${props => props.disabled ? Color.gray4 : Color.gray2};
 	background-color: transparent;
