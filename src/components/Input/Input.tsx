@@ -67,7 +67,7 @@ const Input = (props: Props) =>{
 
     useEffect(()=>{
         setError(props.error)
-     },[props.error]);
+    },[props.error]);
 
     useEffect(()=>{
         if(props.type==="phone"){
