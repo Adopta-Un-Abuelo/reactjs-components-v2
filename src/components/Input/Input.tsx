@@ -67,10 +67,9 @@ const Input = (props: Props) =>{
     useEffect(()=>{
        setError(props.error)
        if(props.type==="phone"){
-
            initPhone(value? value :"") 
-       }
-    },[props.error, props.value])
+        }
+    },[props.value])
 
     const onDateChange = (e:any) =>{
         if(e.target.value.length === 2 || e.target.value.length === 5){
