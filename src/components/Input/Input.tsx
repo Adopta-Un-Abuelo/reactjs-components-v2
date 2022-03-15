@@ -59,6 +59,7 @@ const ErrorDiv = styled.div`
 `;
 const Input = (props: Props) =>{
     const {onChange, value } = props
+    const phoneUtil = require('google-libphonenumber').PhoneNumberUtil.getInstance();
    
     const [ error, setError] = useState<string | undefined>("")
     const [ flag, setFlag ] = useState<any>(undefined)
@@ -77,6 +78,7 @@ const Input = (props: Props) =>{
         }
         onChange && onChange(e);
     }
+
     const onInputKeyPress = (e:any) =>{
         if(e.keyCode === 8){
             if(e.target.value[e.target.value.length -2]==="/"){
@@ -89,6 +91,7 @@ const Input = (props: Props) =>{
             }
         }
     }
+
     const onPhoneChange = (valPhone?:any,flagVal?:any) =>{
         if(flagVal)setFlag(flagVal)
         if(valPhone!==null) setPhoneValue(valPhone)
@@ -96,10 +99,15 @@ const Input = (props: Props) =>{
             country: flagVal? flagVal: flag,
             phone: valPhone!==null? valPhone: phoneValue
         }
-        props.onChange && props.onChange({name:props.name, country:result.country.title, value: result.phone});
+        props.onChange && props.onChange({
+            name:props.name, 
+            country: result.country.title, 
+            value: result.phone,
+            isValid: (result.phone > 8 && result.phone < 18) ? phoneUtil.isValidNumberForRegion(phoneUtil.parse(result.phone, result.country.region), result.country.region) : false
+        });
         props.onPhoneChange && props.onPhoneChange({target: {name:props.name, value: result.country.title+result.phone}});
     } 
-    
+
     const initPhone = (phone:string): void=> {
         let result = {
             country:"",
@@ -112,7 +120,7 @@ const Input = (props: Props) =>{
         result.phone = phone.replace(Country[search].title,"")
         
         setPhoneValue(result.phone)
-        props.onChange && props.onChange({name:props.name, country: Country[search].title, value: result.phone})
+        props.onChange && props.onChange({name:props.name, country: Country[search].title, value: result.phone, isValid: false})
         props.onPhoneChange && props.onPhoneChange({target: {name:props.name, value: Country[search].title+result.phone}})
     }
     return(

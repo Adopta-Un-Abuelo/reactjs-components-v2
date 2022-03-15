@@ -52,6 +52,9 @@ const Title = styled.div`
     line-height: 36px;
     color: #4F4F4F;
     width: 95%;
+    ${media.lessThan("small")`
+        font-size: 22px;
+    `}
 `;
 const Subtitle = styled.div`
     font-family: Poppins;
@@ -59,8 +62,12 @@ const Subtitle = styled.div`
     font-weight: 500;
     font-size: 18px;
     line-height: 22px;
-    margin-top:14px;
+    margin-top: 12px;
     color: #828282;
+    ${media.lessThan("small")`
+        font-size: 16px;
+        margin-top: 8px;
+    `}
 `;
 const Buttons = styled.div`
     position: sticky;
