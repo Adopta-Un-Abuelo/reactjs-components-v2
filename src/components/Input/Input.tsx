@@ -64,9 +64,13 @@ const Input = (props: Props) =>{
     const [ error, setError] = useState<string | undefined>("")
     const [ flag, setFlag ] = useState<any>(undefined)
     const [ phoneValue , setPhoneValue ] = useState<string>("")
+
     useEffect(()=>{
-       setError(props.error)
-       if(props.type==="phone"){
+        setError(props.error)
+     },[props.error]);
+
+    useEffect(()=>{
+        if(props.type==="phone"){
            initPhone(value? value :"") 
         }
     },[props.value])
