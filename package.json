@@ -1,6 +1,6 @@
 {
   "name": "reactjs-components-v2",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "homepage": "https://adopta-un-abuelo.github.io/reactjs-components-v2/",
   "private": false,
   "main": "dist/cjs/index.js",
@@ -24,6 +24,7 @@
     "react-lottie": "^1.2.3",
     "react-scripts": "4.0.3",
     "styled-components": "^5.3.3",
+    "styled-media-query": "^2.1.2",
     "typescript": "^4.1.2"
   },
   "peerDependencies": {

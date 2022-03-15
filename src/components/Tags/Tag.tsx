@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import media from 'styled-media-query';
 
 import Text from '../Text/Text';
 import Color from '../../constants/Color';
@@ -16,6 +17,17 @@ const Container = styled.div<{selected: boolean}>`
     background-color: ${props => props.selected ? Color.background.primaryLow : 'transparent'};
     margin: 2px;
     cursor: pointer;
+    ${media.lessThan("small")`
+        height: 36px;
+        margin: 4px;
+    `}
+`
+const TextStyled = styled(Text)<{selected: boolean}>`
+    color: ${props => props.selected ? Color.text.primary : Color.text.high};
+    font-size: 14px;
+    ${media.lessThan("small")`
+        font-size: 12px;
+    `}
 `
 
 const Tags = (props: Props) =>{
@@ -30,9 +42,9 @@ const Tags = (props: Props) =>{
             selected={props.selected}
             onClick={onClick}
         >
-            <Text type='p' style={{color: props.selected ? Color.text.primary : Color.text.high, fontSize: 14, fontWeight: 600}}>
+            <TextStyled type='p' selected={props.selected}>
                 {props.title}
-            </Text>
+            </TextStyled>
         </Container>
     )
 }

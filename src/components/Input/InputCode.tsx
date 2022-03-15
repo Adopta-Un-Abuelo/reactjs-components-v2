@@ -1,5 +1,6 @@
-import React, { useRef, ComponentPropsWithoutRef, useState } from 'react';
+import React, { useRef, ComponentPropsWithoutRef } from 'react';
 import styled from 'styled-components';
+import media from 'styled-media-query';
 
 import Color from '../../constants/Color';
 
@@ -26,6 +27,10 @@ const InputStyled = styled.input`
         -webkit-appearance: none;
         margin: 0;
     }
+    ${media.lessThan("small")`
+        height: 41px;
+        width: 33px;
+    `}
 `
 
 const InputCode = (props: Props) =>{
