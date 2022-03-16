@@ -3,9 +3,11 @@ import styled from 'styled-components';
 
 import { MoreVertical } from 'lucide-react'; 
 import Button from '../Button/Button';
+import Color from '../../constants/Color';
 
 const Container = styled.div`
     position: relative;
+    
 `
 const FilterView = styled.div<{position?: 'bottom-right' | 'bottom-left' | 'top-right' | 'top-left'}>`
     position: absolute;
@@ -15,12 +17,14 @@ const FilterView = styled.div<{position?: 'bottom-right' | 'bottom-left' | 'top-
     bottom: ${props => (props.position === 'top-left' || props.position === 'top-right') ? '48px' : 'unset'};
     right: ${props => (props.position === 'bottom-left' || props.position === 'top-left') ? '18px' : 'unset'};
     left: ${props => (props.position === 'bottom-right' || props.position === 'top-right') ? '18px' : 'unset'};
-    padding: 8px;
-    border-radius: 4px;
-    height: 278px;
-    width: 320px;
+    padding: 16px;
+    border-radius: 12px;
+    height: 262px;
+    width: 304px;
     background-color: white;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.08);
+    z-index: 1000;
+    border: 1px solid ${Color.line.soft};
 `
 
 const MenuList = (props: Props) =>{
