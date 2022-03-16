@@ -59,7 +59,7 @@ const MenuList = (props: Props) =>{
             <Button
                 design='image'
                 label=""
-                icon={<MoreVertical/>}
+                icon={props.icon ? props.icon : <MoreVertical/>}
                 onClick={onButtonClick}
             />
             {showView &&
@@ -76,9 +76,10 @@ const MenuList = (props: Props) =>{
 export default MenuList;
 export interface Props{
     id: string,
-    children?: JSX.Element,
+    children?: any,
     style?: any,
     menuStyle?: any,
+    icon?: JSX.Element,
     position?: 'bottom-right' | 'bottom-left' | 'top-right' | 'top-left',
     onChange?: (visible: boolean) => void
 }
