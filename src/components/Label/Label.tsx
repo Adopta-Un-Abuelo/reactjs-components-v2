@@ -31,7 +31,7 @@ const Label = (props: Props) =>{
                 Matched
             </Text>
         </LabelStyled>:
-        props.text==="shutdown" ? 
+        props.text==="shutdown" || props.text==="exSubscriptor"? 
         <LabelStyled data-testid="Label" id="Label" {...props} style={{background:"#FCEDF1"}}>
             <Text type='p' style={{fontFamily: "Poppins",fontSize: "14px",fontStyle: "normal",fontWeight: "600",lineHeight: "22px",letterSpacing: "0em",textAlign: "left", "color":"#FF5A5A"}}>
                 Baja
