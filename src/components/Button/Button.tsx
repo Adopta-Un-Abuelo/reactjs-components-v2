@@ -12,7 +12,7 @@ const ButtonPrimary = styled.button`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	height: 48px;
+	height: 56px;
 	padding: 0px 24px;
 	border-radius: 12px;
 	border: none;
@@ -28,12 +28,11 @@ const ButtonSecondary = styled.button`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	height: 48px;
-	width: 100%;
+	height: 56px;
 	padding: 0px 24px;
 	border-radius: 12px;
-	border: ${props => props.disabled ? '1px solid '+ Color.gray3 : '1px solid '+ Color.blue3};
-	color: ${props => props.disabled ? Color.gray3 : Color.blue3};
+	border: ${'1px solid '+ Color.background.primary};
+	opacity: ${props => props.disabled ? 0.48 : 1};
 	background-color: transparent;
 	cursor: ${props => props.disabled ? 'default' : 'pointer'};
 	:hover{
@@ -48,11 +47,10 @@ const ButtonText = styled.button`
 	padding: 0px 24px;
 	border-radius: 12px;
 	border: none;
-	color: ${props => props.disabled ? Color.gray4 : Color.gray2};
 	background-color: transparent;
 	cursor: ${props => props.disabled ? 'default' : 'pointer'};
 	:hover{
-		background-color: ${props => props.disabled ? 'transparent' : Color.gray6};
+		background-color: ${props => props.disabled ? 'transparent' : Color.status.neutral.hover};
 	}
 `
 
@@ -82,7 +80,7 @@ const Button = (props: Props) => {
 					<Text
 						type='p' 
 						weight='semibold'
-						style={{fontSize: props.style?.fontSize ? props.style?.fontSize :16 ,width:"100%",marginLeft: props.icon ? 6 : 0, color: props.disabled ? Color.gray3 : Color.blue3}}
+						style={{fontSize: props.style?.fontSize ? props.style?.fontSize :16 ,width:"100%",marginLeft: props.icon ? 6 : 0, color: Color.text.primary}}
 					>
 						{props.label}
 					</Text>
@@ -99,7 +97,7 @@ const Button = (props: Props) => {
 				<Text
 					type='p'
 					weight='semibold'
-					style={{fontSize: props.style?.fontSize ? props.style?.fontSize :16 ,width:"100%",marginLeft: props.icon ? 6 : 0, color: props.disabled ? Color.gray4 : Color.gray2}}
+					style={{fontSize: props.style?.fontSize ? props.style?.fontSize :16 ,width:"100%",marginLeft: props.icon ? 6 : 0}}
 				>
 					{props.label}
 				</Text>

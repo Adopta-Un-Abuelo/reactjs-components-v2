@@ -40,7 +40,7 @@ const ButtonImage = (props: Props) =>{
             {props.label &&
                 <Text
                     type='p'
-                    style={{marginTop: 2, fontSize: 14}}
+                    style={{marginTop: 4, fontSize: 14}}
                 >
                     {props.label}
                 </Text>

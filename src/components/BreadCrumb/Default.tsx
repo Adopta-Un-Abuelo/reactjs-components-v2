@@ -9,11 +9,11 @@ const Container = styled.div`
 `
 const Step = styled.div<{isSelected: boolean}>`
     display: flex;
-    height: 10px;
-    width: 10px;
+    height: 8px;
+    width: 8px;
     border-radius: 5px;
-    margin-right: 12px;
-    background-color: ${props => props.isSelected ? Color.blue3 : Color.gray5};
+    margin-right: 16px;
+    background-color: ${props => props.isSelected ? Color.background.primary : Color.text.low};
 `
 
 const BreadCrumb = (props: Props) =>{
