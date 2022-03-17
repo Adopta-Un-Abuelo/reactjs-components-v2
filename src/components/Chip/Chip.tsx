@@ -58,5 +58,5 @@ export default Chip;
 export interface Props extends ComponentPropsWithoutRef<"div">{
     text: string,
     type: 'big' | 'small' | 'selector',
-    inactive:boolean
+    inactive?:boolean
 }
