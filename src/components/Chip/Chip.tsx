@@ -8,7 +8,6 @@ const ChipsContainerSmall = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: #EBECFF;
     height: 30px;
     width: 30px;
     border-radius: 50%;
@@ -43,12 +42,12 @@ const Chip = (props: Props) =>{
             <Text type='p' weight={"semibold"} style={{fontSize:12,color:Color.gray1}}>{props.text}</Text> 
         </ChipSelector>
         }
-        { props.type ==="small" && <ChipsContainerSmall data-testid="chip" style={props.style}>
-            <Text type='p' weight={"semibold"} style={{fontSize:12,color:Color.blue3}}>{props.text.slice(0,1).toLocaleUpperCase()+props.text.slice(1,2)}</Text> 
+        { props.type ==="small" && <ChipsContainerSmall data-testid="chip" style={{...props.style, background: !props.inactive ? "#EBECFF":"#F2F2F2"}}>
+            <Text type='p' weight={"semibold"} style={{fontSize:12,color:!props.inactive ? Color.blue3 : Color.gray3}}>{props.text.slice(0,1).toLocaleUpperCase()+props.text.slice(1,2)}</Text> 
         </ChipsContainerSmall>
         }
-         { props.type ==="big" && <ChipsContainerBig data-testid="chip" style={props.style}>
-           <Text type='p' weight={"semibold"} style={{fontSize:12,color:Color.blue3}}>{props.text.slice(0,1).toLocaleUpperCase()+props.text.slice(1,props.text.length).toLocaleLowerCase()}</Text> 
+         { props.type ==="big" && <ChipsContainerBig data-testid="chip" style={{...props.style, background: !props.inactive ? "#EBECFF":"#F2F2F2"}}>
+           <Text type='p' weight={"semibold"} style={{fontSize:12,color:!props.inactive ? Color.blue3 : Color.gray3}}>{props.text.slice(0,1).toLocaleUpperCase()+props.text.slice(1,props.text.length).toLocaleLowerCase()}</Text> 
         </ChipsContainerBig>
         }
     </>)
@@ -58,5 +57,6 @@ const Chip = (props: Props) =>{
 export default Chip;
 export interface Props extends ComponentPropsWithoutRef<"div">{
     text: string,
-    type: 'big' | 'small' | 'selector'
+    type: 'big' | 'small' | 'selector',
+    inactive:boolean
 }
