@@ -35,7 +35,7 @@ margin-right: 11px;
 
 const FeedBack = (props: Props) =>{
     return(
-        <Container data-testid="feedback">
+        <Container data-testid="feedback" {...props}>
             <Check style={{marginLeft:11, marginRight:11}}/>
             <Text>{props.text}</Text>
         </Container>
