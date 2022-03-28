@@ -5,13 +5,12 @@ import { StripeElementChangeEvent, PaymentMethod } from "@stripe/stripe-js";
 
 import Color from '../../constants/Color';
 import Input from '../Input/Input';
-import Text from '../Text/Text';
 
 const InputContainer = styled.div<{error?: boolean, focus: boolean}>`
-    border: ${props => props.error ? '1px solid red' : (props.focus ? '1px solid '+Color.gray3 : 'none')};
-    border-radius: 24px;
-    padding: 22px;
-    background-color: ${props => props.focus ? 'white' : Color.gray6};
+    border: ${props => props.focus ? '2px solid '+Color.line.primarySoft : '1px solid '+Color.line.soft};
+    border-radius: 12px;
+    padding: 17px 22px;
+    background-color: white;
 `
 
 const PayoutForm = forwardRef((props: FormProps, ref: Ref<FormRef>) =>{
@@ -30,6 +29,13 @@ const PayoutForm = forwardRef((props: FormProps, ref: Ref<FormRef>) =>{
     useEffect(() =>{
         setInputError(props.error);
     }, [props.error]);
+
+    useEffect(() =>{
+        if(props.userData && props.userData.email)
+            setEmail(props.userData.email);
+        else
+            setEmail(undefined);
+    }, [props.userData]);
 
     useImperativeHandle(ref, () => ({
         async getPaymentMethod(){
@@ -127,17 +133,17 @@ const PayoutForm = forwardRef((props: FormProps, ref: Ref<FormRef>) =>{
             <Input
                 title={(container && container.current && container.current.offsetWidth <= 400) ? 'Titular' : (props.placeholderName ? props.placeholderName : 'Nombre del titular')}
                 placeholder={props.placeholderName ? props.placeholderName : 'Nombre del titular'}
-                style={{marginBottom: 12}}
+                containerStyle={{marginBottom: 12}}
                 onChange={(e) => onInputChange(e.target.value)}
-                error={inputError ? 'Error' : ""}
+                error={inputError ? 'Error' : undefined}
             />
-            {props.option === 'sepa_debit' &&
+            {props.option === 'sepa_debit' && !props.userData?.email &&
                 <Input
                     title={props.placeholderEmail ? props.placeholderEmail : 'Email'}
                     placeholder={props.placeholderEmail ? props.placeholderEmail : 'Email'}
-                    style={{marginBottom: 12}}
+                    containerStyle={{marginBottom: 12}}
                     onChange={(e) => onEmailInputChange(e.target.value)}
-                    error={inputError ? 'Error' : ""}
+                    error={inputError ? 'Error' : undefined}
                 />
             }
             <InputContainer
@@ -152,7 +158,7 @@ const PayoutForm = forwardRef((props: FormProps, ref: Ref<FormRef>) =>{
                                     fontWeight: 500,
                                     fontFamily: 'Poppins',
                                     fontSize: '16px',
-                                    '::placeholder': {color: 'rgba(0, 0, 0, 0.3)'},
+                                    '::placeholder': {color: Color.text.high},
                                 }
                             },
                             hidePostalCode: true
@@ -170,24 +176,16 @@ const PayoutForm = forwardRef((props: FormProps, ref: Ref<FormRef>) =>{
                                     fontWeight: 500,
                                     fontFamily: 'Poppins',
                                     fontSize: '16px',
-                                    '::placeholder': {color: 'rgba(0, 0, 0, 0.3)'},
+                                    '::placeholder': {color: Color.text.high},
                                 }
                             }
                         }}
                         onChange={onPaymentChange}
+                        onFocus={onInputFocus}
+                        onBlur={onInputBlur}
                     />
                 }
             </InputContainer>
-            <Text
-                type='p'
-                style={{fontSize: 12, color: Color.gray4, marginTop: 8}}
-            >
-                {props.option === 'card' ?
-                    'El pago con tarjeta está protegido por nuestra pasarela de pago seguro'
-                :
-                    'Recuerda que debes añadir el IBAN (Ej.: ES1212341234110123456789)'
-                }
-            </Text>
         </div>
     )
 });
@@ -198,6 +196,9 @@ export interface FormProps{
     error?: boolean,
     placeholderName?: string,
     placeholderEmail?: string,
+    userData?:{
+        email?: string
+    }
     onLoading?: (a: boolean) => void
 }
 export interface FormRef{

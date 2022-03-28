@@ -139,11 +139,13 @@ const Payout = forwardRef((props: PayoutProps, ref: Ref<PayoutRef>) =>{
                     onClose={onModalClose}
                 />
             }
-            <IconTabs
-                style={{marginBottom: 12}}
-                options={paymentOptions}
-                onChange={onTabsChange}
-            />
+            {paymentOptions.length > 1 &&
+                <IconTabs
+                    style={{marginBottom: 12}}
+                    options={paymentOptions}
+                    onChange={onTabsChange}
+                />
+            }
             <Elements 
                 stripe={stripePromise}
                 options={{
@@ -158,6 +160,7 @@ const Payout = forwardRef((props: PayoutProps, ref: Ref<PayoutRef>) =>{
                     style={props.cardStyle}
                     onLoading={onLoading}
                     error={props.error}
+                    userData={props.userData}
                 />
             </Elements>
             {option === 'card' &&
@@ -191,6 +194,9 @@ export interface PayoutProps{
     paymentOptions: Array<'sepa_debit' | 'card'>,
     cardStyle?: any,
     error?: boolean,
+    userData?:{
+        email?: string
+    }
     onSetupConfirmed?: () => void
     onLoading?: (a: boolean) => void
 }

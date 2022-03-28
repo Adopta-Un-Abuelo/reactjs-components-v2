@@ -2,7 +2,10 @@ import React, { ComponentPropsWithoutRef, forwardRef, Ref, useImperativeHandle }
 import styled from 'styled-components';
 import Button from '../Button/Button'
 import Text from '../Text/Text'
-import { X } from 'react-feather'
+import { X } from 'lucide-react'
+import media from 'styled-media-query';
+import Color from '../../constants/Color';
+
 const Screen = styled.div`
    position: fixed;
     top: 0;
@@ -13,19 +16,24 @@ const Screen = styled.div`
     z-index: 10000;
 `;
 const Container = styled.div`
-    min-width: 353px;
-    max-width: 700px;
+    position: relative;
+    min-width: 400px;
+    max-width: 600px;
     max-height: 700px;
     background: #FFFFFF;
     box-shadow: 2px 0px 20px rgba(0, 0, 0, 0.09), 0px 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
-    position: fixed;
     top: 50%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     overflow:hidden;
     overflow-y: auto;
+    ${media.lessThan("small")`
+        min-width: 92%;
+        max-width: 92%;
+        max-height: 90%;
+    `}
 `;
 const TitleView = styled.div`
     position: relative;
@@ -41,9 +49,12 @@ const Title = styled.div`
     font-style: normal;
     font-weight: 600;
     font-size: 32px;
-    line-height: 22px;
+    line-height: 36px;
     color: #4F4F4F;
     width: 95%;
+    ${media.lessThan("small")`
+        font-size: 22px;
+    `}
 `;
 const Subtitle = styled.div`
     font-family: Poppins;
@@ -51,15 +62,25 @@ const Subtitle = styled.div`
     font-weight: 500;
     font-size: 18px;
     line-height: 22px;
-    margin-top:14px;
+    margin-top: 12px;
     color: #828282;
+    ${media.lessThan("small")`
+        font-size: 16px;
+        margin-top: 8px;
+    `}
 `;
 const Buttons = styled.div`
+    position: sticky;
     display: flex;
     flex: 1;
     bottom: 0;
     align-items: center;
     padding: 16px 16px;
+    border: 1px solid ${Color.line.soft};
+    background-color: white;
+    ${media.lessThan("small")`
+        padding: 12px 16px;
+    `}
 `;
 
 const Modal = forwardRef((props: ModalProps, ref: Ref<ModalRef>) =>{
@@ -109,7 +130,7 @@ const Modal = forwardRef((props: ModalProps, ref: Ref<ModalRef>) =>{
                             <Button 
                                 data-testid="close_but" 
                                 onClick={onClose} 
-                                style={{marginRight:8, marginLeft:"auto"}} 
+                                style={{marginRight: 'auto'}} 
                                 label={"Cancelar"} 
                                 design={"text"}
                             />

@@ -16,7 +16,7 @@ const Container = styled.button<{disabled?: boolean}>`
     border: none;
     background-color: transparent;
     :hover{
-        background-color: ${props => !props.disabled && Color.blue3}
+        background-color: ${props => !props.disabled && Color.status.neutral.hover}
     }
 `
 const Icon = styled.img`
@@ -40,7 +40,7 @@ const ButtonImage = (props: Props) =>{
             {props.label &&
                 <Text
                     type='p'
-                    style={{marginTop: 2, fontSize: 14}}
+                    style={{marginTop: 4, fontSize: 14}}
                 >
                     {props.label}
                 </Text>

@@ -2,186 +2,193 @@ import React, { ComponentPropsWithoutRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Color from '../../constants/Color';
 import Country from '../../constants/Country';
-import { Calendar, Phone, User, Mail, X, MapPin } from 'react-feather'
-import  Select  from '../Select/Select'
-const InputView = styled.div`
-    position: relative;
+import { Calendar, User, Mail, X, MapPin, Lock } from 'lucide-react'
+
+import  Select  from '../Select/Select';
+import Text from '../Text/Text';
+
+const Container = styled.div`
+    margin-bottom: 22px;
+`
+const InputContainer = styled.div<{error: boolean, focus: boolean}>`
     display: flex;
     align-items: center;
-    height: 64px;
-    width: 100%;
-    margin-bottom:22px;
-`
-const InputStyled = styled.input`
-    background: ${Color.gray6};
-    border-radius: 24px;
-    font-family: 'Poppins';
-    font-size: 14px;
+    border-radius: 12px;
     padding: 0px;
-    height: 64px;
-    width: 100%;
+    height: 56px;
     outline: none;
-    border: 0;
-    font-size:16px;
-    padding-left:64px;
+    border: ${props => props.error ? '1px solid '+Color.status.color.error : props.focus ? '2px solid'+Color.line.primarySoft : '1px solid'+Color.line.soft};
+    padding: 0px 16px;
+`
+const InputStyled = styled.input<{error: boolean}>`
+    font-family: 'Poppins';
+    font-size: 15px;
+    border: none;
+    outline: none;
+    padding: 0px;
     :focus{
-        border: 1px solid ${Color.gray3};
-        cursor:text;
+        cursor: text;
     }
-    /* :placeholder-shown{
-        :focus{
-            border: 1px solid ${Color.gray5};
-            cursor:text;
-        }
-    } */
+    ::placeholder{
+        color: ${Color.text.high}
+    }
+    ::-webkit-calendar-picker-indicator {
+        display: none;
+        -webkit-appearance: none;
+    }
 `
 const IconStyle = styled.div`
-    position:absolute;
     display:flex; 
     align-items:center; 
     height:24px;
     width:24px;
-    margin-left:24px;
 `;
 const ErrorDiv = styled.div`
-    margin-top:-16px;
-    font-family: Poppins;
-    margin-left: 30px;
+    margin: 0px 12px;
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
-    line-height: 22px;
-    width: 100%;
+    line-height: 12px;
     display: flex;
-    color: #FF5A5A;
+    color: ${Color.status.color.error};
 `;
+const Column = styled.div`
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    margin-left: 12px;
+`
 const Input = (props: Props) =>{
-    const {onChange, value } = props
+
+    const phoneUtil = require('google-libphonenumber').PhoneNumberUtil.getInstance();
    
+    const [ inputValue, setInputValue ] = useState<string | undefined>(undefined);
     const [ error, setError] = useState<string | undefined>("")
-    const [ flag, setFlag ] = useState<any>(undefined)
-    const [ phoneValue , setPhoneValue ] = useState<string>("")
+    const [ country , setCountry ] = useState<any>(Country[0]);
+    const [ focus, setFocus ] = useState(false);
+
     useEffect(()=>{
-       setError(props.error)
-       if(props.type==="phone"){
+        setError(props.error)
+    },[props.error]);
 
-           initPhone(value? value :"") 
-       }
-    },[props.error, props.value])
-
-    const onDateChange = (e:any) =>{
-        if(e.target.value.length === 2 || e.target.value.length === 5){
-            e.target.value = e.target.value+'/'
-        }
-        onChange && onChange(e);
-    }
-    const onInputKeyPress = (e:any) =>{
-        if(e.keyCode === 8){
-            if(e.target.value[e.target.value.length -2]==="/"){
-                e.target.value = e.target.value ? e.target.value.substring(0, e.target.value.length - 2) : ""
-                 onChange && onChange(e);
-            }
-            if(e.target.value[e.target.value.length -1]==="/"){
-                e.target.value = e.target.value ? e.target.value.substring(0, e.target.value.length - 1) : ""
-                 onChange && onChange(e);
-            }
+    const onInputChange = (e: any) =>{
+        setInputValue(e.target.value);
+        props.onChange && props.onChange(e);
+        if(props.type === 'phone'){
+            const phone = country.title + e.target.value;
+            props.onPhoneChange && props.onPhoneChange({
+                country: country.title, 
+                value: e.target.value,
+                isValid: (phone.length > 8 && phone.length < 18) ? phoneUtil.isValidNumberForRegion(phoneUtil.parse(phone, country.region), country.region) : false
+            });
         }
     }
-    const onPhoneChange = (valPhone?:any,flagVal?:any) =>{
-        if(flagVal)setFlag(flagVal)
-        if(valPhone!==null) setPhoneValue(valPhone)
-        const result = {
-            country: flagVal? flagVal: flag,
-            phone: valPhone!==null? valPhone: phoneValue
+
+    const onDeleteClick = (e: any) =>{
+        setInputValue("");
+        props.onChange && props.onChange(undefined);
+        if(props.type === 'phone'){
+            props.onPhoneChange && props.onPhoneChange({
+                country: country.title, 
+                value: undefined,
+                isValid: false
+            });
         }
-        props.onPhoneChange && props.onPhoneChange({target: {name:props.name, value: result.country.title+result.phone}});
+    }
+
+    const onCountryChange = (country:any) =>{
+        setCountry(country);
+        const phone = country.title + (inputValue ? inputValue : "");
+        console.log(phone);
+        props.onPhoneChange && props.onPhoneChange({
+            country: country.title, 
+            value: inputValue,
+            isValid: (phone.length > 8 && phone.length < 18) ? phoneUtil.isValidNumberForRegion(phoneUtil.parse(phone, country.region), country.region) : false
+        });
+        props.onChange && props.onChange({target: {value: phone}});
     } 
-    
-    const initPhone = (phone:string): void=> {
-        let result = {
-            country:"",
-            phone:""
-        }
-        const search = phone ? Country.findIndex((it: any)=>phone.includes(it.title)) : 0
-        if(search>=0) setFlag(Country[search])
-        
-        result.country= Country[search].title;
-        result.phone = phone.replace(Country[search].title,"")
-        
-        setPhoneValue(result.phone)
-        props.onPhoneChange && props.onPhoneChange({target: {name:props.name, value: Country[search].title+result.phone}})
+
+    const onInputFocus = (e: any) =>{
+        setFocus(true);
+        props.onFocus && props.onFocus(e);
     }
+
+    const onInputBlur = (e: any) =>{
+        setFocus(false);
+        props.onBlur && props.onBlur(e);
+    }
+
     return(
-       
-        <>
-        {
-        //DATE
-        props.type==="date" ?
-         <><InputView data-testid="input">
-         <IconStyle><Calendar stroke={Color.gray2}/></IconStyle>
-         <InputStyled aria-label={props.label} placeholder="dd/mm/yyyy" onKeyDown={onInputKeyPress} maxLength={10}  name={props.name} onChange={onDateChange} type="tel" style={{border:error ? `1px solid #FF5A5A`:value!==undefined && value!==null && value.length?"1px solid #00BA88":""}} value={value}/>
-         {value && <IconStyle onClick={()=>props.delete && props.delete()} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
-          </InputView>
-         </>
-        :
-        
-        //PHONE
-        props.type==="phone" ?
-        <><InputView data-testid="input">
-        <IconStyle><Select  selectedItem={flag} onChange={item => onPhoneChange(null, item)} style={{ background:"#F2F2F2", border:"none", padding:0}} id="country" options={Country}/></IconStyle>
-        <InputStyled aria-label={props.label} type="tel" name={props.name} onChange={e=>onPhoneChange(e.target.value)} style={{paddingLeft:117,border:error ? `1px solid #FF5A5A`:value!==undefined && value!==null && value.length?"1px solid #00BA88":""}} value={phoneValue}/>
-        {value && <IconStyle onClick={()=>onPhoneChange("")} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
-         </InputView>
-        </>:
-        
-        //EMAIL
-        props.type==="email" ?
-        <><InputView data-testid="input">
-        <IconStyle><Mail stroke={Color.gray2}/></IconStyle>
-        <InputStyled aria-label={props.label} type="email" {...props}  style={{border:error ? `1px solid #FF5A5A`:value!==undefined && value!==null && value.length?"1px solid #00BA88":""}}/>
-        {value && <IconStyle onClick={()=>props.delete && props.delete()} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
-         </InputView>
-        </>:
-       
-       //ADDRES
-        props.type==="location" ?
-        <><InputView data-testid="input">
-        <IconStyle><MapPin stroke={Color.gray2}/></IconStyle>
-        <InputStyled aria-label={props.label} type="text" {...props}  style={{border:error ? `1px solid #FF5A5A`:value!==undefined && value!==null && value.length?"1px solid #00BA88":""}} />
-        {value && <IconStyle onClick={()=>props.delete && props.delete()} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
-        </InputView>
-        </>
-        :
-        //PASSWORD
-        props.type==="password" ?
-        <><InputView  data-testid="input">
-        <IconStyle><User stroke={Color.gray2}/></IconStyle>
-        <InputStyled aria-label={props.label} {...props}  style={{border:error ? `1px solid #FF5A5A`:value!==undefined && value!==null && value.length?"1px solid #00BA88":""}} value={value}/>
-        {value && <IconStyle onClick={()=>{props.delete && props.delete()}} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
-        </InputView>
-        </>
-        :
-         //TEXT
-        <><InputView  data-testid="input">
-        <IconStyle><User stroke={Color.gray2}/></IconStyle>
-        <InputStyled aria-label={props.label} {...props}  style={{border:error ? `1px solid #FF5A5A`:value!==undefined && value!==null && value.length?"1px solid #00BA88":""}} value={value}/>
-        {value && <IconStyle onClick={()=>{props.delete && props.delete()}} style={{right:16, cursor:"pointer"}}><X data-testid="close" stroke={Color.gray2}/></IconStyle>}
-        </InputView>
-        </>
-        }
-        {error && <ErrorDiv>{error}</ErrorDiv>}
-        </>
-        
+        <Container
+            style={props.containerStyle}
+        >
+            <InputContainer 
+                error={error ? true : false}
+                style={props.style}
+                focus={focus}
+            >
+                <IconStyle style={props.type === 'phone' ? {height: 'unset', width: 'unset'} : {}}>
+                    {props.icon ? props.icon : props.type === 'email' ?
+                        <Mail stroke={Color.text.full}/>
+                    : props.type === 'password' ?
+                        <Lock stroke={Color.text.full}/>
+                    : props.type === 'location' ?
+                        <MapPin stroke={Color.text.full}/>
+                    : props.type === 'date' ?
+                        <Calendar stroke={Color.text.full}/>
+                    : props.type === 'phone' ?
+                        <Select 
+                            selectedItem={country} 
+                            onChange={item => onCountryChange(item)} 
+                            style={{ border:"none", padding:0}} id="country" 
+                            options={Country}
+                        />
+                    :
+                        <User stroke={Color.text.full}/>
+                    }
+                </IconStyle>
+                <Column>
+                    {inputValue &&
+                        <Text type='p' style={{color: Color.text.high, fontSize: 12}}>
+                            {props.placeholder}
+                        </Text>
+                    }
+                    <InputStyled 
+                        type={props.type === 'location' ? 'text' : props.type === 'phone' ? 'tel' : props.type}
+                        {...props}
+                        value={inputValue}
+                        onChange={onInputChange}
+                        maxLength={props.type === 'date' ? 10 : props.type === 'phone' ? 12 : undefined}
+                        error={error ? true : false}
+                        onFocus={onInputFocus}
+                        onBlur={onInputBlur}
+                    />
+                </Column>
+                {inputValue && 
+                    <IconStyle onClick={onDeleteClick} style={{cursor:"pointer"}}>
+                        <X data-testid="close" height={20} width={20} stroke={Color.text.high}/>
+                    </IconStyle>
+                }
+            </InputContainer>
+            {error && 
+                <ErrorDiv>
+                    <Text type='p' style={{color: Color.status.color.error, marginTop: 8, fontSize: 14}}>
+                        {error}
+                    </Text>
+                </ErrorDiv>
+            }
+        </Container>
     )
 }
 export default Input;
 export interface Props extends ComponentPropsWithoutRef<"input">{
+    containerStyle?: any,
+    style?: any
     placeholder?:string,
-    value?:string,
+    icon?: JSX.Element,
     type?: 'text' | 'phone' | 'email' | 'date'| 'location' | 'password',
-    error?:string|undefined,
-    delete?:()=>void,
+    error?: string|undefined,
+    onChange?:(item:any)=>void
     onPhoneChange?:(item:any)=>void
-    label?:string,
     options?:Array<any>
 }

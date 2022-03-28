@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import React from 'react';
 
-import { Checkbox } from '../components';
+import { Checkbox, Text } from '../components';
 
 export default {
 	title: 'Basic/Checkbox',
@@ -42,7 +42,16 @@ List.args = {
 		},
 		{
 			id: 'option_3',
-			label: 'Option 3'
+			label: 'Option 3',
+			error: true
+		},
+		{
+			id: 'option_4',
+			Element:  <Text type='p'>
+				Autorizo al tratamiento de los datos aportados con el fin de que Adopta un Abuelo pueda cursar el formulario y acepto 
+				la <a href="https://www.adoptaunabuelo.org/politica-privacidad" target="_blank">Política de Privacidad</a> y 
+				los <a href="https://www.adoptaunabuelo.org/terminos-condiciones" target="_blank">Términos y condiciones de uso</a>
+			</Text>
 		}
 	],
 	selection: 'single'
