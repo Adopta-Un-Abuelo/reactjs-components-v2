@@ -156,7 +156,8 @@ export interface ModalProps extends ComponentPropsWithoutRef<"div">{
     buttonProps?: {
         label?: string,
         onClick?: () => void,
-        disabled?: boolean
+        disabled?: boolean,
+        loading?: boolean
     }
 }
 export interface ModalRef{
