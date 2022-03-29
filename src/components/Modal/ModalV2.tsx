@@ -132,10 +132,9 @@ const ModalComponent = forwardRef((props: ModalProps, ref: Ref<ModalRef>) =>{
                 <Buttons>
                     {props.buttonProps &&
                         <Button 
-                            disabled={props.buttonProps.disabled} 
-                            onClick={onSave} 
-                            label={props.buttonProps.label ? props.buttonProps.label : "Guardar"}
+                            label={"Guardar"}
                             style={{ height: 40, paddingLeft: 14, paddingRight: 14 }}
+                            {...props.buttonProps}
                         />
                     }
                 </Buttons>

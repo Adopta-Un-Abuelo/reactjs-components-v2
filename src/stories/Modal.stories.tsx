@@ -28,7 +28,8 @@ ModalView.args = {
     error: "",
     buttonProps: {
         label: 'Siguiente',
-        disabled: false
+        disabled: false,
+        loading: true
     }
 }
 
