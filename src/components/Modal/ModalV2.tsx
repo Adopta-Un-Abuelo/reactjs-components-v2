@@ -8,10 +8,12 @@ import Color from '../../constants/Color';
 import Modal from 'react-modal';
 
 const TitleView = styled.div`
-    position: relative;
+    position: sticky;
     display: flex;
     flex-direction: column;
-    padding: 24px;
+    padding: 24px 24px 16px;
+    top: 0px;
+    background-color: white;
 `
 const ChildrenView = styled.div`
     padding: 0px 24px;
@@ -114,6 +116,7 @@ const ModalComponent = forwardRef((props: ModalProps, ref: Ref<ModalRef>) =>{
                     {props.subtitle &&
                         <Subtitle>{props.subtitle}</Subtitle>
                     }
+                    {props.Header}
                 </TitleView>
             }
             <ChildrenView
@@ -152,6 +155,7 @@ export interface ModalProps extends ComponentPropsWithoutRef<"div">{
     hideHeader?: boolean,
     contentStyle?: any,
     onClose:()=>void,
+    Header: JSX.Element,
     buttonProps?: {
         label?: string,
         onClick?: () => void,

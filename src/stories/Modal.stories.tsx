@@ -44,6 +44,9 @@ const Template2: ComponentStory<typeof ModalV2> = (args) =>{
             <Input/>
             <Input/>
             <Input/>
+            <Input/>
+            <Input/>
+            <Input/>
         </ModalV2>
         </>
     )
