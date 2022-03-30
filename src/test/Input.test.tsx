@@ -8,7 +8,7 @@ import userEvent from '@testing-library/user-event';
 describe("Input", () => {
     beforeEach(()=>{
         render(
-            <Input label="name"/>
+            <Input name="name"/>
         )
     })
     it("render", () => {
@@ -25,7 +25,7 @@ describe("Input", () => {
 describe("Input text phone", () => {
     beforeEach(()=>{
         render(
-            <Input type={"phone"} label="phone"/>
+            <Input type={"phone"} />
         )
     })
     it("render", () => {
@@ -48,7 +48,7 @@ describe("Input text phone", () => {
 describe("Displayin error message", () => {
     beforeEach(()=>{
         render(
-            <Input type={"phone"} label="phone" error={"Invalid phone"}/>
+            <Input type={"phone"} name="phone" error={"Invalid phone"}/>
         )
     })
     it("render", () => {
