@@ -155,7 +155,7 @@ export interface ModalProps extends ComponentPropsWithoutRef<"div">{
     hideHeader?: boolean,
     contentStyle?: any,
     onClose:()=>void,
-    Header: JSX.Element,
+    Header?: JSX.Element,
     buttonProps?: {
         label?: string,
         onClick?: () => void,
