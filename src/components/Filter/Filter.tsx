@@ -36,6 +36,7 @@ const FilterView = styled.div`
     width: 320px;
     background-color: white;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 10;
 `
 const ContentView = styled.div`
     display: flex;
@@ -163,11 +164,13 @@ const Filter = (props: Props) =>{
             </ButtonFilter>
             {showView &&
                 <FilterView>
-                    <SearchBar
-                        style={{marginBottom: 16}}
-                        placeholder={'Buscar'}
-                        onChange={onSearchChage}
-                    />
+                    {!props.hideSearchBar &&
+                        <SearchBar
+                            style={{marginBottom: 16}}
+                            placeholder={'Buscar'}
+                            onChange={onSearchChage}
+                        />
+                    }
                     <ContentView>
                         <CheckboxList
                             options={options}
@@ -206,6 +209,7 @@ export interface Props{
         sublabel?: string,
         defaultSelection?: boolean
     }>
+    hideSearchBar?: boolean,
     style?: any,
     onChange?: Function
 }
