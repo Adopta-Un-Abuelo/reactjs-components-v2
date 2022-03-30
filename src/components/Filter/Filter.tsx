@@ -9,6 +9,7 @@ import Button from '../Button/Button';
 import SearchBar from '../SearchBar/SearchBar';
 
 const Container = styled.div`
+    position: relative;
 `
 const ButtonFilter = styled.button<{selected: boolean}>`
 	display: flex;
@@ -17,20 +18,19 @@ const ButtonFilter = styled.button<{selected: boolean}>`
 	height: 40px;
 	padding: 0px 16px;
 	border-radius: 20px;
-	border: ${props => props.disabled ? '1px solid '+ Color.gray3 : '1px solid '+ Color.gray4};
-	color: ${props => props.disabled ? Color.gray3 : Color.gray1};
-	background-color: ${props => props.selected ? Color.gray6 : 'transparent'};
+	border: ${props => props.disabled ? '1px solid '+ Color.line.soft : (props.selected ? '2px solid '+Color.line.primary : '1px solid '+ Color.line.full)};
+	background-color: ${props => props.disabled ? Color.status.neutral.hover : (props.selected ? Color.background.primaryLow : 'transparent')};
 	cursor: ${props => props.disabled ? 'default' : 'pointer'};
 	:hover{
-		background-color: ${props => props.disabled ? 'transparent' : Color.gray4+'30'};
+		background-color: ${props => props.disabled ? Color.status.neutral.hover : Color.gray4+'30'};
 	}
 `
 const FilterView = styled.div`
     position: absolute;
     display: flex;
     flex-direction: column;
-    top: 64px;
-    padding: 8px;
+    top: 48px;
+    padding: 8px 16px;
     border-radius: 4px;
     height: 278px;
     width: 320px;
@@ -47,8 +47,9 @@ const BottomBar = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: flex-end;
-    height: 40px;
     margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid ${Color.line.soft};
 `
 
 const Filter = (props: Props) =>{
@@ -149,6 +150,7 @@ const Filter = (props: Props) =>{
         <Container
             id={props.id}
             data-testid="filter"
+            style={props.style}
         >
             <ButtonFilter
                 selected={(selectedOptions.length > 0) ? true : false}
@@ -177,13 +179,14 @@ const Filter = (props: Props) =>{
                         <Button
                             design={'text'}
                             label={'Borrar'}
-                            style={{marginRight: 4}}
+                            style={{marginRight: 4, height: 42}}
                             onClick={onRemove}
                         />
                         <Button
                             design={'primary'}
                             label={'Aplicar'}
                             onClick={onSave}
+                            style={{height: 42}}
                         />
                     </BottomBar>
                 </FilterView>
@@ -203,5 +206,6 @@ export interface Props{
         sublabel?: string,
         defaultSelection?: boolean
     }>
+    style?: any,
     onChange?: Function
 }
