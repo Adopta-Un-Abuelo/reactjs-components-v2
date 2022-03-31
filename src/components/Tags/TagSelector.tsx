@@ -14,7 +14,7 @@ const TagSelector = (props: Props) =>{
     const [ selection, setSelection ] = useState<Array<OptionProps>>([]);
 
     const onClick = (item: OptionProps) =>{
-        const tempArray = [...selection];
+        const tempArray = selection;
         const index = tempArray.findIndex(e => e.id === item.id);
         if(index > -1)  //Remove the object
             tempArray.splice(index, 1);
