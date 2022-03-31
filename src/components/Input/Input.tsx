@@ -20,7 +20,7 @@ const InputContainer = styled.div<{error: boolean, focus: boolean}>`
     border: ${props => props.error ? '1px solid '+Color.status.color.error : props.focus ? '2px solid'+Color.line.primarySoft : '1px solid'+Color.line.soft};
     padding: 0px 16px;
 `
-const InputStyled = styled.input<{error: boolean}>`
+const InputStyled = styled.input<{error: boolean, hideCalendar?: boolean}>`
     font-family: 'Poppins';
     font-size: 15px;
     border: none;
@@ -33,8 +33,8 @@ const InputStyled = styled.input<{error: boolean}>`
         color: ${Color.text.high}
     }
     ::-webkit-calendar-picker-indicator {
-        display: none;
-        -webkit-appearance: none;
+        display: ${props => props.hideCalendar && 'none'};
+        -webkit-appearance: ${props => props.hideCalendar && 'none'};
     }
 `
 const IconStyle = styled.div`
@@ -190,5 +190,8 @@ export interface Props extends ComponentPropsWithoutRef<"input">{
     error?: string|undefined,
     onChange?:(item:any)=>void
     onPhoneChange?:(item:any)=>void
-    options?:Array<any>
+    options?:Array<any>,
+    hideCalendar?: boolean,
+    min?: any,
+    max?: any
 }

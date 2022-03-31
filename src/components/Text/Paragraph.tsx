@@ -5,7 +5,7 @@ import Color from '../../constants/Color';
 
 const PStyled = styled.p`
     font-family: 'Poppins';
-    font-size: 16px;
+    font-size: 15px;
     margin: 0px;
     color: ${Color.gray2};
 `

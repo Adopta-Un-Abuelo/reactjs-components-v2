@@ -12,10 +12,11 @@ const Container = styled.div`
     position: relative;
 `
 const ButtonFilter = styled.button<{selected: boolean}>`
+    position: relative;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	height: 40px;
+	height: 38px;
 	padding: 0px 16px;
 	border-radius: 20px;
 	border: ${props => props.disabled ? '1px solid '+ Color.line.soft : (props.selected ? '2px solid '+Color.line.primary : '1px solid '+ Color.line.full)};
@@ -51,6 +52,18 @@ const BottomBar = styled.div`
     margin-top: 8px;
     padding-top: 8px;
     border-top: 1px solid ${Color.line.soft};
+`
+const BadgeView = styled.div`
+    position: absolute;
+    top: -6px;
+    right: -4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    height: 20px;
+    width: 20px;
+    background-color: ${Color.background.primary};
 `
 
 const Filter = (props: Props) =>{
@@ -161,6 +174,13 @@ const Filter = (props: Props) =>{
                 <Text type='p'>
                     {props.label}
                 </Text>
+                {selectedOptions.length > 0 &&
+                    <BadgeView>
+                        <Text type='p' style={{color: 'white', fontSize: 12, fontWeight: 600}}>
+                            {selectedOptions.length}
+                        </Text>
+                    </BadgeView>
+                }
             </ButtonFilter>
             {showView &&
                 <FilterView>
