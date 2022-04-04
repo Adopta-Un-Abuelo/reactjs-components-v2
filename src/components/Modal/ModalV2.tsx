@@ -71,10 +71,6 @@ const ModalComponent = forwardRef((props: ModalProps, ref: Ref<ModalRef>) =>{
         props.onClose && props.onClose();
     }
 
-    const onSave = () => {
-        props.buttonProps?.onClick && props.buttonProps.onClick()
-    }
-
     return(
         <Modal
             isOpen={props.isVisible}
@@ -91,7 +87,7 @@ const ModalComponent = forwardRef((props: ModalProps, ref: Ref<ModalRef>) =>{
                     boxShadow:'0px 4px 12px rgba(0, 0, 0, 0.08)',
                     borderRadius: 12,
                     top: props.isVisible ? '50%' : '150%',
-                    transition: 'top linear 400ms',
+                    transition: 'top linear 200ms',
                     left: '50%',
                     transform: 'translate(-50%, -50%)',
                     overflow:'hidden',
@@ -101,7 +97,7 @@ const ModalComponent = forwardRef((props: ModalProps, ref: Ref<ModalRef>) =>{
                 overlay:{
                     backgroundColor: 'rgba(0, 0, 0, 0.6)',
                     opacity: props.isVisible ? 1 : 0,
-                    transition: 'opacity linear 500ms'
+                    transition: 'opacity linear 250ms'
                 }
             }}
         >

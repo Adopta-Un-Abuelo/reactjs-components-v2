@@ -35,7 +35,6 @@ const TagSelector = (props: Props) =>{
         >
             {props.options.map((item, index) =>{
                 const isSelected = selection.some(temp => temp.id === item.id);
-                if(index === 0) console.log(isSelected);
                 return(
                     <Tag
                         key={item.id}
