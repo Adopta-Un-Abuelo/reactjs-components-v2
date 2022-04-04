@@ -19,8 +19,8 @@ const TagSelector = (props: Props) =>{
     },[props.optionsSelected]);
 
     const onClick = (item: OptionProps) =>{
-        const tempArray = selection;
-        const index = tempArray.findIndex(e => e.id === item.id);
+        const tempArray: any = [...selection];
+        const index = tempArray.findIndex((e: any) => e.id === item.id);
         if(index > -1)  //Remove the object
             tempArray.splice(index, 1);
         else
@@ -33,8 +33,9 @@ const TagSelector = (props: Props) =>{
         <Container
             style={props.style}
         >
-            {props.options.map(item =>{
+            {props.options.map((item, index) =>{
                 const isSelected = selection.some(temp => temp.id === item.id);
+                if(index === 0) console.log(isSelected);
                 return(
                     <Tag
                         key={item.id}
