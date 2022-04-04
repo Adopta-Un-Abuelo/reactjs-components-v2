@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import Tag from './Tag';
@@ -11,7 +11,11 @@ const Container = styled.div`
 
 const TagSelector = (props: Props) =>{
 
-    const [ selection, setSelection ] = useState<Array<OptionProps>>([]);
+    const [ selection, setSelection ] = useState<Array<OptionProps>>(props.optionsSelected);
+
+    useEffect(() => {
+        setSelection(props.optionsSelected)
+    },[props.optionsSelected]);
 
     const onClick = (item: OptionProps) =>{
         const tempArray = selection;
@@ -46,6 +50,7 @@ export default TagSelector;
 export interface Props{
     style?: any,
     options: Array<OptionProps>,
+    optionsSelected: Array<OptionProps>,
     onChange?: (selection: Array<OptionProps>) => void
 }
 export interface OptionProps{
