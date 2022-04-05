@@ -28,11 +28,12 @@ const MenuList = (props: Props) =>{
     return(
         <Menu
             ref={menu}
+            {...props}
             menuStyle={{
                 padding: 0,
-                height: 'unset'
+                height: 'unset',
+                ...props.menuStyle
             }}
-            {...props}
         >
             {props.options.map((option, index) =>(
                 <MenuCell

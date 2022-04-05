@@ -19,14 +19,27 @@ const TagSelector = (props: Props) =>{
     },[props.optionsSelected]);
 
     const onClick = (item: OptionProps) =>{
-        const tempArray: any = [...selection];
-        const index = tempArray.findIndex((e: any) => e.id === item.id);
-        if(index > -1)  //Remove the object
-            tempArray.splice(index, 1);
-        else
-            tempArray.push(item);
-        setSelection(tempArray)
-        props.onChange && props.onChange(tempArray);
+        if(props.type === 'single'){
+            const index = selection.findIndex((e: any) => e.id === item.id);
+            if(index > -1){  //Remove the object
+                setSelection([]);
+                props.onChange && props.onChange([]);
+            }
+            else{
+                setSelection([item]);
+                props.onChange && props.onChange([item]);
+            }
+        }
+        else{
+            const tempArray: any = [...selection];
+            const index = tempArray.findIndex((e: any) => e.id === item.id);
+            if(index > -1)  //Remove the object
+                tempArray.splice(index, 1);
+            else
+                tempArray.push(item);
+            setSelection(tempArray)
+            props.onChange && props.onChange(tempArray);
+        }
     }
 
     return(
@@ -49,6 +62,7 @@ const TagSelector = (props: Props) =>{
 }
 export default TagSelector;
 export interface Props{
+    type?: 'multiple' | 'single',
     style?: any,
     options: Array<OptionProps>,
     optionsSelected?: Array<OptionProps>,

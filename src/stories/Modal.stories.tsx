@@ -70,5 +70,6 @@ export const ModalWeb = Template3.bind({});
 ModalWeb.args = {
     title:"Title",
     subtitle:"Subtitle",
-    url: 'https://adoptaunabuelo.org'
+    url: 'https://adoptaunabuelo.org',
+    isVisible: true
 }
