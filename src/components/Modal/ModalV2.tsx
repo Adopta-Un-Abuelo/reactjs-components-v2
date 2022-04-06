@@ -128,6 +128,7 @@ const ModalComponent = forwardRef((props: ModalProps, ref: Ref<ModalRef>) =>{
             }
             {props.buttonProps &&
                 <Buttons>
+                    {props.Bottom}
                     {props.buttonProps &&
                         <Button 
                             label={"Guardar"}
@@ -151,6 +152,7 @@ export interface ModalProps extends ComponentPropsWithoutRef<"div">{
     contentStyle?: any,
     onClose:()=>void,
     Header?: JSX.Element,
+    Bottom?: JSX.Element,
     buttonProps?: {
         label?: string,
         onClick?: () => void,
