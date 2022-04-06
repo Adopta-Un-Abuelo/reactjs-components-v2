@@ -6,6 +6,7 @@ import { Calendar, User, Mail, X, MapPin, Lock } from 'lucide-react'
 
 import  Select  from '../Select/Select';
 import Text from '../Text/Text';
+import InputRange from './InputRange';
 
 const Container = styled.div`
     margin-bottom: 22px;
@@ -106,7 +107,7 @@ const Input = (props: Props) =>{
             isValid: (phone.length > 8 && phone.length < 18) ? phoneUtil.isValidNumberForRegion(phoneUtil.parse(phone, country.region), country.region) : false
         });
         props.onChange && props.onChange({target: {value: phone}});
-    } 
+    }
 
     const onInputFocus = (e: any) =>{
         setFocus(true);
@@ -118,7 +119,11 @@ const Input = (props: Props) =>{
         props.onBlur && props.onBlur(e);
     }
 
-    return(
+    return(props.type === 'range' ?
+        <InputRange
+            {...props}
+        />
+    :
         <Container
             style={props.containerStyle}
         >
@@ -186,12 +191,14 @@ export interface Props extends ComponentPropsWithoutRef<"input">{
     style?: any
     placeholder?:string,
     icon?: JSX.Element,
-    type?: 'text' | 'phone' | 'email' | 'date'| 'location' | 'password',
+    type?: 'text' | 'phone' | 'email' | 'date'| 'location' | 'password' | 'range',
     error?: string|undefined,
     onChange?:(item:any)=>void
     onPhoneChange?:(item:any)=>void
     options?:Array<any>,
     hideCalendar?: boolean,
     min?: any,
-    max?: any
+    max?: any,
+    lineColor?: string,
+    thumbColor?: string
 }
