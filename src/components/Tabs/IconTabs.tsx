@@ -13,14 +13,14 @@ const Tab = styled.div<{selected: boolean}>`
     justify-content: center;
     height: 42px;
     border-radius: 4px;
-    border: 2px solid ${props => props.selected ? Color.blue3 : Color.gray5};
+    border: 1px solid ${props => props.selected ? Color.line.primary : Color.line.soft};
     padding: 0px 18px;
     cursor: pointer;
     margin-right: 8px;
     color: ${Color.blue3};
-    background-color: ${props => props.selected && Color.blue3};
+    background-color: ${props => props.selected && Color.background.primary};
     :hover{
-        background-color: ${props => props.selected ? Color.blue3 : Color.gray5}
+        background-color: ${props => props.selected ? Color.background.primary : Color.line.soft}
     }
 `
 const Icon = styled.div`
@@ -59,7 +59,7 @@ const Tabs = (props: Props) =>{
                                 }}
                             />
                         </Icon>
-                        <Text type='h5' style={{color: isSelected ? 'white' : undefined}}>
+                        <Text type='p' style={{color: isSelected ? 'white' : undefined, fontSize: 14}}>
                             {item.title}
                         </Text>
                     </Tab>
