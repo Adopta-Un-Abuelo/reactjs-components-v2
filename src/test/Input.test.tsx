@@ -1,14 +1,11 @@
-import { render, screen, fireEvent,waitFor, wait } from '@testing-library/react'
-import { Input, SearchBar } from '../components';
-import { Star } from 'react-feather';
-import React, {useState} from 'react'
-import userEvent from '@testing-library/user-event';
+import { render, screen, fireEvent } from '@testing-library/react'
+import { Input } from '../components';
 
 
 describe("Input", () => {
     beforeEach(()=>{
         render(
-            <Input name="name"/>
+            <Input/>
         )
     })
     it("render", () => {
@@ -25,7 +22,7 @@ describe("Input", () => {
 describe("Input text phone", () => {
     beforeEach(()=>{
         render(
-            <Input type={"phone"} />
+            <Input/>
         )
     })
     it("render", () => {
@@ -48,7 +45,7 @@ describe("Input text phone", () => {
 describe("Displayin error message", () => {
     beforeEach(()=>{
         render(
-            <Input type={"phone"} name="phone" error={"Invalid phone"}/>
+            <Input type={"phone"} error={"Invalid phone"}/>
         )
     })
     it("render", () => {
@@ -57,6 +54,3 @@ describe("Displayin error message", () => {
     
     
 })
-
-
-
