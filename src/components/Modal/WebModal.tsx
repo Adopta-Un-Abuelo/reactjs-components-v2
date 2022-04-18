@@ -25,5 +25,5 @@ const WebModal = (props: WebModalProps) =>{
 export default WebModal;
 export interface WebModalProps extends ModalProps{
     ref: RefObject<ModalRef>
-    url: string
+    url?: string
 }

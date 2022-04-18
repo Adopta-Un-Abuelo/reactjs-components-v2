@@ -9,6 +9,7 @@ const InputStyled = styled.input<{lineColor?: string, thumbColor?: string}>`
     background-color: ${props => props.lineColor ? props.lineColor : Color.line.soft};
     outline: none;
     border-radius: 3px;
+    margin: 10px 0px;
 
     ::-moz-range-thumb{
         height: 24px;

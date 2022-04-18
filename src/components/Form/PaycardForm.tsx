@@ -142,6 +142,7 @@ const PayoutForm = forwardRef((props: FormProps, ref: Ref<FormRef>) =>{
                     title={props.placeholderEmail ? props.placeholderEmail : 'Email'}
                     placeholder={props.placeholderEmail ? props.placeholderEmail : 'Email'}
                     containerStyle={{marginBottom: 12}}
+                    type={'email'}
                     onChange={(e) => onEmailInputChange(e.target.value)}
                     error={inputError ? 'Error' : undefined}
                 />

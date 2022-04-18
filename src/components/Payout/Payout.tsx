@@ -130,15 +130,14 @@ const Payout = forwardRef((props: PayoutProps, ref: Ref<PayoutRef>) =>{
         <Container
             style={props.style}
         >
-            {showConfirmModal && props.stripeConfirmUrl &&
-                <WebModal
-                    ref={modal}
-                    hideClose={true}
-                    url={props.stripeConfirmUrl}
-                    style={{width: 600, height: 400, padding: 0}}
-                    onClose={onModalClose}
-                />
-            }
+            <WebModal
+                ref={modal}
+                isVisible={showConfirmModal}
+                hideClose={true}
+                url={props.stripeConfirmUrl}
+                style={{width: 600, height: 400, padding: 0}}
+                onClose={onModalClose}
+            />
             {paymentOptions.length > 1 &&
                 <IconTabs
                     style={{marginBottom: 12}}
