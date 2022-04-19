@@ -9,5 +9,5 @@ export default create({
 
   brandTitle: 'reactjs-components-v2',
   brandUrl: 'https://adoptaunabuelo.org',
-  brandImage: 'https://adoptaunabuelo.org/wp-content/uploads/2020/11/AdoptaUnAbuelo-logo-.png',
+  brandImage: 'https://adoptaunabuelo.org/wp-content/uploads/2020/08/AdoptaUnAbuelo-logo.svg',
 });
