@@ -1,8 +1,8 @@
 import React, { useState, useEffect, ComponentPropsWithoutRef } from 'react';
 import styled from 'styled-components';
 
-import P from '../Text/P';
-import { Check } from 'react-feather';
+import Text from '../Text/Text';
+import { Check } from 'lucide-react';
 import { Color } from '../../constants';
 
 const Container = styled.button`
@@ -13,15 +13,19 @@ const Container = styled.button`
     cursor: ${props => props.disabled ? 'default' : 'pointer'};
     padding: 0px;
     opacity: ${props => props.disabled ? 0.5 : 1.0};
+    align-items: center;
 `
-const Box = styled.div<{selected: boolean}>`
+const Box = styled.div<{selected: boolean, error?: boolean}>`
     display: flex;
     align-items: center;
     justify-content: center;
     height: 24px;
     width: 24px;
-    background-color: ${props => props.selected ? Color.blue3 : Color.gray6};
-    border-radius: 8px;
+    min-height: 24px;
+    min-width: 24px;
+    background-color: ${props => props.selected ? (props.error ? Color.status.color.error : Color.background.primary) : (props.error ? Color.status.color.errorDefault : Color.background.primaryLow)};
+    border: ${props => props.selected ? '1px solid '+(props.error ? Color.status.color.error : Color.background.primary) : '1px solid '+(props.error ? Color.line.redSoft : Color.line.primarySoft)};
+    border-radius: 4px;
 `
 const TextView = styled.div`
     margin-left: 10px;
@@ -49,26 +53,34 @@ const Checkbox = (props: Props) =>{
         >
             <Box
                 selected={selected}
+                error={props.error}
             >
                 {selected &&
                     <Check 
                         data-testid="check-icon"
-                        height={18} 
-                        width={18} 
-                        stroke='white'
+                        height={20} 
+                        width={20}
+                        color='white'
+                        strokeWidth={2}
                     />
                 }
             </Box>
             <TextView>
-                <P>
-                    {props.label}
-                </P>
+                {props.children && props.children}
+                {props.label &&
+                    <Text
+                        type='p'
+                    >
+                        {props.label}
+                    </Text>
+                }
                 {props.sublabel &&
-                    <P
+                    <Text
+                        type='p'
                         style={{fontSize: 12}}
                     >
                         {props.sublabel}
-                    </P>
+                    </Text>
                 }
             </TextView>
         </Container>
@@ -77,6 +89,7 @@ const Checkbox = (props: Props) =>{
 export default Checkbox;
 export interface Props extends ComponentPropsWithoutRef<"button">{
     selected: boolean,
-    label: string,
-    sublabel?: string
+    label?: string,
+    sublabel?: string,
+    error?: boolean
 }

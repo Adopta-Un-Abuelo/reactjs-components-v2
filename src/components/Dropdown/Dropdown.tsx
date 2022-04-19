@@ -1,6 +1,6 @@
 import React, { ComponentPropsWithoutRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import P from '../Text/P'
+import Text from '../Text/Text'
 import Color from '../../constants/Color';
 import Avatar from '../Avatar/Avatar'
 import { ChevronDown, ChevronUp, User } from 'react-feather';
@@ -18,7 +18,7 @@ const DropdownContainer = styled.div`
     border-radius: 40px;
     position: relative;
 `
-const Text = styled.div`
+const TextS = styled.div`
     display: flex;
     width: 80%;
     margin-left: 40px;
@@ -28,6 +28,7 @@ const IconDiv =  styled.div`
     position: absolute;
     display: flex;
     align-items: center;
+    cursor: pointer;
 `;
 const Menu = styled.div`
     display: flex;
@@ -57,6 +58,7 @@ const Option = styled.div`
     left: 4px;
     top: 4px;
     background: #FFFFFF;
+    cursor: pointer;
 `;
 const Dropdown = (props: Props) =>{
     const [ open, setOpen] = useState(false)
@@ -72,31 +74,32 @@ const Dropdown = (props: Props) =>{
     const onClickOption = (item:any)=>{
         setSelected(item);
         setOpen(!open)
+        props.onChange && props.onChange(item);
     }
     return(
         <DropdownContainer data-testid="dropdown" {...props}>
             <IconDiv>
                 {selected && selected.logo ?  selected.logo : selected ? <Avatar style={{height:24, width:24}} name={selected[props.title]} icon={selected.logo || selected.image}/>: <User style={{stroke:`${Color.gray3}`}}/>}
             </IconDiv>
-            <Text>
-                <P style={{color:`${Color.gray2}`}}>{selected? selected.name: "None"}</P>
-            </Text>
+            <TextS>
+                <Text type='p' style={{color:`${Color.gray2}`}}>{selected? selected.name: "None"}</Text>
+            </TextS>
             <IconDiv data-testid="svgMenu" style={{right:8}} onClick={()=>setOpen(!open)}>
                 {open ?  <ChevronUp style={{stroke:`${Color.gray3}`}}/>:<ChevronDown style={{stroke:`${Color.gray3}`}}/>} 
             </IconDiv>
             
             {//****MENU****
                 open && <Menu data-testid="menu">
-                    {
-                        data.map((item, index)=>{
-                            return  <Option key={index} onClick={()=> onClickOption(item)}>
-                            <div>
-                                <Avatar style={{height:24, width:24}} name={item[props.title]} icon={item.logo || item.image}/>
-                            </div>
-                            <P style={{color:`${Color.gray2}`, marginLeft:10}}>{item[props.title]}</P>
-                        </Option>
-                        })
-                    }
+                    {data.map((item, index)=>{
+                        return (
+                            <Option key={index} onClick={()=> onClickOption(item)} style={props.optionStyle}>
+                                <div>
+                                    <Avatar style={{height:24, width:24}} name={item[props.title]} icon={item.logo || item.image}/>
+                                </div>
+                                <Text type='p' style={{color:`${Color.gray2}`, marginLeft:10}}>{item[props.title]}</Text>
+                            </Option>
+                        )
+                    })}
                 </Menu>
             }
         </DropdownContainer>
@@ -104,7 +107,10 @@ const Dropdown = (props: Props) =>{
 }
 export default Dropdown;
 export interface Props extends ComponentPropsWithoutRef<"div">{
+    style?: any,
+    optionStyle?: any,
     data?:Array<any>,
     title:string,
-    selected?:any
+    selected?:any,
+    onChange?: (a: any) => void
 }

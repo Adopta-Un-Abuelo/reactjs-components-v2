@@ -6,7 +6,7 @@ import { Chip } from '../components';
 describe("Chip", () => {
     it("render", () => {
         render(
-            <Chip text={"Hola"}/>
+            <Chip type={"big"} text={"Hola"}/>
         );
     
         expect(screen.getByTestId('chip')).toBeInTheDocument();

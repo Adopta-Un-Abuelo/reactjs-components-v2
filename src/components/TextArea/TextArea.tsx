@@ -2,8 +2,9 @@ import React, { ComponentPropsWithoutRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import './Editor.scss'
+import './Editor.css'
 import ButtonEditor from '../Button/ButtonEditor'
+import Color from '../../constants/Color'
 import { convertToRaw, EditorState, ContentState, convertFromHTML } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 const TextAreaView = styled.textarea`
@@ -13,26 +14,29 @@ const TextAreaView = styled.textarea`
     padding: 12px;
     width: -webkit-fill-available;
     height: 100px;
-    background: #F2F2F2;
+    font-family: 'Poppins';
+    font-size: 16px;
+    margin: 0px;
+    border-radius: 12px;
+    color: ${Color.gray2};
     //Remove resize handle
     resize: none;
     //Remove default scrollbars
     overflow: auto;
-    border-radius: 4px;
+    border: 1px solid ${Color.line.soft};
     :placeholder-shown{
         :focus{
-            border: 1.5px solid #5963F6;
+            border: 2px solid ${Color.line.primarySoft};
             cursor:text;
             outline: none !important;
         }
     }
     :hover{
-        border: 1.5px solid #5963F6;
         cursor: pointer;
         outline: none !important;
     }
     :focus{
-        border: 1.5px solid #5963F6;
+        border: 2px solid ${Color.line.primarySoft};
         cursor:text;
         outline: none !important;
     }
@@ -51,7 +55,6 @@ const TextAreaView = styled.textarea`
 const TextArea = (props: Props) =>{
     const { style, ...restProps } = props;
     const [ editorState, setEditorState] = useState<any>(undefined);
-    const [value, setValue] = useState<any>(undefined)
     
     useEffect(()=>{
         if(props.value && props.type==="edit"){
@@ -61,13 +64,22 @@ const TextArea = (props: Props) =>{
               ))
             
         }
-        else if(props.value) setValue(props.value)
      },[props.value])
 
-     const onTextAreChange = (value?:string, data?:any) => {
-        let result:any = value?value: draftToHtml(convertToRaw(data.getCurrentContent()))
+     const onTextAreChange = (value?:React.ChangeEvent<HTMLTextAreaElement>, data?:any) => {
+        let result:any = undefined;
+        if(value) result= value
+        else {
+            let convert= draftToHtml(convertToRaw(data.getCurrentContent()))
+            result = {
+                target:{
+                    name:props.name,
+                    value: convert
+                }
+            }
+        }
+        
         if(data) setEditorState(data)
-        setValue(result)
         props.onChange && props.onChange(result)
     }
     return(<>{
@@ -82,7 +94,7 @@ const TextArea = (props: Props) =>{
                 <ButtonEditor style={{"text-decoration": "line-through"}} text="S" type={{control:"inline", value:"STRIKETHROUGH"}}/>, 
                 <ButtonEditor text="H1" type={{control:"blockType", value:"header-one"}}/>, 
             ]}  wrapperClassName="wrapper" editorClassName="editor" toolbarClassName="toolbar" />:
-            <TextAreaView value={props.value} onChange={(e)=>{onTextAreChange(e.target.value)}} data-testid="text_area"style={style} placeholder={props.placeholder}/>
+            <TextAreaView value={props.value} name={props.name} onChange={onTextAreChange} data-testid="text_area"style={style} placeholder={props.placeholder}/>
         }
         </>
         

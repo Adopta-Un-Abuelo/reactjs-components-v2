@@ -1,13 +1,17 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import React from 'react';
 
-import { P } from '../components';
+import { Text } from '../components';
 
 export default {
 	title: 'Basic/Text',
-	component: P
-} as ComponentMeta<typeof P>;
+	component: Text
+} as ComponentMeta<typeof Text>;
 
-const Template: ComponentStory<typeof P> = (args) => <P {...args} >Paragraph</P>;
+const Template: ComponentStory<typeof Text> = (args) => <Text {...args} >Text</Text>;
 
+export const Header = Template.bind({});
+Header.args = {
+    type: 'h1',
+}; 
 export const Paragraph = Template.bind({});

@@ -1,8 +1,6 @@
 {
   "compilerOptions": {
-    "emitDeclarationOnly": true,
-    "declarationDir": "dist/",
-    "target": "es5",
+    "target": "es6",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -10,10 +8,13 @@
     "jsx": "react-jsx",
     "module": "ESNext",
     "declaration": true,
+    "declarationDir": "types",
     "sourceMap": true,
     "outDir": "dist",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
+    "emitDeclarationOnly": true,
+    "resolveJsonModule": true,
     "lib": [
       "dom",
       "dom.iterable",
@@ -21,18 +22,9 @@
     ],
     "allowJs": true,
     "noFallthroughCasesInSwitch": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
+    "isolatedModules": true
   },
   "include": [
     "src"
-  ],
-  "exclude": [
-    "node_modules",
-    "build",
-    "src/**/*.stories.tsx",
-    "src/**/*.test.tsx",
-    "src/test",
-    "src/stories"
   ]
 }

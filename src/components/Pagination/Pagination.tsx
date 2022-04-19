@@ -1,8 +1,9 @@
 import React, { ComponentPropsWithoutRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Color } from '../../constants';
-import P from '../Text/P'
+import Text from '../Text/Text'
 import { ArrowLeft,ArrowRight } from 'react-feather';
+
 const Container = styled.div`
    display: flex;
     flex-direction: row;
@@ -66,9 +67,9 @@ const Pagination = (props: Props) =>{
                <ArrowLeft style ={{stroke:start===0 ? Color.gray4 : Color.gray2}}/>
             </Icon>
            <PaginationDiv>
-                <P weight={"semibold"} style={{color:Color.gray3,paddingRight:8}}>{start}</P>
-                <P weight={"semibold"} style={{color:Color.gray3,paddingRight:8}}>de</P>
-                <P weight={"semibold"} style={{color:Color.gray3}}>{Math.ceil(length/rowsPerPage)-1}</P>
+                <Text type='p' weight={"semibold"} style={{color:Color.gray3,paddingRight:8}}>{start}</Text>
+                <Text type='p' weight={"semibold"} style={{color:Color.gray3,paddingRight:8}}>de</Text>
+                <Text type='p' weight={"semibold"} style={{color:Color.gray3}}>{Math.ceil(length/rowsPerPage)-1}</Text>
            </PaginationDiv>
            <Icon data-testid="right-arrow" onClick={nextPage} style ={{background:start===Math.ceil(length/rowsPerPage)-1 ? "white" : Color.gray6, cursor:start===(Math.ceil(length/rowsPerPage)) ? "auto":"pointer"}}>
                <ArrowRight style ={{stroke:start===(Math.ceil(length/rowsPerPage)-1) ? Color.gray4 : Color.gray2}}/>

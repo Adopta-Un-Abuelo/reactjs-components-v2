@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React, { ComponentPropsWithoutRef, useEffect, useState } from 'react';
-import P from '../Text/P'
+import Text from '../Text/Text'
 import { Color } from '../../constants';
 const RadioButtonContainer = styled.div`
   margin: 24px 0;
@@ -30,28 +30,24 @@ const RadioInnerCircle = styled.div`
 
 
 const RadioButton = (props: Props) =>{
-  const [value , setValue] = useState<any>(undefined)
-  const [selected , setSelected] = useState<any>(undefined)
+  const [ selected, setSelected ] = useState(props.selected);
 
-  useEffect(()=>{
-    if(props.value) setValue(props.value)
-    if(props.selected) setSelected(props.selected)
-  },[props.value, props.selected])
+    useEffect(() =>{
+        setSelected(props.selected);
+    },[props.selected]);
 
-  const onClick = () => {
-    if(!props.disabled){
-      setValue(value)
-      props.onClick && props.onClick(value)
-    }
+  const onClick = (event:any) => {
+    setSelected(!selected);
+    props.onClick && props.onClick(event);
   }
   return(
     <RadioButtonContainer data-testid="radioButton"
       onClick={onClick}
     >
       <RadioOuterCircle style={{border: props.disabled ? `2px solid ${Color.gray4}`:` 2px solid ${Color.blue3}`}}>
-        <RadioInnerCircle style={{background: (props.disabled && props.value && selected && props.value === selected)? `${Color.blue3}`:"white"}}/>
+        <RadioInnerCircle style={{background: selected? `${Color.blue3}`:"white"}}/>
       </RadioOuterCircle>
-      <P style={{color:`${Color.gray2}`}}>{props.text}</P>
+      <Text type='p' style={{color:`${Color.gray2}`}}>{props.text}</Text>
     </RadioButtonContainer>
   );
     
@@ -60,7 +56,7 @@ export default RadioButton;
 export interface Props extends ComponentPropsWithoutRef<"div">{
    text?: string,
    value?:string,
-   selected?:string,
+   selected?:boolean,
    disabled?:boolean,
    onClick?: any
 }

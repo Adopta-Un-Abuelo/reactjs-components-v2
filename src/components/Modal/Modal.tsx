@@ -1,56 +1,95 @@
-import React, { ComponentPropsWithoutRef } from 'react';
+import React, { ComponentPropsWithoutRef, forwardRef, Ref, useImperativeHandle } from 'react';
 import styled from 'styled-components';
-import Color from '../../constants/Color';
 import Button from '../Button/Button'
-import { X } from 'react-feather'
+import Text from '../Text/Text'
+import { X } from 'lucide-react'
+import media from 'styled-media-query';
+import Color from '../../constants/Color';
+
+const Screen = styled.div`
+   position: fixed;
+    top: 0;
+    left: 0;
+    width:100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 10000;
+`;
 const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 16px;
-    min-width: 353px;
-    min-height: 170px;
-    max-width: 700px;
-    max-height: 800px;
+    position: relative;
+    min-width: 400px;
+    max-width: 600px;
+    max-height: 700px;
     background: #FFFFFF;
     box-shadow: 2px 0px 20px rgba(0, 0, 0, 0.09), 0px 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    overflow:hidden;
+    overflow-y: auto;
+    ${media.lessThan("small")`
+        min-width: 92%;
+        max-width: 92%;
+        max-height: 90%;
+    `}
 `;
+const TitleView = styled.div`
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+`
+const ChildrenView = styled.div`
+    padding: 0px 24px;
+`
 const Title = styled.div`
     font-family: Poppins;
     font-style: normal;
     font-weight: 600;
-    font-size: 18px;
-    line-height: 22px;
+    font-size: 32px;
+    line-height: 36px;
     color: #4F4F4F;
-    margin-bottom:16px;
     width: 95%;
+    ${media.lessThan("small")`
+        font-size: 22px;
+    `}
 `;
-
 const Subtitle = styled.div`
     font-family: Poppins;
-    margin-bottom:16px;
     font-style: normal;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 18px;
     line-height: 22px;
+    margin-top: 12px;
     color: #828282;
+    ${media.lessThan("small")`
+        font-size: 16px;
+        margin-top: 8px;
+    `}
 `;
 const Buttons = styled.div`
-    margin-top: auto;
+    position: sticky;
     display: flex;
+    flex: 1;
     bottom: 0;
-    width: 100%;
-    justify-content: flex-end;
+    align-items: center;
+    padding: 16px 16px;
+    border: 1px solid ${Color.line.soft};
+    background-color: white;
+    ${media.lessThan("small")`
+        padding: 12px 16px;
+    `}
 `;
-const ChildrenElements =  styled.div`
-    width:100%; 
-    margin-bottom:16px;
-    /* >*{
-        margin-bottom: 0px;
-    } */
-`;
-const Modal = (props: Props) =>{
+
+const Modal = forwardRef((props: ModalProps, ref: Ref<ModalRef>) =>{
+
+    useImperativeHandle(ref, () => ({
+        close(){
+            onClose();
+        }
+    }));
 
     const onClose = () =>{
         props.onClose && props.onClose();
@@ -60,26 +99,64 @@ const Modal = (props: Props) =>{
         props.onSave && props.onSave()
     }
     return(
-       <Container data-testid="modal">
-           <X style={{position:"absolute", alignSelf:"flex-end", cursor:"pointer"}}/>
-           {props.title &&<Title>{props.title}</Title>}
-           {props.subtitle &&<Subtitle>{props.subtitle}</Subtitle>}
-           {props.children && <ChildrenElements>
-                {props.children}
-            </ChildrenElements>}
-        <Buttons>
-            <Button data-testid="close_but" onClick={onClose} style={{marginRight:8}} label={"Cancelar"} design={"text"}/>
-            <Button disabled={props.disableButton} onClick={onSave} label={"Guardar"}/>
-        </Buttons>
-           
-       </Container>
+        <Screen>
+            <Container style={props.style} data-testid="modal">
+                {!props.hideHeader &&
+                    <TitleView>
+                        {!props.hideClose &&
+                            <X onClick={onClose} style={{position:"absolute", alignSelf:"flex-end", cursor:"pointer"}}/>
+                        }
+                        {props.title &&
+                            <Title>{props.title}</Title>
+                        }
+                        {props.subtitle &&
+                            <Subtitle>{props.subtitle}</Subtitle>
+                        }
+                    </TitleView>
+                }
+                <ChildrenView
+                    style={props.contentStyle}
+                >
+                    {props.children}
+                </ChildrenView>
+                {(props.onSave || props.onClose) &&
+                    <Buttons>
+                        {props.error && 
+                            <Text type='p' style={{color:"red", fontSize:12}}>
+                                {props.error}
+                            </Text>
+                        }
+                        {props.onClose &&
+                            <Button 
+                                data-testid="close_but" 
+                                onClick={onClose} 
+                                style={{marginRight: 'auto'}} 
+                                label={"Cancelar"} 
+                                design={"text"}
+                            />
+                        }
+                        {props.onSave &&
+                            <Button disabled={props.disableButton} onClick={onSave} label={props.buttonLabel ? props.buttonLabel : "Guardar"}/>
+                        }
+                    </Buttons>
+                }
+            </Container>
+        </Screen>
     )
-}
+})
 export default Modal;
-export interface Props extends ComponentPropsWithoutRef<"div">{
+export interface ModalProps extends ComponentPropsWithoutRef<"div">{
     title?:string,
     subtitle?:string,
     disableButton?:boolean,
+    error?:string,
+    hideClose?: boolean,
+    hideHeader?: boolean,
+    contentStyle?: any,
+    buttonLabel?: string
     onClose?:()=>void,
     onSave?:()=>void
+}
+export interface ModalRef{
+    close: () => void
 }
