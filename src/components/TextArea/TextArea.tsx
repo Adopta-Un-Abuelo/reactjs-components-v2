@@ -14,30 +14,29 @@ const TextAreaView = styled.textarea`
     padding: 12px;
     width: -webkit-fill-available;
     height: 100px;
-    background: #F2F2F2;
     font-family: 'Poppins';
     font-size: 16px;
     margin: 0px;
+    border-radius: 12px;
     color: ${Color.gray2};
     //Remove resize handle
     resize: none;
     //Remove default scrollbars
     overflow: auto;
-    border: none;
+    border: 1px solid ${Color.line.soft};
     :placeholder-shown{
         :focus{
-            border: 1.5px solid #5963F6;
+            border: 2px solid ${Color.line.primarySoft};
             cursor:text;
             outline: none !important;
         }
     }
     :hover{
-        border: 1.5px solid #5963F6;
         cursor: pointer;
         outline: none !important;
     }
     :focus{
-        border: 1.5px solid #5963F6;
+        border: 2px solid ${Color.line.primarySoft};
         cursor:text;
         outline: none !important;
     }

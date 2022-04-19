@@ -8,8 +8,7 @@ import Color from '../../constants/Color';
 import { isLessThan } from '../../constants/Screen';
 
 import PaycardForm, { FormRef } from '../Form/PaycardForm';
-import PaycardIcon from '../../assets/images/Paycard';
-import IconTabs from '../Tabs/IconTabs';
+import Tabs from '../Tabs/Tabs';
 import BrandPaycardIcon from '../../assets/logo/Paycard';
 import WebModal from '../Modal/WebModal';
 import { ModalRef } from '../Modal/Modal';
@@ -37,13 +36,11 @@ const Payout = forwardRef((props: PayoutProps, ref: Ref<PayoutRef>) =>{
     const [ paymentOptions, setPaymentOptions ] = useState([
         {
             id: 'sepa_debit',
-            title: isMobile ? 'Banco' : 'Cuenta bancaria',
-            icon: PaycardIcon
+            title: isMobile ? 'Banco' : 'Cuenta bancaria'
         },
         {
             id: 'card',
-            title: 'Tarjeta',
-            icon: PaycardIcon
+            title: 'Tarjeta'
         }
     ]);
 
@@ -64,22 +61,19 @@ const Payout = forwardRef((props: PayoutProps, ref: Ref<PayoutRef>) =>{
                 if(item === 'sepa_debit'){
                     return {
                         id: 'sepa_debit',
-                        title: isMobile ? 'Banco' : 'Cuenta bancaria',
-                        icon: PaycardIcon
+                        title: isMobile ? 'Banco' : 'Cuenta bancaria'
                     }
                 }
                 else if(item === 'card'){
                     return {
                         id: 'card',
-                        title: 'Tarjeta',
-                        icon: PaycardIcon
+                        title: 'Tarjeta'
                     }
                 }
                 else{
                     return {
                         id: 'card',
-                        title: 'Tarjeta',
-                        icon: PaycardIcon
+                        title: 'Tarjeta'
                     }
                 }
             })
@@ -90,13 +84,11 @@ const Payout = forwardRef((props: PayoutProps, ref: Ref<PayoutRef>) =>{
            setPaymentOptions([
                 {
                     id: 'sepa_debit',
-                    title: isMobile ? 'Banco' : 'Cuenta bancaria',
-                    icon: PaycardIcon
+                    title: isMobile ? 'Banco' : 'Cuenta bancaria'
                 },
                 {
                     id: 'card',
-                    title: 'Tarjeta',
-                    icon: PaycardIcon
+                    title: 'Tarjeta'
                 }
             ])
             setOption('sepa_debit')
@@ -130,18 +122,17 @@ const Payout = forwardRef((props: PayoutProps, ref: Ref<PayoutRef>) =>{
         <Container
             style={props.style}
         >
-            {showConfirmModal && props.stripeConfirmUrl &&
-                <WebModal
-                    ref={modal}
-                    hideClose={true}
-                    url={props.stripeConfirmUrl}
-                    style={{width: 600, height: 400, padding: 0}}
-                    onClose={onModalClose}
-                />
-            }
+            <WebModal
+                ref={modal}
+                isVisible={showConfirmModal}
+                hideClose={true}
+                url={props.stripeConfirmUrl}
+                style={{width: 600, height: 400, padding: 0}}
+                onClose={onModalClose}
+            />
             {paymentOptions.length > 1 &&
-                <IconTabs
-                    style={{marginBottom: 12}}
+                <Tabs
+                    style={{marginBottom: 12, width: isMobile ? 300 : 400}}
                     options={paymentOptions}
                     onChange={onTabsChange}
                 />
@@ -163,7 +154,7 @@ const Payout = forwardRef((props: PayoutProps, ref: Ref<PayoutRef>) =>{
                     userData={props.userData}
                 />
             </Elements>
-            {option === 'card' &&
+            {option === 'card' && !props.hideDetails &&
                 <InfoView>
                     <BrandPaycardIcon
                         brand={'visa'}
@@ -194,6 +185,7 @@ export interface PayoutProps{
     paymentOptions: Array<'sepa_debit' | 'card'>,
     cardStyle?: any,
     error?: boolean,
+    hideDetails?: boolean,
     userData?:{
         email?: string
     }

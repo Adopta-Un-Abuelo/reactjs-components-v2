@@ -43,7 +43,7 @@ const CellSelector = (props: Props) =>{
     const onClick = (item: OptionProps) =>{
         if(props.selection === 'multiple'){
             const result = selectedOptions.findIndex(e => e.id === item.id);
-            const tempArray = [...selectedOptions];
+            const tempArray = selectedOptions;
             if(result === -1){
                 //add object
                 tempArray.push(item);

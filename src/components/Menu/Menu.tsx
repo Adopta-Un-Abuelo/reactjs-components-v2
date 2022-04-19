@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, forwardRef, Ref, useImperativeHandle } from 'react';
 import styled from 'styled-components';
 
 import { MoreVertical } from 'lucide-react'; 
@@ -7,7 +7,6 @@ import Color from '../../constants/Color';
 
 const Container = styled.div`
     position: relative;
-    
 `
 const FilterView = styled.div<{position?: 'bottom-right' | 'bottom-left' | 'top-right' | 'top-left'}>`
     position: absolute;
@@ -25,11 +24,18 @@ const FilterView = styled.div<{position?: 'bottom-right' | 'bottom-left' | 'top-
     box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.08);
     z-index: 1000;
     border: 1px solid ${Color.line.soft};
+    overflow: hidden;
 `
 
-const MenuList = (props: Props) =>{
+const MenuList = forwardRef((props: MenuProps, ref: Ref<MenuRef>) =>{
 
     const [ showView, setShowView ] = useState(false);
+
+    useImperativeHandle(ref, () => ({
+        close(){
+            setShowView(false);
+        }
+    }));
 
     useEffect(() =>{
         //On click outside the filter view
@@ -76,9 +82,9 @@ const MenuList = (props: Props) =>{
             }
         </Container>
     )
-}
+})
 export default MenuList;
-export interface Props{
+export interface MenuProps{
     id: string,
     children?: any,
     style?: any,
@@ -86,4 +92,7 @@ export interface Props{
     icon?: JSX.Element,
     position?: 'bottom-right' | 'bottom-left' | 'top-right' | 'top-left',
     onChange?: (visible: boolean) => void
+}
+export interface MenuRef{
+    close: () => void
 }

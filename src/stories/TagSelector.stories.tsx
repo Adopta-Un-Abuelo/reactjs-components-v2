@@ -60,5 +60,15 @@ TagSelector.args = {
             id: 'option12',
             title: 'Option 12'
         }
+    ],
+    optionsSelected: [
+        {
+            id: 'option4',
+            title: 'Option 4'
+        },
+        {
+            id: 'option5',
+            title: 'Option 5'
+        },
     ]
 };
