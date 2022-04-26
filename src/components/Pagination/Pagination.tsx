@@ -55,12 +55,23 @@ const Pagination = (props: Props) =>{
         if(props.start!==undefined && props.start!==null && props.start<=(Math.ceil(props.lenght/props.rowsPerPage)-1)) 
             setStart(props.start)
     },[props.start, props.lenght, props.rowsPerPage])
+
     const nextPage = () => {
-        if(start<Math.ceil(props.lenght/props.rowsPerPage)-1)setStart(start+1)
+        if(start<Math.ceil(props.lenght/props.rowsPerPage)-1){
+            const page = start+1;
+            setStart(page);
+            props.onPageChange && props.onPageChange(page);
+        }
     }
+    
     const prevPage = () => {
-        if(start>0)setStart(start-1)
+        if(start>0){
+            const page = start-1;
+            setStart(page)
+            props.onPageChange && props.onPageChange(page);
+        }
     }
+
     return(
         <Container data-testid="pagination" style={props.style}>
            <Icon data-testid="left-arrow" onClick={prevPage} style ={{background:start===0 ? "white" : Color.gray6, cursor:start===0 ? "auto":"pointer"}}>
@@ -82,4 +93,5 @@ export interface Props extends ComponentPropsWithoutRef<"div">{
     start?: number,
     lenght: number,
     rowsPerPage: number,
+    onPageChange?: (page: number) => void
 }
