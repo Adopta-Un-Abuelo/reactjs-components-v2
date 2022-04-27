@@ -57,7 +57,9 @@ const Column = styled.div`
     display: flex;
     flex: 1;
     flex-direction: column;
-    margin-left: 8px;
+`
+const IconView = styled.div`
+    margin-right: 8px;
 `
 const Input = (props: Props) =>{
 
@@ -132,21 +134,19 @@ const Input = (props: Props) =>{
                 style={props.style}
                 focus={focus}
             >
-                {props.icon ? props.icon : props.type === 'email' ?
-                    <Mail stroke={Color.text.full}/>
-                : props.type === 'password' ?
-                    <Lock stroke={Color.text.full}/>
-                : props.type === 'location' ?
-                    <MapPin stroke={Color.text.full}/>
-                : props.type === 'date' ?
-                    <Calendar stroke={Color.text.full}/>
+                {props.icon ? 
+                    <IconView>
+                        {props.icon}
+                    </IconView>
                 : props.type === 'phone' ?
-                    <Select 
-                        selectedItem={country} 
-                        onChange={item => onCountryChange(item)} 
-                        style={{ border:"none", padding:0}} id="country" 
-                        options={Country}
-                    />
+                    <IconView>
+                        <Select 
+                            selectedItem={country} 
+                            onChange={item => onCountryChange(item)} 
+                            style={{ border:"none", padding:0}} id="country" 
+                            options={Country}
+                        />
+                    </IconView>
                 : null}
                 <Column>
                     {inputValue &&
