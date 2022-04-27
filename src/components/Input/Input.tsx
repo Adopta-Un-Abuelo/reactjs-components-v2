@@ -57,7 +57,7 @@ const Column = styled.div`
     display: flex;
     flex: 1;
     flex-direction: column;
-    margin-left: 12px;
+    margin-left: 8px;
 `
 const Input = (props: Props) =>{
 
@@ -132,26 +132,22 @@ const Input = (props: Props) =>{
                 style={props.style}
                 focus={focus}
             >
-                <IconStyle style={props.type === 'phone' ? {height: 'unset', width: 'unset'} : {}}>
-                    {props.icon ? props.icon : props.type === 'email' ?
-                        <Mail stroke={Color.text.full}/>
-                    : props.type === 'password' ?
-                        <Lock stroke={Color.text.full}/>
-                    : props.type === 'location' ?
-                        <MapPin stroke={Color.text.full}/>
-                    : props.type === 'date' ?
-                        <Calendar stroke={Color.text.full}/>
-                    : props.type === 'phone' ?
-                        <Select 
-                            selectedItem={country} 
-                            onChange={item => onCountryChange(item)} 
-                            style={{ border:"none", padding:0}} id="country" 
-                            options={Country}
-                        />
-                    :
-                        <User stroke={Color.text.full}/>
-                    }
-                </IconStyle>
+                {props.icon ? props.icon : props.type === 'email' ?
+                    <Mail stroke={Color.text.full}/>
+                : props.type === 'password' ?
+                    <Lock stroke={Color.text.full}/>
+                : props.type === 'location' ?
+                    <MapPin stroke={Color.text.full}/>
+                : props.type === 'date' ?
+                    <Calendar stroke={Color.text.full}/>
+                : props.type === 'phone' ?
+                    <Select 
+                        selectedItem={country} 
+                        onChange={item => onCountryChange(item)} 
+                        style={{ border:"none", padding:0}} id="country" 
+                        options={Country}
+                    />
+                : null}
                 <Column>
                     {inputValue &&
                         <Text type='p' style={{color: Color.text.high, fontSize: 12}}>

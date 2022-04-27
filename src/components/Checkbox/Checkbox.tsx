@@ -13,7 +13,6 @@ const Container = styled.button`
     cursor: ${props => props.disabled ? 'default' : 'pointer'};
     padding: 0px;
     opacity: ${props => props.disabled ? 0.5 : 1.0};
-    align-items: center;
 `
 const Box = styled.div<{selected: boolean, error?: boolean}>`
     display: flex;
