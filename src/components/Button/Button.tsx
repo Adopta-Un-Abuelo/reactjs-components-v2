@@ -130,7 +130,7 @@ const Button = (props: Props) => {
 					<Text
 						type='p'
 						weight='semibold'
-						style={{width:"100%",marginLeft: props.icon ? 6 : 0, color: 'white'}}
+						style={{width:"100%",marginLeft: props.icon ? 6 : 0, color: props.textColor ? props.textColor : 'white'}}
 					>
 						{props.label}
 					</Text>
@@ -144,5 +144,6 @@ export interface Props extends ComponentPropsWithoutRef<"button">{
 	label: string;
 	design?: 'primary' | 'secondary' | 'text' | 'image',
 	icon?: React.ReactElement,
-	loading?: boolean
+	loading?: boolean,
+	textColor?: string
 }
