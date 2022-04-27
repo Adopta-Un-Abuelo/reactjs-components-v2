@@ -42,8 +42,9 @@ const Tabs = (props: Props) =>{
                         key={item.id}
                         selected={selected}
                         onClick={() => onClick(item)}
+                        style={props.cellStyle}
                     >
-                        <Text type='p' style={{fontSize: 14}}>
+                        <Text type='p' style={{fontSize: 14, ...props.textStyle}}>
                             {item.title}
                         </Text>
                     </Cell>
@@ -55,6 +56,8 @@ const Tabs = (props: Props) =>{
 export default Tabs;
 export interface Props{
     style?: any,
+    cellStyle?: any,
+    textStyle?: any,
     options: Array<OptionProps>
     selectedOption?: OptionProps,
     onChange?: (option: OptionProps) => void

@@ -1,8 +1,8 @@
-import React, { ComponentPropsWithoutRef, useEffect, useState } from 'react';
+import { ComponentPropsWithoutRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Color from '../../constants/Color';
 import Country from '../../constants/Country';
-import { Calendar, User, Mail, X, MapPin, Lock } from 'lucide-react'
+import { X } from 'lucide-react'
 
 import  Select  from '../Select/Select';
 import Text from '../Text/Text';
@@ -73,6 +73,10 @@ const Input = (props: Props) =>{
     useEffect(()=>{
         setError(props.error)
     },[props.error]);
+
+    useEffect(() =>{
+        setInputValue(props.value);
+    },[props.value]);
 
     const onInputChange = (e: any) =>{
         setInputValue(e.target.value);
@@ -195,6 +199,5 @@ export interface Props extends ComponentPropsWithoutRef<"input">{
     hideCalendar?: boolean,
     min?: any,
     max?: any,
-    lineColor?: string,
-    thumbColor?: string
+    value?: string
 }

@@ -1,5 +1,4 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import React from 'react';
 
 import { Input, InputCode } from '../components';
 
@@ -14,7 +13,8 @@ import { Input, InputCode } from '../components';
 const Template: ComponentStory<typeof Input> = (args) => <Input {...args}/>;
 export const Simple = Template.bind({});
 Simple.args = {
-    placeholder: 'Placeholder'
+    placeholder: 'Placeholder',
+	value: undefined
 }; 
 
 const Template2: ComponentStory<typeof InputCode> = (args) => <InputCode {...args}/>;

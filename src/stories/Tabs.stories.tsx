@@ -5,8 +5,8 @@ import PaycardIcon from '../assets/images/Paycard';
 
 export default {
 	title: 'Basic/Tabs',
-	component: IconTabs
-} as ComponentMeta<typeof IconTabs>;
+	component: TabsD
+} as ComponentMeta<typeof TabsD>;
 
 const Template: ComponentStory<typeof TabsD> = (args) => <TabsD {...args}/>;
 
