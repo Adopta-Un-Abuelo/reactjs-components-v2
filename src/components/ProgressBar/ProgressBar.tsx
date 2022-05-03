@@ -11,8 +11,8 @@ const Container = styled.div`
     border-radius: 8px;
     overflow: hidden;
 `
-const Progress = styled.div<{progress: number}>`
-    background-color: ${Color.background.primary};
+const Progress = styled.div<{progress: number, color?: string}>`
+    background: ${props => props.color ? props.color : Color.background.primary};
     width: ${props => props.progress+'%'};
 `
 
@@ -20,12 +20,20 @@ const ProgressBar = (props: Props) =>{
 
     return(
         <Container style={props.style}>
-            <Progress progress={props.progress}/>
+            {typeof props.progress === 'number' ?
+                <Progress progress={props.progress} color={props.color}/>
+            : props.progress.map((item, index) =>(
+                <Progress key={'progress-value-'+index} progress={item.value} color={item.color}/>
+            ))}
         </Container>
     )
 }
 export default ProgressBar;
 export interface Props{
     style?: any,
-    progress: number
+    progress: number | Array<{
+        value: number,
+        color?: string
+    }>,
+    color?: string
 }
