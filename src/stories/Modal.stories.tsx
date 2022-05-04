@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import React, { useState } from 'react';
+import { useState, useRef } from 'react';
 
 import { ModalV2, Input, WebModal, Button } from '../components';
 export default {
@@ -64,8 +64,17 @@ ModalViewChilds.args = {
     }
 }
 
-const Template3: ComponentStory<typeof WebModal> = (args) => 
-<WebModal {...args} />;
+const Template3: ComponentStory<typeof WebModal> = (args) => {
+    const [ isVisible, setIsVisible ] = useState(false);
+    const modal = useRef(null);
+
+    return(
+        <>
+        <Button label={'showModal'} onClick={() => setIsVisible(true)}/>
+        <WebModal {...args} isVisible={isVisible} onClose={() => setIsVisible(false)} ref={modal}/>
+        </>
+    )
+}
 export const ModalWeb = Template3.bind({});
 ModalWeb.args = {
     title:"Title",

@@ -96,7 +96,8 @@ const ModalComponent = forwardRef((props: ModalProps, ref: Ref<ModalRef>) =>{
                 overlay:{
                     backgroundColor: 'rgba(0, 0, 0, 0.6)',
                     opacity: props.isVisible ? 1 : 0,
-                    transition: 'opacity linear 250ms'
+                    transition: 'opacity linear 250ms',
+                    zIndex: 1000
                 }
             }}
         >

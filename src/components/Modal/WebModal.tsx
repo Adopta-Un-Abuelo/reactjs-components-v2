@@ -1,14 +1,14 @@
-import React, { RefObject } from 'react';
+import React, { forwardRef, Ref } from 'react';
 import styled from 'styled-components';
 
 import Modal, { ModalProps, ModalRef } from '../Modal/ModalV2';
 
 const WebView = styled.iframe``
 
-const WebModal = (props: WebModalProps) =>{
-
+const WebModal = forwardRef((props: WebModalProps, ref: Ref<ModalRef>) =>{
     return(
         <Modal
+            ref={ref}
             contentStyle={{padding: 0, height: '70vh'}}
             {...props}
         >
@@ -21,9 +21,8 @@ const WebModal = (props: WebModalProps) =>{
             />
         </Modal>
     )
-}
+});
 export default WebModal;
 export interface WebModalProps extends ModalProps{
-    ref: RefObject<ModalRef>
     url?: string
 }
