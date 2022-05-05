@@ -19,7 +19,7 @@ const ButtonFilter = styled.button<{selected: boolean}>`
 	height: 38px;
 	padding: 0px 16px;
 	border-radius: 20px;
-	border: ${props => props.disabled ? '1px solid '+ Color.line.soft : (props.selected ? '2px solid '+Color.line.primary : '1px solid '+ Color.line.full)};
+	border: ${props => props.disabled ? '0px solid' : (props.selected ? '2px solid '+Color.line.primary : '1px solid '+ Color.line.soft)};
 	background-color: ${props => props.disabled ? Color.status.neutral.hover : (props.selected ? Color.background.primaryLow : 'transparent')};
 	cursor: ${props => props.disabled ? 'default' : 'pointer'};
 	:hover{
@@ -171,7 +171,7 @@ const Filter = (props: Props) =>{
                 disabled={props.disabled}
                 onClick={onFilterClick}
             >
-                <Text type='p'>
+                <Text type='p' style={{color: props.disabled ? Color.text.low : undefined}}>
                     {props.label}
                 </Text>
                 {selectedOptions.length > 0 &&

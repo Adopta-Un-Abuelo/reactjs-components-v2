@@ -10,6 +10,7 @@ const AvatarContainer = styled.div`
     align-items: center;
     text-align: center;
     border-radius: 50%;
+    background-color: ${Color.background.primaryLow};
 `
 const Text = styled.p`
     font-family: Poppins;
@@ -30,8 +31,14 @@ const Icon = styled.img`
 
 const Avatar = (props: Props) =>{
     return(
-        <AvatarContainer data-testid="avatar" style={{border: props.icon ? `2px solid ${Color.gray6}` : "2px solid "+Color.text.primary, ...props.style}}>
-            {props.icon ? <Icon src={props.icon}/> :props.name?  <Text style={{fontSize:props.style?.fontSize}}>{props.name.substring(0,1).toLocaleUpperCase()}</Text>:null }
+        <AvatarContainer data-testid="avatar" style={props.style}>
+            {props.icon ?
+                <Icon src={props.icon}/> 
+            : props.name ? 
+                <Text style={{fontSize: props.style?.fontSize ? props.style.fontSize : 24, fontWeight: 600}}>
+                    {props.name.substring(0,1).toLocaleUpperCase()}
+                </Text>
+            :null}
         </AvatarContainer>
     )
 }

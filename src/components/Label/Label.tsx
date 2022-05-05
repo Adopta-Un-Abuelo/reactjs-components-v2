@@ -1,6 +1,7 @@
-import React, { ComponentPropsWithoutRef} from 'react';
+import { ComponentPropsWithoutRef} from 'react';
 import styled from 'styled-components';
 import Text from '../Text/Text';
+
 const LabelStyled = styled.div`
     font-family: 'Poppins';
     font-size: 16px;
@@ -9,12 +10,12 @@ const LabelStyled = styled.div`
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 6px 8px;
-    width: 110px;
-    height: 34px;
+    padding: 0px 12px;
+    width: fit-content;
+    height: 32px;
     left: 117px;
     top: 382px;
-    border-radius: 4px;
+    border-radius: 100px;
 `
 const Label = (props: Props) =>{
     return(
