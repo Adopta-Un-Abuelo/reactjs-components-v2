@@ -26,7 +26,9 @@ const IconSwitch = (props: Props) =>{
     const [ selectedOption, setSelectedOption ] = useState(props.options[0]);
 
     return(
-        <Container>
+        <Container
+            style={props.style}
+        >
             {props.options.map(item =>{
                 const selected = item.id === selectedOption.id;
                 return(
@@ -47,6 +49,7 @@ const IconSwitch = (props: Props) =>{
 }
 export default IconSwitch;
 export interface Props{
+    style?: any,
     options: Array<{
         id: string,
         icon: any
