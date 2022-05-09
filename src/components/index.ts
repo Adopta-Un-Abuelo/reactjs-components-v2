@@ -28,3 +28,4 @@ export { default as ProgressBar } from './ProgressBar/ProgressBar';
 export { default as Menu } from './Menu/Menu';
 export { default as MenuList } from './Menu/MenuList';
 export { default as Tabs } from './Tabs/Tabs';
+export { default as SwitchIcon } from './Switch/IconSwitch';
