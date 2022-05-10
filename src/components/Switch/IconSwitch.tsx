@@ -15,7 +15,7 @@ const Cell = styled.div<{selected: boolean}>`
     display: flex;
     padding: 12px 16px;
     cursor: pointer;
-    background-color: ${props => props.selected ? Color.background.primaryLow : 'transparent'};
+    background-color: ${props => props.selected ? Color.background.soft : 'transparent'};
     border-radius: 12px;
     align-items: center;
     justify-content: center;

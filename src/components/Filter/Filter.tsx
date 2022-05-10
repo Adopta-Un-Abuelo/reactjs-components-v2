@@ -1,4 +1,4 @@
-import React, { useEffect, useState, ChangeEvent } from 'react';
+import { useEffect, useState, ChangeEvent } from 'react';
 import styled from 'styled-components';
 import Fuse from 'fuse.js';
 
@@ -7,6 +7,7 @@ import Text from '../Text/Text';
 import CheckboxList from '../Checkbox/CheckboxList';
 import Button from '../Button/Button';
 import SearchBar from '../SearchBar/SearchBar';
+import { ChevronDown } from 'lucide-react';
 
 const Container = styled.div`
     position: relative;
@@ -16,11 +17,11 @@ const ButtonFilter = styled.button<{selected: boolean}>`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	height: 38px;
-	padding: 0px 16px;
+	height: 32px;
+	padding: 0px 12px;
 	border-radius: 20px;
-	border: ${props => props.disabled ? '0px solid' : (props.selected ? '2px solid '+Color.line.primary : '1px solid '+ Color.line.soft)};
-	background-color: ${props => props.disabled ? Color.status.neutral.hover : (props.selected ? Color.background.primaryLow : 'transparent')};
+	border: ${props => props.disabled ? '0px solid' : (props.selected ? '2px solid '+Color.text.full : '1px solid '+ Color.line.soft)};
+	background-color: ${props => props.disabled ? Color.status.neutral.hover : 'transparent'};
 	cursor: ${props => props.disabled ? 'default' : 'pointer'};
 	:hover{
 		background-color: ${props => props.disabled ? Color.status.neutral.hover : Color.gray4+'30'};
@@ -30,7 +31,7 @@ const FilterView = styled.div`
     position: absolute;
     display: flex;
     flex-direction: column;
-    top: 48px;
+    top: 40px;
     padding: 8px 16px;
     border-radius: 4px;
     height: 278px;
@@ -49,21 +50,17 @@ const BottomBar = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: flex-end;
-    margin-top: 8px;
     padding-top: 8px;
     border-top: 1px solid ${Color.line.soft};
 `
 const BadgeView = styled.div`
-    position: absolute;
-    top: -6px;
-    right: -4px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 10px;
-    height: 20px;
-    width: 20px;
-    background-color: ${Color.background.primary};
+    height: 18px;
+    width: 18px;
+    background-color: ${Color.background.full};
 `
 
 const Filter = (props: Props) =>{
@@ -171,45 +168,53 @@ const Filter = (props: Props) =>{
                 disabled={props.disabled}
                 onClick={onFilterClick}
             >
-                <Text type='p' style={{color: props.disabled ? Color.text.low : undefined}}>
+                <Text type='p' style={{color: props.disabled ? Color.text.low : selectedOptions.length > 0 ? Color.text.full : Color.text.high, fontSize: 14, marginRight: 4}}>
                     {props.label}
                 </Text>
-                {selectedOptions.length > 0 &&
+                {selectedOptions.length > 0 ?
                     <BadgeView>
                         <Text type='p' style={{color: 'white', fontSize: 12, fontWeight: 600}}>
                             {selectedOptions.length}
                         </Text>
                     </BadgeView>
+                :
+                    <ChevronDown height={18} width={18} color={props.disabled ? Color.text.low : Color.text.high}/>
                 }
             </ButtonFilter>
             {showView &&
                 <FilterView>
                     {!props.hideSearchBar &&
                         <SearchBar
-                            style={{marginBottom: 16}}
+                            style={{borderBottom: '1px solid '+Color.line.soft}}
                             placeholder={'Buscar'}
+                            design={'secondary'}
                             onChange={onSearchChage}
                         />
                     }
                     <ContentView>
                         <CheckboxList
+                            style={{paddingTop: 16}}
                             options={options}
                             selection={props.design === 'multiple' ? 'multiple' : 'single'}
+                            height={18}
+                            width={18}
                             onChange={onOptionChange}
                         />
                     </ContentView>
                     <BottomBar>
                         <Button
                             design={'text'}
+                            size={'small'}
                             label={'Borrar'}
-                            style={{marginRight: 4, height: 42}}
+                            style={{marginRight: 4}}
                             onClick={onRemove}
                         />
+                        <div style={{display: 'flex', flex: 1}}/>
                         <Button
                             design={'primary'}
+                            size={'small'}
                             label={'Aplicar'}
                             onClick={onSave}
-                            style={{height: 42}}
                         />
                     </BottomBar>
                 </FilterView>

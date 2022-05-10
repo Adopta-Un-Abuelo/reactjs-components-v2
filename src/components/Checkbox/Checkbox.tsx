@@ -14,14 +14,14 @@ const Container = styled.button`
     padding: 0px;
     opacity: ${props => props.disabled ? 0.5 : 1.0};
 `
-const Box = styled.div<{selected: boolean, error?: boolean}>`
+const Box = styled.div<{selected: boolean, error?: boolean, height?: number, width?: number}>`
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 24px;
-    width: 24px;
-    min-height: 24px;
-    min-width: 24px;
+    height: ${props => props.height ? props.height+'px' : '24px'};
+    width: ${props => props.width ? props.width+'px' : '24px'};
+    min-height: ${props => props.height ? props.height+'px' : '24px'};
+    min-width: ${props => props.width ? props.width+'px' : '24px'};
     background-color: ${props => props.selected ? (props.error ? Color.status.color.error : Color.background.primary) : (props.error ? Color.status.color.errorDefault : Color.background.primaryLow)};
     border: ${props => props.selected ? '1px solid '+(props.error ? Color.status.color.error : Color.background.primary) : '1px solid '+(props.error ? Color.line.redSoft : Color.line.primarySoft)};
     border-radius: 4px;
@@ -53,6 +53,8 @@ const Checkbox = (props: Props) =>{
             <Box
                 selected={selected}
                 error={props.error}
+                height={props.height} 
+                width={props.width}
             >
                 {selected &&
                     <Check 
@@ -90,5 +92,7 @@ export interface Props extends ComponentPropsWithoutRef<"button">{
     selected: boolean,
     label?: string,
     sublabel?: string,
-    error?: boolean
+    error?: boolean,
+    height?: number,
+    width?: number
 }

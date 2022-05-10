@@ -36,6 +36,8 @@ const CheckboxList = (props: Props) =>{
                         sublabel={item.sublabel}
                         error={item.error}
                         selected={active}
+                        height={props.height}
+                        width={props.width}
                         onClick={() => onClick(item)}
                     >
                         {item.Element}
@@ -56,6 +58,8 @@ export interface Props{
         Element?: JSX.Element,
         error?: boolean
     }>,
+    height?: number,
+    width?: number
     selection: 'single' | 'multiple',
     onChange?: Function
 }
