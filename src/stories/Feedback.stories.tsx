@@ -5,7 +5,10 @@ import { Feedback } from '../components';
 
 export default {
 	title: 'Basic/Feedback',
-	component: Feedback
+	component: Feedback,
+    argTypes: {
+		onClose: { action: 'onClose' }
+	}
 } as ComponentMeta<typeof Feedback>;
 
 const Template: ComponentStory<typeof Feedback> = (args) => <Feedback {...args} >Paragraph</Feedback>;
@@ -14,5 +17,6 @@ export const Success = Template.bind({});
 
 Success.args= {
     type:"success",
-    text:"Success message"
+    text:"Success message",
+    isVisible: false
 }

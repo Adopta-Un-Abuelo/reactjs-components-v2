@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef } from 'react';
+import { ComponentPropsWithoutRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { Check, X } from 'lucide-react';
@@ -21,7 +21,18 @@ const Container = styled.div<{type: 'success' | 'error'}>`
 `
 
 const FeedBack = (props: Props) =>{
-    return(
+
+    const [ isVisible, setIsVisible ] = useState(false);
+
+    useEffect(() =>{
+        setIsVisible(props.isVisible);
+        setTimeout(() => {
+            props.onClose && props.onClose();
+            setIsVisible(false);
+        }, 3000);
+    },[props.isVisible]);
+
+    return(isVisible ?
         <Container data-testid="feedback" {...props}>
             {props.type === 'success' ?
                 <Check 
@@ -42,10 +53,12 @@ const FeedBack = (props: Props) =>{
                 {props.text}
             </Text>
         </Container>
-    )
+    : null)
 }
 export default FeedBack;
 export interface Props extends ComponentPropsWithoutRef<"div">{
+    isVisible: boolean,
     type: 'success' | 'error',
-    text: string
+    text: string,
+    onClose?: () => void
 }
