@@ -86,7 +86,7 @@ const Filter = (props: Props) =>{
             const element = document.getElementById(props.id);
             if(element !== null){
                 if(!element.contains(e.target))
-                    if(showView) onFilterClick();
+                    if(showView) onFilterClick(e);
             }
         });
         return document.removeEventListener('mousedown', onFilterClick);
@@ -128,7 +128,8 @@ const Filter = (props: Props) =>{
         props.onChange && props.onChange([]);
     }
 
-    const onFilterClick = () =>{
+    const onFilterClick = (e: any) =>{
+        e.stopPropagation();
         if(showView){
             const temp = props.options;
             props.options.map((item, index) =>{
