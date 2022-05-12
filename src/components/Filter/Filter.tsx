@@ -81,6 +81,11 @@ const Filter = (props: Props) =>{
     },[props.options]);
 
     useEffect(() =>{
+        if(props.selectedOptions)
+            setSelectedOptions(props.selectedOptions);
+    },[props.selectedOptions]);
+
+    useEffect(() =>{
         //On click outside the filter view
         document.addEventListener('mousedown', (e: any) => {
             const element = document.getElementById(props.id);
@@ -196,6 +201,7 @@ const Filter = (props: Props) =>{
                         <CheckboxList
                             style={{paddingTop: 16}}
                             options={options}
+                            selectedOptions={selectedOptions}
                             selection={props.design === 'multiple' ? 'multiple' : 'single'}
                             height={18}
                             width={18}
@@ -234,6 +240,9 @@ export interface Props{
         label: string,
         sublabel?: string,
         defaultSelection?: boolean
+    }>
+    selectedOptions?:  Array<{
+        id: string
     }>
     hideSearchBar?: boolean,
     style?: any,

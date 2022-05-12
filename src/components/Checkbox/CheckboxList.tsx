@@ -1,6 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import React from 'react'
 import Checkbox from './Checkbox';
 
 const Container = styled.div`
@@ -10,6 +9,11 @@ const CheckboxList = (props: Props) =>{
 
     const [ selection, setSelection ] = useState(props.options.filter(e => e.defaultSelection));
     const [ update, setUpdate ] = useState(false);
+
+    useEffect(() =>{
+        if(props.selectedOptions)
+            setSelection(props.selectedOptions);
+    },[props.selectedOptions]);
 
     const onClick = (item: any) =>{
         const result = selection.findIndex(obj => item.id === obj.id);
@@ -58,6 +62,9 @@ export interface Props{
         Element?: JSX.Element,
         error?: boolean
     }>,
+    selectedOptions?: Array<{
+        id: string
+    }>
     height?: number,
     width?: number
     selection: 'single' | 'multiple',
