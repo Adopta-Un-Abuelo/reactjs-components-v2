@@ -8,7 +8,7 @@ const ChipsContainerSmall = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 30px;
+    height: 32px;
     width: 30px;
     border-radius: 50%;
 `
@@ -17,11 +17,10 @@ const ChipsContainerBig = styled.div`
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 4px 16px;
-    height: 30px;
+    padding: 0px 12px;
+    height: 32px;
     left: 118px;
     top: 1082px;
-    background: #EBECFF;
     border-radius: 555px;
 `
 const ChipSelector = styled.div`
@@ -29,28 +28,33 @@ const ChipSelector = styled.div`
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 8px 10px;
-    height: 40px;
+    padding: 0px 12px;
+    height: 32px;
     opacity: 0.8;
-    border: 1px solid #BDBDBD;
+    border: 1px solid ${Color.line.soft};
     box-sizing: border-box;
     border-radius: 555px;
 `;
 const Chip = (props: Props) =>{
-    return(<>
-        { props.type ==="selector" && <ChipSelector data-testid="chip" {...props}>
-            <Text type='p' weight={"semibold"} style={{fontSize:12,color:Color.gray1}}>{props.text}</Text> 
-        </ChipSelector>
-        }
-        { props.type ==="small" && <ChipsContainerSmall data-testid="chip" style={{...props.style, background: !props.inactive ? "#EBECFF":"#F2F2F2"}}>
-            <Text type='p' weight={"semibold"} style={{fontSize:12,color:!props.inactive ? Color.blue3 : Color.gray3}}>{props.text.slice(0,1).toLocaleUpperCase()+props.text.slice(1,2)}</Text> 
-        </ChipsContainerSmall>
-        }
-         { props.type ==="big" && <ChipsContainerBig data-testid="chip" style={{...props.style, background: !props.inactive ? "#EBECFF":"#F2F2F2"}}>
-           <Text type='p' weight={"semibold"} style={{fontSize:12,color:!props.inactive ? Color.blue3 : Color.gray3}}>{props.text.slice(0,1).toLocaleUpperCase()+props.text.slice(1,props.text.length).toLocaleLowerCase()}</Text> 
-        </ChipsContainerBig>
-        }
-    </>)
+    return(
+        props.type ==="selector" ?
+            <ChipSelector data-testid="chip" {...props}>
+                <Text type='p' style={{fontSize:14, fontWeight: 500, color: Color.text.full}}>{props.text}</Text> 
+            </ChipSelector>
+        : props.type ==="small" ?
+            <ChipsContainerSmall data-testid="chip" style={{...props.style, background: !props.inactive ? Color.background.primaryLow : Color.background.soft}}>
+                <Text type='p' style={{fontSize:14,color:!props.inactive ? Color.text.primary : Color.text.high}}>
+                    {props.text.slice(0,1).toLocaleUpperCase()+props.text.slice(1,2)}
+                </Text> 
+            </ChipsContainerSmall>
+        : props.type ==="big" ?
+            <ChipsContainerBig data-testid="chip" style={{...props.style, background: !props.inactive ? Color.background.primaryLow : Color.background.soft}}>
+                <Text type='p' style={{fontSize:14,color:!props.inactive ? Color.text.primary : Color.text.high}}>
+                    {props.text.slice(0,1).toLocaleUpperCase()+props.text.slice(1,props.text.length).toLocaleLowerCase()}
+                </Text> 
+            </ChipsContainerBig>
+        : null
+    )
        
     
 }
