@@ -71,5 +71,5 @@ const InputChat = (props: Props) =>{
 }
 export default InputChat;
 export interface Props extends ComponentPropsWithoutRef<"input">{
-    onSend: (text: string) => void
+    onSend?: (text: string) => void
 }

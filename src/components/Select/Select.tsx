@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import Lottie from 'react-lottie';
 
+import animation from '../../assets/animations/button-loading.json'
 import Text from '../Text/Text';
 import Color from '../../constants/Color';
 import { ChevronDown, ChevronUp } from 'lucide-react'
@@ -94,23 +96,39 @@ const Select = (props: Props) =>{
                 showMenu={showMenu}
                 onClick={onSelectClick}
             >
-                {selectedItem && selectedItem.icon && 
-                    <Icon>
-                        <selectedItem.icon/>
-                    </Icon>
-                }
-                {!props.hideTitle &&
-                    <Text
-                        type='p'
-                        style={{flex: 1, fontSize: 14, fontWeight: 600, color: props.style ? props.style.color : Color.text.full}}
-                    >
-                        {props.title ? selectedItem[props.title] : selectedItem.title}
-                    </Text>
-                }
-                {showMenu ?
-                    <ChevronUp height={20} width={20}/>
-                : 
-                    <ChevronDown height={20} width={20}/>
+                {props.loading ?
+                    <Lottie 
+                        options={{
+                            loop: true,
+                            autoplay: true, 
+                            animationData: animation,
+                            rendererSettings: {
+                                preserveAspectRatio: 'xMidYMid slice'
+                            }
+                        }}
+                        width={100}
+                    />    
+                :
+                    <>
+                    {selectedItem && selectedItem.icon && 
+                        <Icon>
+                            <selectedItem.icon/>
+                        </Icon>
+                    }
+                    {!props.hideTitle &&
+                        <Text
+                            type='p'
+                            style={{flex: 1, fontSize: 14, fontWeight: 600, color: props.style ? props.style.color : Color.text.full}}
+                        >
+                            {props.title ? selectedItem[props.title] : selectedItem.title}
+                        </Text>
+                    }
+                    {showMenu ?
+                        <ChevronUp height={20} width={20}/>
+                    : 
+                        <ChevronDown height={20} width={20}/>
+                    }
+                    </>
                 }
             </SelectStyled>
             {showMenu && 
@@ -140,6 +158,7 @@ const Select = (props: Props) =>{
 export default Select;
 export interface Props{
     id: string,
+    loading?: boolean,
     style?: any
     optionStyle?: any
     title?: string

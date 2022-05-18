@@ -1,6 +1,6 @@
 {
   "name": "reactjs-components-v2",
-  "version": "0.2.18",
+  "version": "0.2.19",
   "homepage": "https://adopta-un-abuelo.github.io/reactjs-components-v2/",
   "private": false,
   "main": "dist/cjs/index.js",
