@@ -23,7 +23,7 @@ const ChipsContainerBig = styled.div`
     top: 1082px;
     border-radius: 555px;
 `
-const ChipSelector = styled.div`
+const ChipSelector = styled.div<{active?: boolean}>`
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -31,7 +31,7 @@ const ChipSelector = styled.div`
     padding: 0px 12px;
     height: 32px;
     opacity: 0.8;
-    border: 1px solid ${Color.line.soft};
+    border: 1px solid ${props => props.active ? Color.line.full : Color.line.soft};
     box-sizing: border-box;
     border-radius: 555px;
 `;
@@ -39,17 +39,17 @@ const Chip = (props: Props) =>{
     return(
         props.type ==="selector" ?
             <ChipSelector data-testid="chip" {...props}>
-                <Text type='p' style={{fontSize:14, fontWeight: 500, color: Color.text.full}}>{props.text}</Text> 
+                <Text type='p2' weight='medium' style={{color: Color.text.full}}>{props.text}</Text> 
             </ChipSelector>
         : props.type ==="small" ?
-            <ChipsContainerSmall data-testid="chip" style={{...props.style, background: !props.inactive ? Color.background.primaryLow : Color.background.soft}}>
-                <Text type='p' style={{fontSize:14,color:!props.inactive ? Color.text.primary : Color.text.high}}>
+            <ChipsContainerSmall data-testid="chip" style={{...props.style, background: props.active ? Color.background.primaryLow : Color.background.soft}}>
+                <Text type='p2' weight='medium' style={{color:props.active ? Color.text.primary : Color.text.high}}>
                     {props.text.slice(0,1).toLocaleUpperCase()+props.text.slice(1,2)}
                 </Text> 
             </ChipsContainerSmall>
         : props.type ==="big" ?
-            <ChipsContainerBig data-testid="chip" style={{...props.style, background: !props.inactive ? Color.background.primaryLow : Color.background.soft}}>
-                <Text type='p' style={{fontSize:14,color:!props.inactive ? Color.text.primary : Color.text.high}}>
+            <ChipsContainerBig data-testid="chip" style={{...props.style, background: props.active ? Color.background.primaryLow : Color.background.soft}}>
+                <Text type='p2' weight='medium' style={{color:props.active ? Color.text.primary : Color.text.high}}>
                     {props.text.slice(0,1).toLocaleUpperCase()+props.text.slice(1,props.text.length).toLocaleLowerCase()}
                 </Text> 
             </ChipsContainerBig>
@@ -62,5 +62,5 @@ export default Chip;
 export interface Props extends ComponentPropsWithoutRef<"div">{
     text: string,
     type: 'big' | 'small' | 'selector',
-    inactive?:boolean
+    active?:boolean
 }

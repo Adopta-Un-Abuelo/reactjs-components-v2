@@ -16,7 +16,7 @@ const P = (props: Props) =>{
     return(
         <PStyled
             style={{
-                fontSize: type === 'p' ? 15 : type === 'p' ? 14 : type === 'c1' ? 12 : 10,
+                fontSize: type === 'p' ? 15 : type === 'p2' ? 14 : type === 'c1' ? 12 : 10,
                 fontWeight: weight === 'semibold' ? 600 : (weight === 'medium' ? 500 : 400),
                 ...style
             }}
