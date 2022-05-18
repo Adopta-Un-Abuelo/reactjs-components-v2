@@ -1,17 +1,16 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import React from 'react';
 
-import { Text } from '../components';
+import { Text as TextStyled } from '../components';
 
 export default {
 	title: 'Basic/Text',
-	component: Text
-} as ComponentMeta<typeof Text>;
+	component: TextStyled
+} as ComponentMeta<typeof TextStyled>;
 
-const Template: ComponentStory<typeof Text> = (args) => <Text {...args} >Text</Text>;
+const Template: ComponentStory<typeof TextStyled> = (args) => <TextStyled {...args} >Text</TextStyled>;
 
-export const Header = Template.bind({});
-Header.args = {
+export const Default = Template.bind({});
+Default.args = {
     type: 'h1',
 }; 
-export const Paragraph = Template.bind({});

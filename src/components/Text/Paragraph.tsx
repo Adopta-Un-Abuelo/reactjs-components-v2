@@ -5,19 +5,19 @@ import Color from '../../constants/Color';
 
 const PStyled = styled.p`
     font-family: 'Poppins';
-    font-size: 15px;
     margin: 0px;
-    color: ${Color.gray2};
+    color: ${Color.text.full};
 `
 
 const P = (props: Props) =>{
 
-    const { style, children, weight, ...rest } = props;
+    const { style, type, children, weight, ...rest } = props;
 
     return(
         <PStyled
             style={{
-                fontWeight: weight === 'bold' ? 700 : (weight === 'semibold' ? 600 : 400),
+                fontSize: type === 'p' ? 15 : 14,
+                fontWeight: weight === 'semibold' ? 600 : (weight === 'medium' ? 500 : 400),
                 ...style
             }}
             {...rest}
@@ -28,5 +28,6 @@ const P = (props: Props) =>{
 }
 export default P;
 export interface Props extends ComponentPropsWithoutRef<"p">{
-    weight?: 'bold' | 'semibold'
+    type: 'p' | 'p2' | any
+    weight?: 'medium' | 'semibold' | 'regular'
 }
