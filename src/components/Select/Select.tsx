@@ -13,10 +13,9 @@ const SelectStyled = styled.div<{showMenu: boolean}>`
     flex-direction: row;
     align-items: center;
     border: 1px solid ${Color.gray5};
-    padding: 8px 16px;
+    padding: 0px 12px;
+    height: 36px;
     border-radius: 4px;
-    border-bottom-left-radius: ${props => props.showMenu && 0};
-    border-bottom-right-radius: ${props => props.showMenu && 0};
     cursor: pointer;
     background-color: white;
 `
@@ -24,10 +23,11 @@ const OptionsView = styled.div`
     position: absolute;
     top: 45px;
     z-index: 1000;
-    border: 1px solid ${Color.gray5};
+    border: 1px solid rgba(0, 0, 0, 0.04);
     background-color: white;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
+    border-radius: 6px;
+    box-shadow: 0px 4px 8px 0px #0000001A;
+    overflow: hidden;
 `
 const Option = styled.div`
     display: flex;
@@ -35,7 +35,6 @@ const Option = styled.div`
     align-items: center;
     padding: 8px 16px;
     cursor: pointer;
-    border-bottom: 1px solid ${Color.gray5};
     :hover{
         background-color: ${Color.gray5};
     }
@@ -103,15 +102,15 @@ const Select = (props: Props) =>{
                 {!props.hideTitle &&
                     <Text
                         type='p'
-                        style={{flex: 1}}
+                        style={{flex: 1, fontSize: 14, fontWeight: 600, color: props.style ? props.style.color : Color.text.full}}
                     >
                         {props.title ? selectedItem[props.title] : selectedItem.title}
                     </Text>
                 }
                 {showMenu ?
-                    <ChevronUp/>
+                    <ChevronUp height={20} width={20}/>
                 : 
-                    <ChevronDown/>
+                    <ChevronDown height={20} width={20}/>
                 }
             </SelectStyled>
             {showMenu && 

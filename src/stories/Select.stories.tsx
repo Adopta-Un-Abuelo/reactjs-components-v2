@@ -28,3 +28,29 @@ Select.args = {
         sese: 'Option 2'
     }
 };
+
+export const SelectWithStyles = Template2.bind({});
+SelectWithStyles.args = {
+    title:"sese",
+    id: 'select',
+    options: [
+        {
+            id: 'option1',
+            sese: 'Option 1',
+            icon: VenezuelaFlag
+        },
+        {
+            id: 'option2',
+            sese: 'Option 2'
+        }
+    ],
+    selectedItem: {
+        id: 'option2',
+        sese: 'Option 2'
+    },
+    style: {
+        color: '#FF8854',
+        backgroundColor: '#FFF1D6',
+        border: 'none'
+    }
+};
