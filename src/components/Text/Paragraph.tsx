@@ -16,7 +16,7 @@ const P = (props: Props) =>{
     return(
         <PStyled
             style={{
-                fontSize: type === 'p' ? 15 : 14,
+                fontSize: type === 'p' ? 15 : type === 'p' ? 14 : type === 'c1' ? 12 : 10,
                 fontWeight: weight === 'semibold' ? 600 : (weight === 'medium' ? 500 : 400),
                 ...style
             }}
@@ -28,6 +28,6 @@ const P = (props: Props) =>{
 }
 export default P;
 export interface Props extends ComponentPropsWithoutRef<"p">{
-    type: 'p' | 'p2' | any
+    type: 'p' | 'p2' | 'c1' | 'c2' | any
     weight?: 'medium' | 'semibold' | 'regular'
 }
