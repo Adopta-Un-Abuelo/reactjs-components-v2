@@ -28,9 +28,9 @@ const Payout = forwardRef((props: PayoutProps, ref: Ref<PayoutRef>) =>{
 
     const modal = useRef<ModalRef>(null);
     const form = useRef<FormRef>(null);
-    const stripePromise = loadStripe(props.stripeKey);
     const isMobile = isLessThan('mobileL');
 
+    const [ stripePromise, setStripePromise] = useState(() => loadStripe(props.stripeKey))
     const [ option, setOption ] = useState<any>('sepa_debit');
     const [ showConfirmModal, setShowConfirmModal ] = useState(false);
     const [ paymentOptions, setPaymentOptions ] = useState([
