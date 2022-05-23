@@ -54,7 +54,9 @@ const PayoutForm = forwardRef((props: FormProps, ref: Ref<FormRef>) =>{
     }
 
     const createPaymentMethod = async () =>{
+        console.log('Hola 2');
         if(elements && stripe && paymentMethod && name){
+            console.log('Hola 3');
             if(paymentMethod.elementType === 'iban'){
                 props.onLoading && props.onLoading(true);
                 const ibanElement = elements.getElement(IbanElement);
@@ -79,8 +81,10 @@ const PayoutForm = forwardRef((props: FormProps, ref: Ref<FormRef>) =>{
                 }
             }
             else{
+                console.log('Hola 4');
                 props.onLoading && props.onLoading(true);
                 const cardElement = elements.getElement(CardElement);
+                console.log('Hola 5');
                 if(cardElement){
                     const {error, paymentMethod} = await stripe.createPaymentMethod({
                         type: 'card',
@@ -95,6 +99,7 @@ const PayoutForm = forwardRef((props: FormProps, ref: Ref<FormRef>) =>{
                         return undefined;
                     } 
                     else {
+                        console.log('Hola 6');
                         props.onLoading && props.onLoading(false);
                         return paymentMethod;
                     }
