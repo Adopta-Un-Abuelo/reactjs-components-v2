@@ -106,13 +106,13 @@ const Label = (props: Props) =>{
 
     return(selectedColor ?
         <LabelStyled data-testid="Label" id="Label" {...props} style={{background: selectedColor.backgroundColor, ...props.style}}>
-            <Text type='p' style={{fontSize: 14, fontWeight: 500, color: selectedColor.color}}>
+            <Text type='p' style={{fontSize: props.style?.fontSize ? props.style.fontSize : 14, fontWeight: 500, color: selectedColor.color}}>
                 {selectedColor.text}
             </Text>
         </LabelStyled>
     :
         <LabelStyled data-testid="Label" id="Label" {...props} style={{background: props.backgroundColor ? props.backgroundColor: Color.background.soft, ...props.style}}>
-            <Text type='p' style={{fontSize: 14, fontWeight: 500, color: props.color}}>
+            <Text type='p' style={{fontSize: props.style?.fontSize ? props.style.fontSize : 14, fontWeight: 500, color: props.color}}>
                 {props.text}
             </Text>
         </LabelStyled>

@@ -46,7 +46,6 @@ const Payout = forwardRef((props: PayoutProps, ref: Ref<PayoutRef>) =>{
 
     useImperativeHandle(ref, () => ({
         async getPaymentMethod(){
-            console.log('Hola 1');
             return await form.current?.getPaymentMethod();
         }
     }));

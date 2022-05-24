@@ -81,9 +81,7 @@ const PayoutForm = forwardRef((props: FormProps, ref: Ref<FormRef>) =>{
             else{
                 props.onLoading && props.onLoading(true);
                 const cardElement = elements.getElement(CardElement);
-                console.log('Hola 5', cardElement);
                 if(cardElement){
-                    console.log('Hola 6');
                     const {error, paymentMethod} = await stripe.createPaymentMethod({
                         type: 'card',
                         card: cardElement,
@@ -97,7 +95,6 @@ const PayoutForm = forwardRef((props: FormProps, ref: Ref<FormRef>) =>{
                         return undefined;
                     } 
                     else {
-                        console.log('Hola 7');
                         props.onLoading && props.onLoading(false);
                         return paymentMethod;
                     }
