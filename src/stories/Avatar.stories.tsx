@@ -1,11 +1,13 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import React from 'react';
 
 import { Avatar } from '../components';
 
 export default {
 	title: 'Basic/Avatar',
-	component: Avatar
+	component: Avatar,
+    argTypes: {
+		onChange: { action: 'onChange' }
+	}
 } as ComponentMeta<typeof Avatar>;
 
 const Template: ComponentStory<typeof Avatar> = (args) => <Avatar {...args}/>;
