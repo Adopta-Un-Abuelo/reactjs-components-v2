@@ -1,8 +1,10 @@
-import { ComponentPropsWithoutRef, useRef } from 'react';
+import { ComponentPropsWithoutRef, useRef, useState } from 'react';
 import styled from 'styled-components';
-import Color from '../../constants/Color';
 
-const AvatarContainer = styled.div<{editable?: boolean}>`
+import Color from '../../constants/Color';
+import Modal from '../Modal/ModalV2';
+
+const AvatarContainer = styled.div<{editable?: boolean, clickable?: boolean}>`
     width: 50px;
     height: 50px;
     display: flex;
@@ -11,7 +13,7 @@ const AvatarContainer = styled.div<{editable?: boolean}>`
     text-align: center;
     border-radius: 50%;
     background-color: ${Color.background.primaryLow};
-    cursor: ${props => props.editable ? 'pointer' : 'default'};
+    cursor: ${props => (props.editable || props.clickable) ? 'pointer' : 'default'};
 `
 const Text = styled.p`
     font-family: Poppins;
@@ -28,18 +30,25 @@ const Icon = styled.img`
     object-fit: cover;
     border-radius: 50%;
 `
+const BigIcon = styled.img`
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+`
 
 const Avatar = (props: Props) =>{
 
     const inputFile = useRef<HTMLInputElement>(null) 
+    const [ showModal, setShowModal ] = useState(false);
     
     const onButtonClick = () => {
         if(props.editable)
             inputFile.current?.click();
+        else if(props.clickable)
+            setShowModal(true);
     }
 
     const onInputChange = async (e: any) =>{
-        console.log(e.target.files);
         if(e.target && e.target.files && e.target.files[0]){
             if(!e.target.files[0].name.match(/\.(jpg|jpeg|png|gif)$/)) {
                 alert('Debes seleccionar una imagen')
@@ -63,8 +72,21 @@ const Avatar = (props: Props) =>{
             data-testid="avatar" 
             style={props.style} 
             editable={props.editable}
+            clickable={props.clickable}
             onClick={onButtonClick}
         >
+            <Modal
+                isVisible={showModal}
+                onClose={() => setShowModal(false)}
+                contentStyle={{padding: 0, backgroundColor: 'black'}}
+                hideHeader={true}
+                buttonProps={{
+                    label: 'Cerrar',
+                    onClick: () => setShowModal(false)
+                }}
+            >
+                <BigIcon src={props.icon}/> 
+            </Modal>
             <input 
                 ref={inputFile}
                 id='file'
@@ -88,5 +110,6 @@ export interface Props extends ComponentPropsWithoutRef<"div">{
     icon?: any,
     name?:string,
     editable?: boolean
+    clickable?: boolean
     onChange?: (file: any) => void
 }
