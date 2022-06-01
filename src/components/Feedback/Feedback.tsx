@@ -1,48 +1,64 @@
-import React, { ComponentPropsWithoutRef } from 'react';
+import { ComponentPropsWithoutRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import Check from '../../assets/images/Check';
+import { Check, X } from 'lucide-react';
+import Text from '../Text/Text';
+import { Color } from '../../constants';
 
-const Container = styled.div`
-display: flex;
-flex-direction: row;
-align-items: center;
-padding: 8px;
-width: 336px;
-height: 40px;
-left: 124px;
-top: 293px;
-background: #59C183;
-box-shadow: 2px 0px 20px rgba(0, 0, 0, 0.09), 0px 4px 8px rgba(0, 0, 0, 0.1);
-border-radius: 4px;
+const Container = styled.div<{type: 'success' | 'error'}>`
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 16px;
+    min-width: 300px;
+    max-width: 60%;
+    left: 24px;
+    bottom: 24px;
+    background: ${props => props.type === 'success' ? Color.status.color.success : Color.status.color.error};
+    box-shadow: 2px 0px 20px rgba(0, 0, 0, 0.09), 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
 `
 
-
-const Text = styled.p`
-font-family: Poppins;
-font-style: normal;
-font-weight: 500;
-font-size: 14px;
-line-height: 22px;
-width: 300px;
-color: #FFFFFF;
-text-overflow: ellipsis;
-white-space: nowrap;
-overflow: hidden;
-margin-right: 11px;
-
-`;
-
 const FeedBack = (props: Props) =>{
-    return(
+
+    const [ isVisible, setIsVisible ] = useState(false);
+
+    useEffect(() =>{
+        setIsVisible(props.isVisible);
+        setTimeout(() => {
+            props.onClose && props.onClose();
+            setIsVisible(false);
+        }, 3000);
+    },[props.isVisible]);
+
+    return(isVisible ?
         <Container data-testid="feedback" {...props}>
-            <Check style={{marginLeft:11, marginRight:11}}/>
-            <Text>{props.text}</Text>
+            {props.type === 'success' ?
+                <Check 
+                    style={{marginRight:12}}
+                    color={'white'}
+                    height={24}
+                    width={24}
+                />
+            :
+                <X 
+                    style={{marginRight:12}}
+                    color={'white'}
+                    height={24}
+                    width={24}
+                />
+            }
+            <Text type='p' style={{display: 'flex', flex: 1, color: 'white'}}>
+                {props.text}
+            </Text>
         </Container>
-    )
+    : null)
 }
 export default FeedBack;
 export interface Props extends ComponentPropsWithoutRef<"div">{
+    isVisible: boolean,
     type: 'success' | 'error',
-    text: string
+    text: string,
+    onClose?: () => void
 }

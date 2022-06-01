@@ -1,18 +1,28 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import React from 'react';
+import { useState } from 'react';
 
 import { Avatar } from '../components';
 
 export default {
 	title: 'Basic/Avatar',
-	component: Avatar
+	component: Avatar,
+    argTypes: {
+		onChange: { action: 'onChange' }
+	}
 } as ComponentMeta<typeof Avatar>;
 
-const Template: ComponentStory<typeof Avatar> = (args) => <Avatar {...args}/>;
+const Template: ComponentStory<typeof Avatar> = (args) => {
+
+    const [ logo, setLogo ] = useState<string | undefined>(undefined);
+
+    return(
+        <Avatar {...args} onChange={(base64: string) => setLogo(base64)} icon={logo}/>
+    )
+};
 
 export const AvatarName = Template.bind({});
 AvatarName.args = {
-    name:"Ronald de Jesús"
+    name:"Ronald de Jesús",
 }
 
 

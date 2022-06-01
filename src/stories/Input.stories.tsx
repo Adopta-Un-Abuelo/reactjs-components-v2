@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { Input, InputCode } from '../components';
+import { Input, InputCode, InputChat } from '../components';
 
  export default {
 	title: 'Basic/Input',
@@ -19,3 +19,12 @@ Simple.args = {
 
 const Template2: ComponentStory<typeof InputCode> = (args) => <InputCode {...args}/>;
 export const Code = Template2.bind({});
+
+const Template3: ComponentStory<typeof InputChat> = (args) => <InputChat {...args}/>;
+export const Chat = Template3.bind({});
+Chat.args={
+	placeholder: 'Escribe aqui'
+}
+Chat.argTypes={
+	onSend: { action: 'onSend' }
+}

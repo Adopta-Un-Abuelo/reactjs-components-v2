@@ -8,12 +8,12 @@ import Text from '../Text/Text';
 import Color from '../../constants/Color';
 import ButtonImage from './ButtonImage';
 
-const ButtonPrimary = styled.button`
+const ButtonPrimary = styled.button<{size?: 'small' | 'normal'}>`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	height: 56px;
-	padding: 0px 24px;
+	height: ${props => props.size === 'small' ? '36px' : '56px'};
+	padding: ${props => props.size === 'small' ? '0px 12px' : '0px 24px'};
 	border-radius: 12px;
 	border: none;
 	color: white;
@@ -24,12 +24,12 @@ const ButtonPrimary = styled.button`
 		background-color: ${props => props.disabled ? Color.background.primary : Color.status.primary.hover};
 	}
 `
-const ButtonSecondary = styled.button`
+const ButtonSecondary = styled.button<{size?: 'small' | 'normal'}>`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	height: 56px;
-	padding: 0px 24px;
+	height: ${props => props.size === 'small' ? '36px' : '56px'};
+	padding: ${props => props.size === 'small' ? '0px 12px' : '0px 24px'};
 	border-radius: 12px;
 	border: ${'1px solid '+ Color.background.primary};
 	opacity: ${props => props.disabled ? 0.48 : 1};
@@ -39,12 +39,12 @@ const ButtonSecondary = styled.button`
 		background-color: ${props => props.disabled ? 'transparent' : Color.blue3+'30'};
 	}
 `
-const ButtonText = styled.button`
+const ButtonText = styled.button<{size?: 'small' | 'normal'}>`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	height: 48px;
-	padding: 0px 24px;
+	height: ${props => props.size === 'small' ? '36px' : '56px'};
+	padding: ${props => props.size === 'small' ? '0px 12px' : '0px 24px'};
 	border-radius: 12px;
 	border: none;
 	background-color: transparent;
@@ -60,6 +60,7 @@ const Button = (props: Props) => {
 			<ButtonSecondary
 				data-testid="button"
 				type="button"
+				size={props.size}
 				{...props}
 			>
 				{props.loading ?
@@ -80,7 +81,7 @@ const Button = (props: Props) => {
 					<Text
 						type='p' 
 						weight='semibold'
-						style={{fontSize: props.style?.fontSize ? props.style?.fontSize :16 ,width:"100%",marginLeft: props.icon ? 6 : 0, color: Color.text.primary}}
+						style={{fontSize: props.style?.fontSize ? props.style?.fontSize : props.size === 'small' ? 14 : 15 ,width:"100%",marginLeft: props.icon ? 6 : 0, color: Color.text.primary}}
 					>
 						{props.label}
 					</Text>
@@ -91,13 +92,14 @@ const Button = (props: Props) => {
 			<ButtonText
 				data-testid="button"
 				type="button"
+				size={props.size}
 				{...props}
 			>
 				{props.icon && props.icon}
 				<Text
 					type='p'
 					weight='semibold'
-					style={{fontSize: props.style?.fontSize ? props.style?.fontSize :16 ,width:"100%",marginLeft: props.icon ? 6 : 0}}
+					style={{fontSize: props.style?.fontSize ? props.style?.fontSize : props.size === 'small' ? 14 : 15 ,width:"100%",marginLeft: props.icon ? 6 : 0}}
 				>
 					{props.label}
 				</Text>
@@ -110,6 +112,7 @@ const Button = (props: Props) => {
 			<ButtonPrimary
 				data-testid="button"
 				type="button"
+				size={props.size}
 				{...props}
 			>
 				{props.loading ?
@@ -130,7 +133,7 @@ const Button = (props: Props) => {
 					<Text
 						type='p'
 						weight='semibold'
-						style={{width:"100%",marginLeft: props.icon ? 6 : 0, color: props.textColor ? props.textColor : 'white'}}
+						style={{fontSize: props.style?.fontSize ? props.style?.fontSize : props.size === 'small' ? 14 : 15, width:"100%",marginLeft: props.icon ? 6 : 0, color: props.textColor ? props.textColor : 'white'}}
 					>
 						{props.label}
 					</Text>
@@ -143,6 +146,7 @@ export default Button;
 export interface Props extends ComponentPropsWithoutRef<"button">{
 	label: string;
 	design?: 'primary' | 'secondary' | 'text' | 'image',
+	size?: 'small' | 'normal',
 	icon?: React.ReactElement,
 	loading?: boolean,
 	textColor?: string
