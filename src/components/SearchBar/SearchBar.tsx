@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef } from 'react';
 import styled from 'styled-components';
-import { Search } from 'react-feather';
+import { Search } from 'lucide-react';
 import { Color } from '../../constants';
 
 const InputView = styled.div`
