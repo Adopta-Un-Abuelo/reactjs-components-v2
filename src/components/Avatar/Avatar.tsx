@@ -68,6 +68,19 @@ const Avatar = (props: Props) =>{
 	});
 
     return(
+        <>
+        <Modal
+            isVisible={showModal}
+            onClose={() => setShowModal(false)}
+            contentStyle={{padding: 0, backgroundColor: 'black'}}
+            hideHeader={true}
+            buttonProps={{
+                label: 'Cerrar',
+                onClick: () => setShowModal(false)
+            }}
+        >
+            <BigIcon src={props.icon}/> 
+        </Modal>
         <AvatarContainer 
             data-testid="avatar" 
             style={props.style} 
@@ -75,18 +88,6 @@ const Avatar = (props: Props) =>{
             clickable={props.clickable}
             onClick={onButtonClick}
         >
-            <Modal
-                isVisible={showModal}
-                onClose={() => setShowModal(false)}
-                contentStyle={{padding: 0, backgroundColor: 'black'}}
-                hideHeader={true}
-                buttonProps={{
-                    label: 'Cerrar',
-                    onClick: () => setShowModal(false)
-                }}
-            >
-                <BigIcon src={props.icon}/> 
-            </Modal>
             <input 
                 ref={inputFile}
                 id='file'
@@ -103,6 +104,7 @@ const Avatar = (props: Props) =>{
                 </Text>
             :null}
         </AvatarContainer>
+        </>
     )
 }
 export default Avatar;
