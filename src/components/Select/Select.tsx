@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import Lottie from 'react-lottie';
 
+import animation from '../../assets/animations/button-loading.json'
 import Text from '../Text/Text';
 import Color from '../../constants/Color';
 import { ChevronDown, ChevronUp } from 'lucide-react'
@@ -13,10 +15,9 @@ const SelectStyled = styled.div<{showMenu: boolean}>`
     flex-direction: row;
     align-items: center;
     border: 1px solid ${Color.gray5};
-    padding: 8px 16px;
+    padding: 0px 12px;
+    height: 36px;
     border-radius: 4px;
-    border-bottom-left-radius: ${props => props.showMenu && 0};
-    border-bottom-right-radius: ${props => props.showMenu && 0};
     cursor: pointer;
     background-color: white;
 `
@@ -24,10 +25,11 @@ const OptionsView = styled.div`
     position: absolute;
     top: 45px;
     z-index: 1000;
-    border: 1px solid ${Color.gray5};
+    border: 1px solid rgba(0, 0, 0, 0.04);
     background-color: white;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
+    border-radius: 6px;
+    box-shadow: 0px 4px 8px 0px #0000001A;
+    overflow: hidden;
 `
 const Option = styled.div`
     display: flex;
@@ -35,7 +37,6 @@ const Option = styled.div`
     align-items: center;
     padding: 8px 16px;
     cursor: pointer;
-    border-bottom: 1px solid ${Color.gray5};
     :hover{
         background-color: ${Color.gray5};
     }
@@ -95,23 +96,39 @@ const Select = (props: Props) =>{
                 showMenu={showMenu}
                 onClick={onSelectClick}
             >
-                {selectedItem && selectedItem.icon && 
-                    <Icon>
-                        <selectedItem.icon/>
-                    </Icon>
-                }
-                {!props.hideTitle &&
-                    <Text
-                        type='p'
-                        style={{flex: 1}}
-                    >
-                        {props.title ? selectedItem[props.title] : selectedItem.title}
-                    </Text>
-                }
-                {showMenu ?
-                    <ChevronUp/>
-                : 
-                    <ChevronDown/>
+                {props.loading ?
+                    <Lottie 
+                        options={{
+                            loop: true,
+                            autoplay: true, 
+                            animationData: animation,
+                            rendererSettings: {
+                                preserveAspectRatio: 'xMidYMid slice'
+                            }
+                        }}
+                        width={100}
+                    />    
+                :
+                    <>
+                    {selectedItem && selectedItem.icon && 
+                        <Icon>
+                            <selectedItem.icon/>
+                        </Icon>
+                    }
+                    {!props.hideTitle &&
+                        <Text
+                            type='p'
+                            style={{flex: 1, fontSize: 14, fontWeight: 600, color: props.style ? props.style.color : Color.text.full}}
+                        >
+                            {props.title ? selectedItem[props.title] : selectedItem.title}
+                        </Text>
+                    }
+                    {showMenu ?
+                        <ChevronUp height={20} width={20}/>
+                    : 
+                        <ChevronDown height={20} width={20}/>
+                    }
+                    </>
                 }
             </SelectStyled>
             {showMenu && 
@@ -141,6 +158,7 @@ const Select = (props: Props) =>{
 export default Select;
 export interface Props{
     id: string,
+    loading?: boolean,
     style?: any
     optionStyle?: any
     title?: string

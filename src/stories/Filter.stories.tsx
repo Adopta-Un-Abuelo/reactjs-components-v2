@@ -42,6 +42,11 @@ export default {
 				label: 'Option 8'
 			}
 		],
+		selectedOptions: [
+			{
+				id: 'option_4'
+			}
+		],
 		disabled: false
 	},
 	argTypes: {

@@ -12,14 +12,14 @@ const Container = styled.div`
     border-radius: 1000px;
     padding: 2px;
 `
-const Cell = styled.div<{selected: boolean}>`
+const Cell = styled.div<{selected: boolean, cellColor?: string}>`
     display: flex;
     flex: 1;
     align-items: center;
     justify-content: center;
     border-radius: 1000px;
     cursor: pointer;
-    background-color: ${props => props.selected ? 'white' : 'transparent'};
+    background-color: ${props => props.selected ? (props.color ? props.color : 'white') : 'transparent'};
 `
 
 const Tabs = (props: Props) =>{
@@ -33,7 +33,7 @@ const Tabs = (props: Props) =>{
 
     return(
         <Container
-            style={props.style}
+            style={{backgroundColor: props.backgroundColor, ...props.style}}
         >
             {props.options.map(item =>{
                 const selected = selection.id === item.id ? true : false;
@@ -42,8 +42,10 @@ const Tabs = (props: Props) =>{
                         key={item.id}
                         selected={selected}
                         onClick={() => onClick(item)}
+                        style={props.cellStyle}
+                        color={props.cellColor}
                     >
-                        <Text type='p' style={{fontSize: 14}}>
+                        <Text type='p' style={{fontSize: 14, color: selected ? props.textColor : undefined, ...props.textStyle}}>
                             {item.title}
                         </Text>
                     </Cell>
@@ -55,6 +57,11 @@ const Tabs = (props: Props) =>{
 export default Tabs;
 export interface Props{
     style?: any,
+    cellStyle?: any,
+    textStyle?: any,
+    cellColor?: string,
+    textColor?: string,
+    backgroundColor?: string,
     options: Array<OptionProps>
     selectedOption?: OptionProps,
     onChange?: (option: OptionProps) => void

@@ -1,8 +1,8 @@
-import React, { ComponentPropsWithoutRef, useEffect, useState } from 'react';
+import { ComponentPropsWithoutRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Color from '../../constants/Color';
 import Country from '../../constants/Country';
-import { Calendar, User, Mail, X, MapPin, Lock } from 'lucide-react'
+import { X } from 'lucide-react'
 
 import  Select  from '../Select/Select';
 import Text from '../Text/Text';
@@ -57,7 +57,9 @@ const Column = styled.div`
     display: flex;
     flex: 1;
     flex-direction: column;
-    margin-left: 12px;
+`
+const IconView = styled.div`
+    margin-right: 8px;
 `
 const Input = (props: Props) =>{
 
@@ -71,6 +73,10 @@ const Input = (props: Props) =>{
     useEffect(()=>{
         setError(props.error)
     },[props.error]);
+
+    useEffect(() =>{
+        setInputValue(props.value);
+    },[props.value]);
 
     const onInputChange = (e: any) =>{
         setInputValue(e.target.value);
@@ -132,26 +138,20 @@ const Input = (props: Props) =>{
                 style={props.style}
                 focus={focus}
             >
-                <IconStyle style={props.type === 'phone' ? {height: 'unset', width: 'unset'} : {}}>
-                    {props.icon ? props.icon : props.type === 'email' ?
-                        <Mail stroke={Color.text.full}/>
-                    : props.type === 'password' ?
-                        <Lock stroke={Color.text.full}/>
-                    : props.type === 'location' ?
-                        <MapPin stroke={Color.text.full}/>
-                    : props.type === 'date' ?
-                        <Calendar stroke={Color.text.full}/>
-                    : props.type === 'phone' ?
+                {props.icon ? 
+                    <IconView>
+                        {props.icon}
+                    </IconView>
+                : props.type === 'phone' ?
+                    <IconView>
                         <Select 
                             selectedItem={country} 
                             onChange={item => onCountryChange(item)} 
                             style={{ border:"none", padding:0}} id="country" 
                             options={Country}
                         />
-                    :
-                        <User stroke={Color.text.full}/>
-                    }
-                </IconStyle>
+                    </IconView>
+                : null}
                 <Column>
                     {inputValue &&
                         <Text type='p' style={{color: Color.text.high, fontSize: 12}}>
@@ -199,6 +199,5 @@ export interface Props extends ComponentPropsWithoutRef<"input">{
     hideCalendar?: boolean,
     min?: any,
     max?: any,
-    lineColor?: string,
-    thumbColor?: string
+    value?: string
 }

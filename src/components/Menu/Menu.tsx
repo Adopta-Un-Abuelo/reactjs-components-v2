@@ -43,13 +43,14 @@ const MenuList = forwardRef((props: MenuProps, ref: Ref<MenuRef>) =>{
             const element = document.getElementById(props.id);
             if(element !== null){
                 if(!element.contains(e.target))
-                    if(showView) onButtonClick();
+                    if(showView) onButtonClick(e);
             }
         });
         return document.removeEventListener('mousedown', onButtonClick);
     });
 
-    const onButtonClick = () =>{
+    const onButtonClick = (e: any) =>{
+        e.stopPropagation();
         if(showView){
             setShowView(false);
             props.onChange && props.onChange(false);
