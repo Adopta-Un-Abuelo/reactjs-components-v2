@@ -20,7 +20,8 @@ const MenuList = (props: Props) =>{
 
     const menu = useRef<MenuRef>(null);
 
-    const onClick = (option: OptionsProps) =>{
+    const onClick = (e: any, option: OptionsProps) =>{
+        e.stopPropagation();
         menu.current?.close();
         props.onClick(option)
     }
@@ -38,7 +39,7 @@ const MenuList = (props: Props) =>{
             {props.options.map((option, index) =>(
                 <MenuCell
                     key={'action'+index}
-                    onClick={() => onClick(option)}
+                    onClick={(e) => onClick(e, option)}
                 >
                     {option.icon &&
                         <option.icon height={20} width={20} color={Color.text.primary}/>
