@@ -2,7 +2,7 @@ import React, { ComponentPropsWithoutRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Color } from '../../constants';
 import Text from '../Text/Text'
-import { ArrowLeft,ArrowRight } from 'react-feather';
+import { ArrowLeft,ArrowRight } from 'lucide-react';
 
 const Container = styled.div`
    display: flex;

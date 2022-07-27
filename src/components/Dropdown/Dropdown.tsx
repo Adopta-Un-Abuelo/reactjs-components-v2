@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Text from '../Text/Text'
 import Color from '../../constants/Color';
 import Avatar from '../Avatar/Avatar'
-import { ChevronDown, ChevronUp, User } from 'react-feather';
+import { ChevronDown, ChevronUp, User } from 'lucide-react';
 
 const DropdownContainer = styled.div`
     display: flex;
