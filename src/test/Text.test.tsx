@@ -1,38 +1,41 @@
 import { render } from '@testing-library/react'
-import { P } from '../components';
+import { Text } from '../components';
 import { screen } from '@testing-library/react'
-import React from 'react';
 
 
 describe("P", () => {
     it("render", () => {
         render(
-            <P>
+            <Text type='p'>
                 Testing
-            </P>
+            </Text>
         );
     })
 });
 describe("p_bold", () => {
     it("render", () => {
         render(
-            <P
-            weight={'bold'}
-            data-testid="p_bold">
+            <Text
+                type='p'
+                weight={'semibold'}
+                data-testid="p_bold"
+            >
                 Bold
-            </P>
+            </Text>
         );
-        expect(screen.queryByTestId("p_bold")).toHaveStyle(`fontWeight:700`);
+        expect(screen.queryByTestId("p_bold")).toHaveStyle(`fontWeight:600`);
     })
 });
 describe("P_semibold", () => {
     it("render", () => {
         render(
-            <P
-            weight={'semibold'}
-            data-testid="p_semibold">
+            <Text
+                type='p'
+                weight={'semibold'}
+                data-testid="p_semibold"
+            >
                 SemiBold
-            </P>
+            </Text>
         );
         expect(screen.queryByTestId("p_semibold")).toHaveStyle(`fontWeight:600`);
     })

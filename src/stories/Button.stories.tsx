@@ -1,6 +1,5 @@
-import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { Star } from 'react-feather'
+import { Star } from 'lucide-react'
 
 import { Button } from '../components';
 

@@ -1,7 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import { Button } from '../components';
-import { Star } from 'react-feather';
-import React from 'react';
+import { Star } from 'lucide-react';
 
 describe("Button", () => {
     it("render", () => {

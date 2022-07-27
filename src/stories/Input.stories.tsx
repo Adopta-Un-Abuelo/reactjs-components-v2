@@ -23,7 +23,8 @@ export const Code = Template2.bind({});
 const Template3: ComponentStory<typeof InputChat> = (args) => <InputChat {...args}/>;
 export const Chat = Template3.bind({});
 Chat.args={
-	placeholder: 'Escribe aqui'
+	placeholder: 'Escribe aqui',
+	loading: false
 }
 Chat.argTypes={
 	onSend: { action: 'onSend' }
