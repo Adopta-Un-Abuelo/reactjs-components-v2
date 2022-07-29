@@ -1,6 +1,6 @@
 {
   "name": "reactjs-components-v2",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "homepage": "https://adopta-un-abuelo.github.io/reactjs-components-v2/",
   "private": false,
   "main": "dist/cjs/index.js",
@@ -18,8 +18,8 @@
     "google-libphonenumber": "^3.2.30",
     "lucide-react": "^0.83.0",
     "postcss": "^8.4.14",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-draft-wysiwyg": "^1.15.0",
     "react-draft-wysiwyg-a": "^1.14.5-1",
     "react-lottie": "^1.2.3",
