@@ -191,7 +191,7 @@ export interface Props extends ComponentPropsWithoutRef<"input">{
     style?: any
     placeholder?:string,
     icon?: JSX.Element,
-    type?: 'text' | 'phone' | 'email' | 'date'| 'location' | 'password' | 'range',
+    type?: 'text' | 'phone' | 'email' | 'date'| 'location' | 'password' | 'range' | 'time',
     error?: string|undefined,
     onChange?:(item:any)=>void
     onPhoneChange?:(item:any)=>void
