@@ -55,7 +55,9 @@ const Buttons = styled.div`
     `}
 `;
 const ErrorView = styled.div`
+    background-color: ${Color.background.redLow};
     padding: 12px 24px;
+    margin-bottom: 24px;
 `
 
 const ModalComponent = forwardRef((props: ModalProps, ref: Ref<ModalRef>) =>{
@@ -115,11 +117,6 @@ const ModalComponent = forwardRef((props: ModalProps, ref: Ref<ModalRef>) =>{
                     {props.Header}
                 </TitleView>
             }
-            <ChildrenView
-                style={props.contentStyle}
-            >
-                {props.children}
-            </ChildrenView>
             {props.error && 
                 <ErrorView>
                     <Text type='p' style={{color: Color.status.color.error, fontSize:12}}>
@@ -127,6 +124,11 @@ const ModalComponent = forwardRef((props: ModalProps, ref: Ref<ModalRef>) =>{
                     </Text>
                 </ErrorView>
             }
+            <ChildrenView
+                style={props.contentStyle}
+            >
+                {props.children}
+            </ChildrenView>
             {props.buttonProps &&
                 <Buttons>
                     {props.Bottom}
